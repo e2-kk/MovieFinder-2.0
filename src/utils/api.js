@@ -1,6 +1,7 @@
 import axios from "axios";
+import { config } from "../config";
 
-const api_key = "f3855f8bdde19bb1dd9b18e80bc383b6";
+var api_key = config.API_KEY;
 
 export const getMoviesCategories = async () => {
   try {
