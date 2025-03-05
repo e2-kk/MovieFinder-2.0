@@ -1,0 +1,32 @@
+.movie-list {
+  padding: 40px 0;
+}
+
+.movie-list-grid {
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  width: 100%;
+  place-items: center;
+  row-gap: 40px;
+  margin-bottom: 1.9rem;
+  margin-top: 2.6rem;
+}
+
+.movie-list-btn {
+  display: block;
+  margin: 0 auto;
+  border: 1.5px solid #bdbabacd;
+  outline: none;
+  background-color: transparent;
+  color: #ffffffcd;
+  padding: 0.5rem 1.25rem;
+  width: 15rem;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+.movie-list-btn:hover {
+  transform: scale(1.017);
+  color: #d4cbcbcd;
+}
