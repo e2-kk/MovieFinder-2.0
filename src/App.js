@@ -11,6 +11,7 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(0);
   const [pageNum, setPageNum] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     if (selectedCategory !== 0) {
@@ -18,21 +19,24 @@ function App() {
         const data = await getMoviesWithinCategory(selectedCategory, pageNum);
 
         if (movies.length !== 0) {
-          setMovies((prevMovies) => [...prevMovies, ...data]);
+          setMovies((prevMovies) => [...prevMovies, ...data.results]);
         } else {
-          setMovies(data);
+          setMovies(data.results);
         }
+        setTotalPages(data.total_pages);
       };
       fetchMoviesWithinCategory();
     } else {
       const fetchMovies = async () => {
         const data = await getAllMovies(pageNum);
         if (movies.length !== 0) {
-          setMovies((prevMovies) => [...prevMovies, ...data]);
+          setMovies((prevMovies) => [...prevMovies, ...data.results]);
         } else {
-          setMovies(data);
+          setMovies(data.results);
         }
+        setTotalPages(data.total_pages);
       };
+
       fetchMovies();
     }
   }, [selectedCategory, pageNum]);
@@ -45,7 +49,12 @@ function App() {
         setMoviesCategories={setMoviesCategories}
         setMovies={setMovies}
       />
-      <MoviesList movies={movies} page={pageNum} setPageNum={setPageNum} />
+      <MoviesList
+        movies={movies}
+        page={pageNum}
+        setPageNum={setPageNum}
+        totalPages={totalPages}
+      />
     </div>
   );
 }
