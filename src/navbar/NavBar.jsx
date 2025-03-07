@@ -7,6 +7,7 @@ const NavBar = ({
   moviesCategories,
   setSelectedCategory,
   setMoviesCategories,
+  setMovies,
 }) => {
   useEffect(() => {
     const fetchCategories = async () => {
@@ -30,7 +31,10 @@ const NavBar = ({
                 {moviesCategories.map((category) => (
                   <li
                     key={category.id}
-                    onClick={() => setSelectedCategory(category.id)}
+                    onClick={() => {
+                      setSelectedCategory(category.id);
+                      setMovies([]);
+                    }}
                   >
                     {category.name}
                   </li>
