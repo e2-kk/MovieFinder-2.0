@@ -17,13 +17,21 @@ function App() {
       const fetchMoviesWithinCategory = async () => {
         const data = await getMoviesWithinCategory(selectedCategory, pageNum);
 
-        setMovies(data);
+        if (movies.length !== 0) {
+          setMovies((prevMovies) => [...prevMovies, ...data]);
+        } else {
+          setMovies(data);
+        }
       };
       fetchMoviesWithinCategory();
     } else {
       const fetchMovies = async () => {
         const data = await getAllMovies(pageNum);
-        setMovies(data);
+        if (movies.length !== 0) {
+          setMovies((prevMovies) => [...prevMovies, ...data]);
+        } else {
+          setMovies(data);
+        }
       };
       fetchMovies();
     }
@@ -35,6 +43,7 @@ function App() {
         moviesCategories={moviesCategories}
         setSelectedCategory={setSelectedCategory}
         setMoviesCategories={setMoviesCategories}
+        setMovies={setMovies}
       />
       <MoviesList movies={movies} page={pageNum} setPageNum={setPageNum} />
     </div>
