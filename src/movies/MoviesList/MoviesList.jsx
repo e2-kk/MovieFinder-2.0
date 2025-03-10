@@ -2,6 +2,7 @@ import React from "react";
 
 import "./MoviesList.css";
 import MovieCard from "../movieCard/MovieCard";
+import SortingOptions from "../../resusableComponents/SortingOptions";
 
 const MoviesList = ({ movies, page, setPageNum, totalPages }) => {
   const handleNextMoviesPage = () => {
@@ -14,6 +15,7 @@ const MoviesList = ({ movies, page, setPageNum, totalPages }) => {
   };
   return (
     <div className="movie-list container">
+      <SortingOptions />
       <div className="movie-list-grid">
         {movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />

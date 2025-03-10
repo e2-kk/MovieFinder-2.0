@@ -8,8 +8,8 @@
   width: 100%;
   place-items: center;
   row-gap: 40px;
+  column-gap: 120px;
   margin-bottom: 1.9rem;
-  margin-top: 2.6rem;
 }
 
 .movie-list-btn {
@@ -23,7 +23,7 @@
   width: 15rem;
   font-size: 1.1rem;
   border-radius: 10px;
-  transition: all 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .movie-list-btn:hover {

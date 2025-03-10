@@ -5,6 +5,7 @@ import NavBar from "./navbar/NavBar";
 import MoviesList from "./movies/MoviesList/MoviesList";
 import { getMoviesWithinCategory } from "./utils/api";
 import { getAllMovies } from "./utils/api";
+import SortingOptions from "./resusableComponents/SortingOptions";
 
 function App() {
   const [moviesCategories, setMoviesCategories] = useState([]);
@@ -49,6 +50,7 @@ function App() {
         setMoviesCategories={setMoviesCategories}
         setMovies={setMovies}
       />
+
       <MoviesList
         movies={movies}
         page={pageNum}
