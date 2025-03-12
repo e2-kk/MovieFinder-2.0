@@ -2,39 +2,43 @@ import React, { useState } from "react";
 
 import "./SortingOptions.css";
 
-const SortingOptions = () => {
-  const [sortingOption, setSortingOption] = useState({
-    year: "release_date",
-    rate: "rating",
-    services: "watch_providers",
-  });
+const SortingOptions = ({ sortingOption, setSortingOption, setMovies }) => {
+  const handleOptionChange = (event) => {
+    const { name, value } = event.target;
+    setSortingOption((prev) => {
+      return { ...prev, [name]: value };
+    });
+
+    setMovies([]);
+  };
+
   return (
     <div className="sorting-options container">
       <select
         className="option"
         name="year"
-        //onChange
-        //value
+        onChange={handleOptionChange}
+        value={sortingOption.year}
       >
         <option value="release_date">Year</option>
-        <option value="release_date_asc">Ascending</option>
-        <option value="release_date_desc">Descending</option>
+        <option value="primary_release_date.asc">Ascending</option>
+        <option value="primary_release_date.desc">Descending</option>
       </select>
       <select
         className="option"
         name="rate"
-        //onChange
-        //value
+        onChange={handleOptionChange}
+        value={sortingOption.rate}
       >
         <option value="rating">Rating</option>
-        <option value="rating_asc">Ascending</option>
-        <option value="rating_desc">Descending</option>
+        <option value="vote_average.asc">Ascending</option>
+        <option value="vote_average.desc">Descending</option>
       </select>
       <select
         className="option"
         name="services"
-        //onChange
-        //value
+        onChange={handleOptionChange}
+        value={sortingOption.services}
       >
         <option value="watch_providers">Services</option>
         <option value="Netflix">Netflix</option>

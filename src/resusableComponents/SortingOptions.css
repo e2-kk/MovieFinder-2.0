@@ -20,6 +20,7 @@
   font-size: 0.96rem;
   margin-right: 6rem;
   text-align: center;
+  text-align-last: center;
   transition: 0.2s ease-in-out;
 }
 

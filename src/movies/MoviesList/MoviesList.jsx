@@ -4,7 +4,15 @@ import "./MoviesList.css";
 import MovieCard from "../movieCard/MovieCard";
 import SortingOptions from "../../resusableComponents/SortingOptions";
 
-const MoviesList = ({ movies, page, setPageNum, totalPages }) => {
+const MoviesList = ({
+  movies,
+  page,
+  setPageNum,
+  totalPages,
+  sortingOption,
+  setSortingOption,
+  setMovies,
+}) => {
   const handleNextMoviesPage = () => {
     if (totalPages > page) {
       const pageNum = page + 1;
@@ -15,7 +23,11 @@ const MoviesList = ({ movies, page, setPageNum, totalPages }) => {
   };
   return (
     <div className="movie-list container">
-      <SortingOptions />
+      <SortingOptions
+        sortingOption={sortingOption}
+        setSortingOption={setSortingOption}
+        setMovies={setMovies}
+      />
       <div className="movie-list-grid">
         {movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
