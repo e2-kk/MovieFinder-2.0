@@ -27,6 +27,7 @@ const MoviesList = ({
         sortingOption={sortingOption}
         setSortingOption={setSortingOption}
         setMovies={setMovies}
+        setPageNum={setPageNum}
       />
       <div className="movie-list-grid">
         {movies.map((movie) => (

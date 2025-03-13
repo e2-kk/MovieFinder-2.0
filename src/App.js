@@ -36,10 +36,7 @@ function App() {
         setTotalPages(data.total_pages);
       };
       fetchMoviesWithinCategory();
-    } else if (
-      sortingOption.year !== "release_date" &&
-      sortingOption.rate === "rating"
-    ) {
+    } else if (sortingOption.year !== "release_date") {
       const fetchSortedMoviesByYear = async () => {
         const data = await getSortedMoviesByYear(pageNum, sortingOption);
         if (movies.length !== 0) {
@@ -50,9 +47,7 @@ function App() {
         setTotalPages(data.total_pages);
       };
       fetchSortedMoviesByYear();
-      console.log("Sorting by year is executed!");
-    } else if (sortingOption.rate !== "watch_providers") {
-      //setSortingOption({ year: "release_date" });
+    } else if (sortingOption.services !== "watch_providers") {
       const fetchSortedMoviesByServices = async () => {
         const data = await getSortedMoviesByServices(pageNum, sortingOption);
         if (movies.length !== 0) {
@@ -63,9 +58,7 @@ function App() {
         setTotalPages(data.total_pages);
       };
       fetchSortedMoviesByServices();
-      console.log("Sorting by services is executed!");
-    } else if (sortingOption.services !== "rating") {
-      //setSortingOption({ year: "release_date" });
+    } else if (sortingOption.rate !== "rating") {
       const fetchSortedMoviesByRating = async () => {
         const data = await getSortedMoviesByRating(pageNum, sortingOption);
         if (movies.length !== 0) {
@@ -76,7 +69,6 @@ function App() {
         setTotalPages(data.total_pages);
       };
       fetchSortedMoviesByRating();
-      console.log("Sorting by rate is executed!");
     } else {
       const fetchMovies = async () => {
         const data = await getAllMovies(pageNum);
@@ -91,8 +83,6 @@ function App() {
       fetchMovies();
     }
   }, [selectedCategory, pageNum, sortingOption]);
-
-  console.log(sortingOption);
 
   return (
     <div className="App">

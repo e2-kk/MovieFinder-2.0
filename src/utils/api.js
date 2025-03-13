@@ -45,7 +45,7 @@ export const getSortedMoviesByYear = async (pageNum, sortingOption) => {
     const response = await axios.get(
       `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&primary_release_date.gte=2000-01-01&primary_release_date.lte=2025-12-31&with_original_language=en&vote_count.gte=150.0&page=${pageNum}&sort_by=${sortingOption.year}`
     );
-    return response.data; // Returns a Promise that resolves to all movies
+    return response.data; // Returns a Promise that resolves to sorted movies by release year
   } catch (error) {
     console.error("Error fetching movies:", error);
     return []; // Return an empty array in case of error
@@ -57,7 +57,7 @@ export const getSortedMoviesByRating = async (pageNum, sortingOption) => {
     const response = await axios.get(
       `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&primary_release_date.gte=2000-01-01&primary_release_date.lte=2025-12-31&with_original_language=en&vote_count.gte=150.0&page=${pageNum}&sort_by=${sortingOption.rate}`
     );
-    return response.data; // Returns a Promise that resolves to all movies
+    return response.data; // Returns a Promise that resolves to sorted movies by rating
   } catch (error) {
     console.error("Error fetching movies:", error);
     return []; // Return an empty array in case of error
@@ -69,7 +69,7 @@ export const getSortedMoviesByServices = async (pageNum, sortingOption) => {
     const response = await axios.get(
       `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&primary_release_date.gte=2000-01-01&primary_release_date.lte=2025-12-31&with_original_language=en&vote_count.gte=150.0&page=${pageNum}&with_watch_providers=${sortingOption.services}`
     );
-    return response.data; // Returns a Promise that resolves to all movies
+    return response.data; // Returns a Promise that resolves to sorted movies by services
   } catch (error) {
     console.error("Error fetching movies:", error);
     return []; // Return an empty array in case of error

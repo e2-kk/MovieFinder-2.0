@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "./SortingOptions.css";
 
-const SortingOptions = ({ sortingOption, setSortingOption, setMovies }) => {
+const SortingOptions = ({
+  sortingOption,
+  setSortingOption,
+  setMovies,
+  setPageNum,
+}) => {
   const handleOptionChange = (event) => {
     const { name, value } = event.target;
     setSortingOption((prev) => {
@@ -10,6 +15,7 @@ const SortingOptions = ({ sortingOption, setSortingOption, setMovies }) => {
     });
 
     setMovies([]);
+    setPageNum(1);
   };
 
   return (
@@ -17,7 +23,12 @@ const SortingOptions = ({ sortingOption, setSortingOption, setMovies }) => {
       <select
         className="option"
         name="year"
-        onChange={handleOptionChange}
+        onChange={(event) => {
+          setSortingOption((prev) => {
+            return { ...prev, services: "watch_providers", rate: "rating" };
+          });
+          handleOptionChange(event);
+        }}
         value={sortingOption.year}
       >
         <option value="release_date">Year</option>
@@ -27,7 +38,16 @@ const SortingOptions = ({ sortingOption, setSortingOption, setMovies }) => {
       <select
         className="option"
         name="rate"
-        onChange={handleOptionChange}
+        onChange={(event) => {
+          setSortingOption((prev) => {
+            return {
+              ...prev,
+              services: "watch_providers",
+              year: "release_date",
+            };
+          });
+          handleOptionChange(event);
+        }}
         value={sortingOption.rate}
       >
         <option value="rating">Rating</option>
@@ -37,7 +57,16 @@ const SortingOptions = ({ sortingOption, setSortingOption, setMovies }) => {
       <select
         className="option"
         name="services"
-        onChange={handleOptionChange}
+        onChange={(event) => {
+          setSortingOption((prev) => {
+            return {
+              ...prev,
+              rate: "rating",
+              year: "release_date",
+            };
+          });
+          handleOptionChange(event);
+        }}
         value={sortingOption.services}
       >
         <option value="watch_providers">Services</option>
