@@ -3,8 +3,13 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import NavBar from "./navbar/NavBar";
 import MoviesList from "./movies/MoviesList/MoviesList";
-import { getMoviesWithinCategory } from "./utils/api";
-import { getAllMovies } from "./utils/api";
+import {
+  getMoviesWithinCategory,
+  getAllMovies,
+  getSortedMoviesByYear,
+  getSortedMoviesByRating,
+  getSortedMoviesByServices,
+} from "./utils/api";
 
 function App() {
   const [moviesCategories, setMoviesCategories] = useState([]);
@@ -12,6 +17,11 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState(0);
   const [pageNum, setPageNum] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [sortingOption, setSortingOption] = useState({
+    year: "release_date",
+    rate: "rating",
+    services: "watch_providers",
+  });
 
   useEffect(() => {
     if (selectedCategory !== 0) {
@@ -26,6 +36,39 @@ function App() {
         setTotalPages(data.total_pages);
       };
       fetchMoviesWithinCategory();
+    } else if (sortingOption.year !== "release_date") {
+      const fetchSortedMoviesByYear = async () => {
+        const data = await getSortedMoviesByYear(pageNum, sortingOption);
+        if (movies.length !== 0) {
+          setMovies((prevMovies) => [...prevMovies, ...data.results]);
+        } else {
+          setMovies(data.results);
+        }
+        setTotalPages(data.total_pages);
+      };
+      fetchSortedMoviesByYear();
+    } else if (sortingOption.services !== "watch_providers") {
+      const fetchSortedMoviesByServices = async () => {
+        const data = await getSortedMoviesByServices(pageNum, sortingOption);
+        if (movies.length !== 0) {
+          setMovies((prevMovies) => [...prevMovies, ...data.results]);
+        } else {
+          setMovies(data.results);
+        }
+        setTotalPages(data.total_pages);
+      };
+      fetchSortedMoviesByServices();
+    } else if (sortingOption.rate !== "rating") {
+      const fetchSortedMoviesByRating = async () => {
+        const data = await getSortedMoviesByRating(pageNum, sortingOption);
+        if (movies.length !== 0) {
+          setMovies((prevMovies) => [...prevMovies, ...data.results]);
+        } else {
+          setMovies(data.results);
+        }
+        setTotalPages(data.total_pages);
+      };
+      fetchSortedMoviesByRating();
     } else {
       const fetchMovies = async () => {
         const data = await getAllMovies(pageNum);
@@ -39,7 +82,7 @@ function App() {
 
       fetchMovies();
     }
-  }, [selectedCategory, pageNum]);
+  }, [selectedCategory, pageNum, sortingOption]);
 
   return (
     <div className="App">
@@ -49,11 +92,15 @@ function App() {
         setMoviesCategories={setMoviesCategories}
         setMovies={setMovies}
       />
+
       <MoviesList
         movies={movies}
         page={pageNum}
         setPageNum={setPageNum}
         totalPages={totalPages}
+        sortingOption={sortingOption}
+        setSortingOption={setSortingOption}
+        setMovies={setMovies}
       />
     </div>
   );

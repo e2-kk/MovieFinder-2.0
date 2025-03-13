@@ -18,7 +18,7 @@ const NavBar = ({
   }, []);
   return (
     <section className="section-nav">
-      <div className="container">
+      <div className="section-nav-container">
         <nav className="nav">
           <h1 className="nav-logo">MovieFinder</h1>
           <ul className="nav-list">
