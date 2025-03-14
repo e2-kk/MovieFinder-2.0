@@ -9,6 +9,9 @@ import {
   getSortedMoviesByYear,
   getSortedMoviesByRating,
   getSortedMoviesByServices,
+  getSortedMoviesByServicesWithinCategory,
+  getSortedMoviesByRatingWithinCategory,
+  getSortedMoviesByYearWithinCategory,
 } from "./utils/api";
 
 function App() {
@@ -24,7 +27,12 @@ function App() {
   });
 
   useEffect(() => {
-    if (selectedCategory !== 0) {
+    if (
+      selectedCategory !== 0 &&
+      sortingOption.services === "watch_providers" &&
+      sortingOption.rate === "rating" &&
+      sortingOption.year === "release_date"
+    ) {
       const fetchMoviesWithinCategory = async () => {
         const data = await getMoviesWithinCategory(selectedCategory, pageNum);
 
@@ -36,6 +44,25 @@ function App() {
         setTotalPages(data.total_pages);
       };
       fetchMoviesWithinCategory();
+    } else if (
+      sortingOption.year !== "release_date" &&
+      selectedCategory !== 0
+    ) {
+      const fetchSortedMoviesByYearWithinCategory = async () => {
+        const data = await getSortedMoviesByYearWithinCategory(
+          pageNum,
+          sortingOption,
+          selectedCategory
+        );
+        if (movies.length !== 0) {
+          setMovies((prevMovies) => [...prevMovies, ...data.results]);
+        } else {
+          setMovies(data.results);
+        }
+        setTotalPages(data.total_pages);
+      };
+
+      fetchSortedMoviesByYearWithinCategory();
     } else if (sortingOption.year !== "release_date") {
       const fetchSortedMoviesByYear = async () => {
         const data = await getSortedMoviesByYear(pageNum, sortingOption);
@@ -47,6 +74,24 @@ function App() {
         setTotalPages(data.total_pages);
       };
       fetchSortedMoviesByYear();
+    } else if (
+      sortingOption.services !== "watch_providers" &&
+      selectedCategory !== 0
+    ) {
+      const fetchSortedMoviesByServicesWithinCategory = async () => {
+        const data = await getSortedMoviesByServicesWithinCategory(
+          pageNum,
+          sortingOption,
+          selectedCategory
+        );
+        if (movies.length !== 0) {
+          setMovies((prevMovies) => [...prevMovies, ...data.results]);
+        } else {
+          setMovies(data.results);
+        }
+        setTotalPages(data.total_pages);
+      };
+      fetchSortedMoviesByServicesWithinCategory();
     } else if (sortingOption.services !== "watch_providers") {
       const fetchSortedMoviesByServices = async () => {
         const data = await getSortedMoviesByServices(pageNum, sortingOption);
@@ -58,6 +103,21 @@ function App() {
         setTotalPages(data.total_pages);
       };
       fetchSortedMoviesByServices();
+    } else if (sortingOption.rate !== "rating" && selectedCategory !== 0) {
+      const fetchSortedMoviesByRatingWithinCategory = async () => {
+        const data = await getSortedMoviesByRatingWithinCategory(
+          pageNum,
+          sortingOption,
+          selectedCategory
+        );
+        if (movies.length !== 0) {
+          setMovies((prevMovies) => [...prevMovies, ...data.results]);
+        } else {
+          setMovies(data.results);
+        }
+        setTotalPages(data.total_pages);
+      };
+      fetchSortedMoviesByRatingWithinCategory();
     } else if (sortingOption.rate !== "rating") {
       const fetchSortedMoviesByRating = async () => {
         const data = await getSortedMoviesByRating(pageNum, sortingOption);
