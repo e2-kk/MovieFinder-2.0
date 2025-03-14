@@ -25,6 +25,7 @@ function App() {
     rate: "rating",
     services: "watch_providers",
   });
+  const [watchList, setWatchList] = useState([]);
 
   useEffect(() => {
     if (
@@ -144,6 +145,8 @@ function App() {
     }
   }, [selectedCategory, pageNum, sortingOption]);
 
+  console.log(watchList);
+
   return (
     <div className="App">
       <NavBar
@@ -161,6 +164,8 @@ function App() {
         sortingOption={sortingOption}
         setSortingOption={setSortingOption}
         setMovies={setMovies}
+        setWatchList={setWatchList}
+        watchList={watchList}
       />
     </div>
   );

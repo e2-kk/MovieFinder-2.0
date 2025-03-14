@@ -12,6 +12,8 @@ const MoviesList = ({
   sortingOption,
   setSortingOption,
   setMovies,
+  setWatchList,
+  watchList,
 }) => {
   const handleNextMoviesPage = () => {
     if (totalPages > page) {
@@ -31,7 +33,7 @@ const MoviesList = ({
       />
       <div className="movie-list-grid">
         {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
+          <MovieCard key={movie.id} movie={movie} setWatchList={setWatchList} />
         ))}
       </div>
       <button className="movie-list-btn" onClick={handleNextMoviesPage}>
