@@ -13,7 +13,6 @@ const MoviesList = ({
   setSortingOption,
   setMovies,
   setWatchList,
-  watchList,
 }) => {
   const handleNextMoviesPage = () => {
     if (totalPages > page) {

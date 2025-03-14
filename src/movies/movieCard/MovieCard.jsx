@@ -1,7 +1,7 @@
 import React from "react";
 import "./MovieCard.css";
 
-const MovieCard = ({ movie, setWatchList, watchList }) => {
+const MovieCard = ({ movie, setWatchList }) => {
   const handleWatchList = (movie) => {
     setWatchList((prevWatchList) => {
       const updatedWatchList = [...(prevWatchList || [])];

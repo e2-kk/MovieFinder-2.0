@@ -145,8 +145,6 @@ function App() {
     }
   }, [selectedCategory, pageNum, sortingOption]);
 
-  console.log(watchList);
-
   return (
     <div className="App">
       <NavBar
@@ -165,7 +163,6 @@ function App() {
         setSortingOption={setSortingOption}
         setMovies={setMovies}
         setWatchList={setWatchList}
-        watchList={watchList}
       />
     </div>
   );
