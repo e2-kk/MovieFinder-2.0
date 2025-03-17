@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import "./NavBar.css";
 import { getMoviesCategories } from "../utils/api";
@@ -12,7 +13,7 @@ const NavBar = ({
   useEffect(() => {
     const fetchCategories = async () => {
       const data = await getMoviesCategories();
-      setMoviesCategories(data); // Updates the state with API response
+      setMoviesCategories(data);
     };
     fetchCategories();
   }, []);
@@ -23,7 +24,7 @@ const NavBar = ({
           <h1 className="nav-logo">MovieFinder</h1>
           <ul className="nav-list">
             <li className="nav-list-link">
-              <a href="#">Films</a>
+              <a href="/">Films</a>
             </li>
             <li className="nav-list-link">
               <a href="#">Genres</a>
@@ -42,7 +43,7 @@ const NavBar = ({
               </ul>
             </li>
             <li className="nav-list-link">
-              <a href="#">Watch List</a>
+              <Link to="/watch-list">Watch List</Link>
             </li>
           </ul>
         </nav>

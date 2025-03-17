@@ -1,7 +1,8 @@
 import React from "react";
+
 import "./MovieCard.css";
 
-const MovieCard = ({ movie, setWatchList }) => {
+const MovieCard = ({ movie, setWatchList, watchList }) => {
   const handleWatchList = (movie) => {
     setWatchList((prevWatchList) => {
       const updatedWatchList = [...(prevWatchList || [])];
@@ -20,11 +21,16 @@ const MovieCard = ({ movie, setWatchList }) => {
       return updatedWatchList;
     });
   };
+
   return (
     <div className="movie-card-container">
       <img
         className="movie-card-save-icon"
-        src="./assets/like.png"
+        src={
+          watchList?.some((savedMovie) => savedMovie.movie.id === movie.id)
+            ? "./assets/red-heart.png"
+            : "./assets/like.png"
+        }
         alt="save icon"
         onClick={() => {
           handleWatchList(movie);

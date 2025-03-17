@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
 
 import "./App.css";
 import NavBar from "./navbar/NavBar";
@@ -13,6 +14,9 @@ import {
   getSortedMoviesByRatingWithinCategory,
   getSortedMoviesByYearWithinCategory,
 } from "./utils/api";
+import WatchList from "./watchList/WatchList";
+
+const savedMovies = localStorage.getItem("watchList");
 
 function App() {
   const [moviesCategories, setMoviesCategories] = useState([]);
@@ -25,7 +29,7 @@ function App() {
     rate: "rating",
     services: "watch_providers",
   });
-  const [watchList, setWatchList] = useState([]);
+  const [watchList, setWatchList] = useState(JSON.parse(savedMovies));
 
   useEffect(() => {
     if (
@@ -153,17 +157,28 @@ function App() {
         setMoviesCategories={setMoviesCategories}
         setMovies={setMovies}
       />
-
-      <MoviesList
-        movies={movies}
-        page={pageNum}
-        setPageNum={setPageNum}
-        totalPages={totalPages}
-        sortingOption={sortingOption}
-        setSortingOption={setSortingOption}
-        setMovies={setMovies}
-        setWatchList={setWatchList}
-      />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <MoviesList
+              movies={movies}
+              page={pageNum}
+              setPageNum={setPageNum}
+              totalPages={totalPages}
+              sortingOption={sortingOption}
+              setSortingOption={setSortingOption}
+              setMovies={setMovies}
+              setWatchList={setWatchList}
+              watchList={watchList}
+            />
+          }
+        />
+        <Route
+          path="/watch-list"
+          element={<WatchList watchList={watchList} />}
+        />
+      </Routes>
     </div>
   );
 }
