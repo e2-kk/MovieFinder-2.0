@@ -5,8 +5,6 @@ import "./WatchList.css";
 import MovieCard from "../movies/movieCard/MovieCard";
 
 const WatchList = ({ watchList }) => {
-  console.log(watchList);
-
   useEffect(() => {
     localStorage.setItem("watchList", JSON.stringify(watchList));
   }, [watchList]);
