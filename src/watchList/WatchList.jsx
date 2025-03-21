@@ -11,16 +11,11 @@ const WatchList = ({
   setWatchList,
   sortingOption,
   setSortingOption,
+  setSortedWatchList,
+  sortedWatchList,
 }) => {
-  const [sortedWatchList, setSortedWatchList] = useState([]);
-  useEffect(() => {
-    localStorage.setItem("watchList", JSON.stringify(watchList));
-    setSortedWatchList(watchList);
-  }, [watchList]);
-
   useEffect(() => {
     if (sortingOption.year === "asc") {
-      console.log("I am executed");
       const sortedWatchList = _.sortBy(watchList, ["movie.release_date"]);
       setSortedWatchList(sortedWatchList);
     } else if (sortingOption.year === "desc") {
@@ -52,9 +47,6 @@ const WatchList = ({
 
     setWatchList(updatedWatchList);
   };
-
-  console.log(watchList);
-  console.log(sortedWatchList);
 
   return (
     <div className="movie-list container height">

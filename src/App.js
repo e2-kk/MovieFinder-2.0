@@ -30,6 +30,12 @@ function App() {
     services: "watch_providers",
   });
   const [watchList, setWatchList] = useState(JSON.parse(savedMovies));
+  const [sortedWatchList, setSortedWatchList] = useState([]);
+
+  useEffect(() => {
+    localStorage.setItem("watchList", JSON.stringify(watchList));
+    setSortedWatchList(watchList);
+  }, [watchList]);
 
   useEffect(() => {
     if (
@@ -158,6 +164,7 @@ function App() {
         setSelectedCategory={setSelectedCategory}
         setMoviesCategories={setMoviesCategories}
         setMovies={setMovies}
+        setSotringOption={setSortingOption}
       />
       <Routes>
         <Route
@@ -184,6 +191,8 @@ function App() {
               setWatchList={setWatchList}
               setSortingOption={setSortingOption}
               sortingOption={sortingOption}
+              setSortedWatchList={setSortedWatchList}
+              sortedWatchList={sortedWatchList}
             />
           }
         />

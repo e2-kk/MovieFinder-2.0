@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import "./NavBar.css";
@@ -9,7 +9,9 @@ const NavBar = ({
   setSelectedCategory,
   setMoviesCategories,
   setMovies,
+  setSotringOption,
 }) => {
+  const [activeLink, setActiveLink] = useState("");
   useEffect(() => {
     const fetchCategories = async () => {
       const data = await getMoviesCategories();
@@ -31,10 +33,17 @@ const NavBar = ({
               <ul className="genres-dropdown">
                 {moviesCategories.map((category) => (
                   <li
+                    className={activeLink === category.name ? "active" : ""}
                     key={category.id}
                     onClick={() => {
                       setSelectedCategory(category.id);
                       setMovies([]);
+                      setActiveLink(category.name);
+                      setSotringOption({
+                        year: "release_date",
+                        rate: "rating",
+                        services: "watch_providers",
+                      });
                     }}
                   >
                     {category.name}
