@@ -13,7 +13,6 @@ const MovieCard = ({ movie, setWatchList, watchList }) => {
 
       if (movieIndex === -1) {
         updatedWatchList.push({ movie });
-        console.log("Movie was saved");
       } else {
         console.log("Movie is already saved");
       }

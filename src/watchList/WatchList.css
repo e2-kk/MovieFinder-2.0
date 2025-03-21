@@ -5,3 +5,18 @@
 .margin-top {
   margin-top: 4%;
 }
+
+.movie-list-item-container {
+  position: relative;
+}
+
+.movie-list-iem-delete-btn {
+  position: absolute;
+  max-width: 23px;
+  max-height: 23px;
+  top: 13px;
+  right: 5px;
+  filter: contrast(200%);
+  cursor: pointer;
+  z-index: 76;
+}

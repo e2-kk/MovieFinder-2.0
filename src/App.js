@@ -149,6 +149,8 @@ function App() {
     }
   }, [selectedCategory, pageNum, sortingOption]);
 
+  console.log(movies);
+
   return (
     <div className="App">
       <NavBar
@@ -176,7 +178,14 @@ function App() {
         />
         <Route
           path="/watch-list"
-          element={<WatchList watchList={watchList} />}
+          element={
+            <WatchList
+              watchList={watchList}
+              setWatchList={setWatchList}
+              setSortingOption={setSortingOption}
+              sortingOption={sortingOption}
+            />
+          }
         />
       </Routes>
     </div>
