@@ -89,4 +89,5 @@ ul li a:hover {
 
 ul li:hover ul.genres-dropdown {
   display: block;
+  z-index: 88;
 }

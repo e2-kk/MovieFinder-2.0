@@ -155,8 +155,6 @@ function App() {
     }
   }, [selectedCategory, pageNum, sortingOption]);
 
-  console.log(movies);
-
   return (
     <div className="App">
       <NavBar
@@ -165,6 +163,7 @@ function App() {
         setMoviesCategories={setMoviesCategories}
         setMovies={setMovies}
         setSotringOption={setSortingOption}
+        selectedCategory={selectedCategory}
       />
       <Routes>
         <Route

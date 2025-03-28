@@ -22,7 +22,6 @@ const FilteringOptions = ({
     setSortedWatchList(watchList);
   };
 
-  console.log(sortingOption);
   return (
     <div className="sorting-options container">
       <select
