@@ -27,6 +27,7 @@
 .nav-logo {
   color: #fff;
   font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .nav .nav-list {
@@ -62,7 +63,11 @@ ul li ul.genres-dropdown li {
 }
 
 ul li ul.genres-dropdown li:hover {
-  color: #fbfafa7a;
+  color: #c9c3c37a;
+}
+
+ul li ul.genres-dropdown li.active {
+  color: #c9c3c37a;
 }
 
 ul li ul.genres-dropdown {
@@ -79,9 +84,10 @@ ul li ul.genres-dropdown {
 }
 
 ul li a:hover {
-  color: #fbfafa7a;
+  color: #c9c3c37a;
 }
 
 ul li:hover ul.genres-dropdown {
   display: block;
+  z-index: 88;
 }

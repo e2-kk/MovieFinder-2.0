@@ -23,10 +23,10 @@
   width: 15rem;
   font-size: 1.1rem;
   border-radius: 10px;
-  transition: 0.2s ease-in-out;
+  transition: 0.3s ease;
 }
 
 .movie-list-btn:hover {
   transform: scale(1.017);
-  color: #d4cbcbcd;
+  /*color: #d4cbcbcd;*/
 }

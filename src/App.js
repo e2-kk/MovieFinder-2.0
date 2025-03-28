@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
 
 import "./App.css";
 import NavBar from "./navbar/NavBar";
@@ -13,6 +14,9 @@ import {
   getSortedMoviesByRatingWithinCategory,
   getSortedMoviesByYearWithinCategory,
 } from "./utils/api";
+import WatchList from "./watchList/WatchList";
+
+const savedMovies = localStorage.getItem("watchList");
 
 function App() {
   const [moviesCategories, setMoviesCategories] = useState([]);
@@ -25,6 +29,13 @@ function App() {
     rate: "rating",
     services: "watch_providers",
   });
+  const [watchList, setWatchList] = useState(JSON.parse(savedMovies));
+  const [sortedWatchList, setSortedWatchList] = useState([]);
+
+  useEffect(() => {
+    localStorage.setItem("watchList", JSON.stringify(watchList));
+    setSortedWatchList(watchList);
+  }, [watchList]);
 
   useEffect(() => {
     if (
@@ -151,17 +162,40 @@ function App() {
         setSelectedCategory={setSelectedCategory}
         setMoviesCategories={setMoviesCategories}
         setMovies={setMovies}
+        setSotringOption={setSortingOption}
+        selectedCategory={selectedCategory}
       />
-
-      <MoviesList
-        movies={movies}
-        page={pageNum}
-        setPageNum={setPageNum}
-        totalPages={totalPages}
-        sortingOption={sortingOption}
-        setSortingOption={setSortingOption}
-        setMovies={setMovies}
-      />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <MoviesList
+              movies={movies}
+              page={pageNum}
+              setPageNum={setPageNum}
+              totalPages={totalPages}
+              sortingOption={sortingOption}
+              setSortingOption={setSortingOption}
+              setMovies={setMovies}
+              setWatchList={setWatchList}
+              watchList={watchList}
+            />
+          }
+        />
+        <Route
+          path="/watch-list"
+          element={
+            <WatchList
+              watchList={watchList}
+              setWatchList={setWatchList}
+              setSortingOption={setSortingOption}
+              sortingOption={sortingOption}
+              setSortedWatchList={setSortedWatchList}
+              sortedWatchList={sortedWatchList}
+            />
+          }
+        />
+      </Routes>
     </div>
   );
 }
