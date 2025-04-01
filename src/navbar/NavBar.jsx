@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./NavBar.css";
 import { getMoviesCategories } from "../utils/api";
@@ -23,8 +23,7 @@ const NavBar = ({
   const navigate = useNavigate();
 
   const handleSelectedCategoryReset = () => {
-    activeLink = "";
-    setSelectedCategory(0);
+    setActiveLink("");
   };
 
   return (
@@ -52,7 +51,7 @@ const NavBar = ({
                         rate: "rating",
                         services: "watch_providers",
                       });
-                      navigate("/");
+                      navigate("/", { state: { category } });
                     }}
                   >
                     {category.name}
@@ -61,9 +60,9 @@ const NavBar = ({
               </ul>
             </li>
             <li className="nav-list-link">
-              <NavLink to="/watch-list" onClick={handleSelectedCategoryReset}>
+              <Link to="/watch-list" onClick={handleSelectedCategoryReset}>
                 Watch List
-              </NavLink>
+              </Link>
             </li>
           </ul>
         </nav>

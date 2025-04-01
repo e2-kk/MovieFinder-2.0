@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import "./MovieCard.css";
 
 const MovieCard = ({ movie, setWatchList, watchList }) => {
@@ -35,7 +35,7 @@ const MovieCard = ({ movie, setWatchList, watchList }) => {
           handleWatchList(movie);
         }}
       ></img>
-      <a className="movie-card" href="#">
+      <Link className="movie-card" to={`/movie/${movie.id}`} target="_blank">
         <img
           className="movie-card-poster"
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -60,7 +60,7 @@ const MovieCard = ({ movie, setWatchList, watchList }) => {
               : movie.overview}
           </p>
         </div>
-      </a>
+      </Link>
       <h3 className="movie-card-title">
         {movie.title.length > 14
           ? movie.title.slice(0, 14) + "..."

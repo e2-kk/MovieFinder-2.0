@@ -2,7 +2,7 @@ import React from "react";
 
 import "./MoviesList.css";
 import MovieCard from "../movieCard/MovieCard";
-import SortingOptions from "../../resusableComponents/SortingOptions";
+import SortingOptions from "../../resusableComponents/MovieListSortingOptions";
 
 const MoviesList = ({
   movies,

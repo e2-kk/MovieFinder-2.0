@@ -4,7 +4,7 @@ import _ from "lodash";
 import "../movies/MoviesList/MoviesList.css";
 import "./WatchList.css";
 import MovieCard from "../movies/movieCard/MovieCard";
-import FilteringOptions from "../resusableComponents/filtering-options/FilteringOptions";
+import FilteringOptions from "../resusableComponents/filtering-options/WatchListFilteringOptions";
 
 const WatchList = ({
   watchList,
@@ -67,7 +67,7 @@ const WatchList = ({
                 handleMovieDeletion(movie);
               }}
             />
-            <MovieCard movie={movie.movie} />
+            <MovieCard movie={movie.movie} watchList={watchList} />
           </div>
         ))}
       </div>

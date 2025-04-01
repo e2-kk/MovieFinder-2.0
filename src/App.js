@@ -15,6 +15,7 @@ import {
   getSortedMoviesByYearWithinCategory,
 } from "./utils/api";
 import WatchList from "./watchList/WatchList";
+import MoviePage from "./movies/moviesPage/MoviePage";
 
 const savedMovies = localStorage.getItem("watchList");
 
@@ -182,6 +183,7 @@ function App() {
             />
           }
         />
+        <Route path="/movie/:id" element={<MoviePage />}></Route>
         <Route
           path="/watch-list"
           element={
