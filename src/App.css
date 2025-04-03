@@ -4,12 +4,11 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: #151516;
+}
 .container {
   width: 90%;
   max-width: 90%;
   margin: 0 auto;
-}
-
-.App {
-  background-color: #151516;
 }
