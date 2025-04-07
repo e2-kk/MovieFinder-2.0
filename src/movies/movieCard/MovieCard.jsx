@@ -46,7 +46,7 @@ const MovieCard = ({ movie, setWatchList, watchList }) => {
           <div className="movie-card-details-date-rate">
             <p>{movie.release_date.slice(0, 4)}</p>
             <p>
-              {Math.round(movie.vote_average * 10) / 10}
+              {Math.floor(movie.vote_average * 10) / 10}
               <img
                 className="movie-card-details-emoji"
                 src="./assets/star.png"
