@@ -12,6 +12,10 @@
   margin-bottom: 2.5rem;
 }
 
+.movie-list-item-container {
+  position: relative;
+}
+
 .movie-list-btn {
   display: block;
   margin: 0 auto;

@@ -1,6 +1,7 @@
 .movie-details-page {
   margin-top: 4%;
   position: relative;
+  padding-bottom: 3rem;
 }
 
 .movie-details-backdrop-img-container {
@@ -36,6 +37,7 @@
 }
 
 .movie-details-media-poster-container {
+  position: relative;
   width: 50%;
   height: 55%;
   overflow: hidden;
@@ -111,5 +113,34 @@
 
 .movie-details-info-subh-desc {
   font-size: 1.35rem;
+  color: #d6cfcfcd;
+}
+
+.movie-details-info-provider-container {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.movie-details-info-provider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 1rem;
+}
+
+.movie-details-info-provider-img {
+  float: left;
+  width: 50px;
+  height: 50px;
+  object-fit: fill;
+  border-radius: 50px;
+}
+
+.movie-details-info-provider-title {
+  font-weight: 400;
+  font-size: 1.05rem;
   color: #d6cfcfcd;
 }

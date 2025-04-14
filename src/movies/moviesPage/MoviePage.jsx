@@ -5,8 +5,9 @@ import "./MoviePage.css";
 import { getMovieDetails } from "../../utils/api";
 import { getMovieTrailers } from "../../utils/api";
 import { getMovieWatchProviders } from "../../utils/api";
+import SaveIcon from "../../resusableComponents/save-icon/SaveIcon";
 
-const MoviePage = () => {
+const MoviePage = ({ watchList, handleWatchList }) => {
   const { id } = useParams();
   const [selectedMovie, setSelectedMovie] = useState(0);
   const [trailers, setTrailers] = useState([]);
@@ -28,14 +29,19 @@ const MoviePage = () => {
 
     const getWatchProviders = async () => {
       const movieWatchProviders = await getMovieWatchProviders(id);
-      setWatchProviders(movieWatchProviders.GB.flatrate);
+      setWatchProviders(
+        movieWatchProviders?.GB?.rent
+          ? movieWatchProviders?.GB?.rent
+          : movieWatchProviders?.GB?.flatrate
+      );
+      //console.log(movieWatchProviders);
     };
 
     getWatchProviders();
   }, [id]);
 
-  console.log(selectedMovie);
-  console.log(watchProviders);
+  //console.log(selectedMovie);
+  //console.log(watchProviders);
 
   return (
     <div className="movie-details-page container">
@@ -49,6 +55,11 @@ const MoviePage = () => {
       <div className="movie-details">
         <div className="movie-details-media">
           <div className="movie-details-media-poster-container">
+            <SaveIcon
+              movie={selectedMovie}
+              watchList={watchList}
+              handleWatchList={handleWatchList}
+            />
             <img
               className="movie-details-media-poster"
               src={`https://image.tmdb.org/t/p/w500${selectedMovie?.poster_path}`}
@@ -128,6 +139,29 @@ const MoviePage = () => {
             {selectedMovie?.overview}
           </p>
           <h4 className="movie-details-info-subh">Watch Providers</h4>
+          <div className="movie-details-info-provider-container">
+            {watchProviders ? (
+              watchProviders?.map((provider) => (
+                <div
+                  key={provider.provider_id}
+                  className="movie-details-info-provider"
+                >
+                  <img
+                    src={`https://image.tmdb.org/t/p/original/${provider?.logo_path}`}
+                    className="movie-details-info-provider-img"
+                  ></img>
+
+                  <h5 className="movie-details-info-provider-title">
+                    {provider.provider_name}
+                  </h5>
+                </div>
+              ))
+            ) : (
+              <p className="missing-content-text">
+                Sorry, Information Unavailable
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </div>
