@@ -4,7 +4,8 @@ import _ from "lodash";
 import "../movies/MoviesList/MoviesList.css";
 import "./WatchList.css";
 import MovieCard from "../movies/movieCard/MovieCard";
-import FilteringOptions from "../resusableComponents/filtering-options/FilteringOptions";
+import FilteringOptions from "../resusableComponents/filtering-options/WatchListFilteringOptions";
+import DeleteIcon from "../resusableComponents/delete-icon/DeleteIcon";
 
 const WatchList = ({
   watchList,
@@ -59,15 +60,11 @@ const WatchList = ({
       <div className="movie-list-grid">
         {sortedWatchList.map((movie) => (
           <div className="movie-list-item-container" key={movie.movie.id}>
-            <img
-              className="movie-list-iem-delete-btn"
-              src="./assets/delete.png"
-              alt="delete icon"
-              onClick={() => {
-                handleMovieDeletion(movie);
-              }}
+            <DeleteIcon
+              handleMovieDeletion={handleMovieDeletion}
+              movie={movie}
             />
-            <MovieCard movie={movie.movie} />
+            <MovieCard movie={movie.movie} watchList={watchList} />
           </div>
         ))}
       </div>

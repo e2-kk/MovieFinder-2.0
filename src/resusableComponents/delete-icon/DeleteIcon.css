@@ -1,0 +1,10 @@
+.movie-list-iem-delete-btn {
+  position: absolute;
+  max-width: 23px;
+  max-height: 23px;
+  top: 13px;
+  right: 5px;
+  filter: contrast(200%);
+  cursor: pointer;
+  z-index: 76;
+}

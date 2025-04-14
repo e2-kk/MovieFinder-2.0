@@ -1,0 +1,146 @@
+.movie-details-page {
+  margin-top: 4%;
+  position: relative;
+  padding-bottom: 3rem;
+}
+
+.movie-details-backdrop-img-container {
+  height: 450px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.99), rgba(0, 0, 0, 0.96));
+}
+
+.movie-details-backdrop-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 40% 25%;
+  opacity: 0.45;
+}
+
+.movie-details {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: -15.5rem;
+  z-index: 50;
+}
+
+.movie-details-media {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.movie-details-media-poster-container {
+  position: relative;
+  width: 50%;
+  height: 55%;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 3rem;
+}
+
+.movie-details-media-poster {
+  width: 100%;
+  height: 100%;
+  opacity: 0.95;
+}
+
+.movie-details-media-trailer-container {
+  width: 50%;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 10%;
+}
+
+.movie-details-media-trailer {
+  width: 100%;
+  height: 100%;
+  border: none;
+  box-shadow: none;
+  border-radius: 10px;
+}
+.movie-details-info {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.movie-details-info-title {
+  margin-top: 0;
+  font-size: 5rem;
+  margin-bottom: 3.4rem;
+  font-weight: 500;
+}
+
+.movie-details-info-tagline {
+  font-size: 2.5rem;
+  color: #ffffffcd;
+  font-weight: 300;
+  margin-bottom: 3.4rem;
+  opacity: 0.97;
+}
+
+.movie-details-info-list {
+  font-size: 1.35rem;
+}
+
+.movie-details-info-list li {
+  display: block;
+  margin-bottom: 1.8rem;
+}
+
+.movie-details-info-list-item-title {
+  color: #a19d9dcd;
+  font-weight: 500;
+}
+
+.movie-details-info-genres ~ .movie-details-info-genres::before {
+  content: ", ";
+}
+
+.movie-details-info-subh {
+  font-size: 2rem;
+  font-weight: 350;
+  margin-bottom: 1.8rem;
+  margin-top: 3.4rem;
+}
+
+.movie-details-info-subh-desc {
+  font-size: 1.35rem;
+  color: #d6cfcfcd;
+}
+
+.movie-details-info-provider-container {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.movie-details-info-provider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 1rem;
+}
+
+.movie-details-info-provider-img {
+  float: left;
+  width: 50px;
+  height: 50px;
+  object-fit: fill;
+  border-radius: 50px;
+}
+
+.movie-details-info-provider-title {
+  font-weight: 400;
+  font-size: 1.05rem;
+  color: #d6cfcfcd;
+}

@@ -15,6 +15,7 @@ import {
   getSortedMoviesByYearWithinCategory,
 } from "./utils/api";
 import WatchList from "./watchList/WatchList";
+import MoviePage from "./movies/moviesPage/MoviePage";
 
 const savedMovies = localStorage.getItem("watchList");
 
@@ -155,6 +156,24 @@ function App() {
     }
   }, [selectedCategory, pageNum, sortingOption]);
 
+  const handleWatchList = (movie) => {
+    setWatchList((prevWatchList) => {
+      const updatedWatchList = [...(prevWatchList || [])];
+
+      const movieIndex = updatedWatchList.findIndex(
+        (item) => item.movie.id === movie.id
+      );
+
+      if (movieIndex === -1) {
+        updatedWatchList.push({ movie });
+      } else {
+        console.log("Movie is already saved");
+      }
+
+      return updatedWatchList;
+    });
+  };
+
   return (
     <div className="App">
       <NavBar
@@ -179,9 +198,19 @@ function App() {
               setMovies={setMovies}
               setWatchList={setWatchList}
               watchList={watchList}
+              handleWatchList={handleWatchList}
             />
           }
         />
+        <Route
+          path="/movie/:id"
+          element={
+            <MoviePage
+              watchList={watchList}
+              handleWatchList={handleWatchList}
+            />
+          }
+        ></Route>
         <Route
           path="/watch-list"
           element={

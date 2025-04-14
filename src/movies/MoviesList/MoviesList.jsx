@@ -2,7 +2,8 @@ import React from "react";
 
 import "./MoviesList.css";
 import MovieCard from "../movieCard/MovieCard";
-import SortingOptions from "../../resusableComponents/SortingOptions";
+import SortingOptions from "../../resusableComponents/MovieListSortingOptions";
+import SaveIcon from "../../resusableComponents/save-icon/SaveIcon";
 
 const MoviesList = ({
   movies,
@@ -14,6 +15,7 @@ const MoviesList = ({
   setMovies,
   setWatchList,
   watchList,
+  handleWatchList,
 }) => {
   const handleNextMoviesPage = () => {
     if (totalPages > page) {
@@ -23,6 +25,7 @@ const MoviesList = ({
       console.log("Sorry, reached the end of movies list");
     }
   };
+
   return (
     <div className="movie-list container">
       <SortingOptions
@@ -33,12 +36,19 @@ const MoviesList = ({
       />
       <div className="movie-list-grid">
         {movies.map((movie) => (
-          <MovieCard
-            key={movie.id}
-            movie={movie}
-            setWatchList={setWatchList}
-            watchList={watchList}
-          />
+          <div className="movie-list-item-container" key={movie.id}>
+            <SaveIcon
+              watchList={watchList}
+              movie={movie}
+              handleWatchList={handleWatchList}
+            />
+            <MovieCard
+              key={movie.id}
+              movie={movie}
+              setWatchList={setWatchList}
+              watchList={watchList}
+            />
+          </div>
         ))}
       </div>
       <button className="movie-list-btn" onClick={handleNextMoviesPage}>

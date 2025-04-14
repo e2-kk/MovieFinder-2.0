@@ -4,12 +4,17 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: #151516;
+  color: #ffffffcd;
+}
 .container {
   width: 90%;
   max-width: 90%;
   margin: 0 auto;
 }
 
-.App {
-  background-color: #151516;
+.missing-content-text {
+  color: #d6cfcfcd;
+  font-size: 1.1rem;
 }

@@ -1,41 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import "./MovieCard.css";
 
-const MovieCard = ({ movie, setWatchList, watchList }) => {
-  const handleWatchList = (movie) => {
-    setWatchList((prevWatchList) => {
-      const updatedWatchList = [...(prevWatchList || [])];
-
-      const movieIndex = updatedWatchList.findIndex(
-        (item) => item.movie.id === movie.id
-      );
-
-      if (movieIndex === -1) {
-        updatedWatchList.push({ movie });
-      } else {
-        console.log("Movie is already saved");
-      }
-
-      return updatedWatchList;
-    });
-  };
-
+const MovieCard = ({ movie }) => {
   return (
     <div className="movie-card-container">
-      <img
-        className="movie-card-save-icon"
-        src={
-          watchList?.some((savedMovie) => savedMovie.movie.id === movie.id)
-            ? "./assets/red-heart.png"
-            : "./assets/like.png"
-        }
-        alt="save icon"
-        onClick={() => {
-          handleWatchList(movie);
-        }}
-      ></img>
-      <a className="movie-card" href="#">
+      <Link className="movie-card" to={`/movie/${movie.id}`} target="_blank">
         <img
           className="movie-card-poster"
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -46,7 +17,7 @@ const MovieCard = ({ movie, setWatchList, watchList }) => {
           <div className="movie-card-details-date-rate">
             <p>{movie.release_date.slice(0, 4)}</p>
             <p>
-              {Math.round(movie.vote_average * 10) / 10}
+              {Math.floor(movie.vote_average * 10) / 10}
               <img
                 className="movie-card-details-emoji"
                 src="./assets/star.png"
@@ -60,7 +31,7 @@ const MovieCard = ({ movie, setWatchList, watchList }) => {
               : movie.overview}
           </p>
         </div>
-      </a>
+      </Link>
       <h3 className="movie-card-title">
         {movie.title.length > 14
           ? movie.title.slice(0, 14) + "..."

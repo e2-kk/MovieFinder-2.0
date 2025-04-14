@@ -1,25 +1,21 @@
 import React from "react";
 
-import "../SortingOptions.css";
+import "./MovieListSortingOptions.css";
 
-const FilteringOptions = ({
+const SortingOptions = ({
   sortingOption,
   setSortingOption,
-  setSortedWatchList,
-  watchList,
+  setMovies,
+  setPageNum,
 }) => {
   const handleOptionChange = (event) => {
     const { name, value } = event.target;
     setSortingOption((prev) => {
       return { ...prev, [name]: value };
     });
-  };
 
-  const handleFilteringOptionsReset = () => {
-    setSortingOption((prev) => {
-      return { ...prev, year: "release_date", rate: "rating" };
-    });
-    setSortedWatchList(watchList);
+    setMovies([]);
+    setPageNum(1);
   };
 
   return (
@@ -36,8 +32,8 @@ const FilteringOptions = ({
         value={sortingOption.year}
       >
         <option value="release_date">Year</option>
-        <option value="asc">Ascending</option>
-        <option value="desc">Descending</option>
+        <option value="primary_release_date.asc">Ascending</option>
+        <option value="primary_release_date.desc">Descending</option>
       </select>
       <select
         className="option"
@@ -55,14 +51,31 @@ const FilteringOptions = ({
         value={sortingOption.rate}
       >
         <option value="rating">Rating</option>
-        <option value="asc">Ascending</option>
-        <option value="desc">Descending</option>
+        <option value="vote_average.asc">Ascending</option>
+        <option value="vote_average.desc">Descending</option>
       </select>
-      <button className="option" onClick={handleFilteringOptionsReset}>
-        Reset Filters
-      </button>
+      <select
+        className="option"
+        name="services"
+        onChange={(event) => {
+          setSortingOption((prev) => {
+            return {
+              ...prev,
+              rate: "rating",
+              year: "release_date",
+            };
+          });
+          handleOptionChange(event);
+        }}
+        value={sortingOption.services}
+      >
+        <option value="watch_providers">Services</option>
+        <option value="Netflix">Netflix</option>
+        <option value="Apple TV">Apple TV</option>
+        <option value="youtube">YouTube</option>
+      </select>
     </div>
   );
 };
 
-export default FilteringOptions;
+export default SortingOptions;

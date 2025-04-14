@@ -123,3 +123,39 @@ export const getSortedMoviesByYearWithinCategory = async (
     return []; // Return an empty array in case of error
   }
 };
+
+export const getMovieDetails = async (id) => {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}&?api_key=${api_key}`
+    );
+    return response.data; // Returns a Promise that resolves to movie details
+  } catch (error) {
+    console.error("Error fetching movies:", error);
+    return []; // Return an empty array in case of error
+  }
+};
+
+export const getMovieTrailers = async (id) => {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${api_key}`
+    );
+    return response.data.results; // Returns a Promise that resolves to movie trailers
+  } catch (error) {
+    console.error("Error fetching movies:", error);
+    return []; // Return an empty array in case of error
+  }
+};
+
+export const getMovieWatchProviders = async (id) => {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}/watch/providers?api_key=${api_key}`
+    );
+    return response.data.results; // Returns a Promise that resolves to movie trailers
+  } catch (error) {
+    console.error("Error fetching movies:", error);
+    return []; // Return an empty array in case of error
+  }
+};

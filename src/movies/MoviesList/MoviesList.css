@@ -9,7 +9,11 @@
   place-items: center;
   row-gap: 40px;
   column-gap: 120px;
-  margin-bottom: 1.9rem;
+  margin-bottom: 2.5rem;
+}
+
+.movie-list-item-container {
+  position: relative;
 }
 
 .movie-list-btn {
@@ -27,6 +31,6 @@
 }
 
 .movie-list-btn:hover {
-  transform: scale(1.017);
-  /*color: #d4cbcbcd;*/
+  color: #c9c3c37a;
+  border-color: #c9c3c37a;
 }
