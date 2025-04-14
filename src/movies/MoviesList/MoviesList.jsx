@@ -4,6 +4,7 @@ import "./MoviesList.css";
 import MovieCard from "../movieCard/MovieCard";
 import SortingOptions from "../../resusableComponents/MovieListSortingOptions";
 import SaveIcon from "../../resusableComponents/save-icon/SaveIcon";
+import MovieCardSkeleton from "../movieCardSkeleton/MovieCardSkeleton";
 
 const MoviesList = ({
   movies,
@@ -16,6 +17,7 @@ const MoviesList = ({
   setWatchList,
   watchList,
   handleWatchList,
+  isLoading,
 }) => {
   const handleNextMoviesPage = () => {
     if (totalPages > page) {
@@ -26,6 +28,10 @@ const MoviesList = ({
     }
   };
 
+  const skeletons = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+  ];
+
   return (
     <div className="movie-list container">
       <SortingOptions
@@ -35,6 +41,8 @@ const MoviesList = ({
         setPageNum={setPageNum}
       />
       <div className="movie-list-grid">
+        {isLoading && skeletons.map((n) => <MovieCardSkeleton key={n} />)}
+
         {movies.map((movie) => (
           <div className="movie-list-item-container" key={movie.id}>
             <SaveIcon
@@ -51,9 +59,11 @@ const MoviesList = ({
           </div>
         ))}
       </div>
-      <button className="movie-list-btn" onClick={handleNextMoviesPage}>
-        Load More
-      </button>
+      {!isLoading && (
+        <button className="movie-list-btn" onClick={handleNextMoviesPage}>
+          Load More
+        </button>
+      )}
     </div>
   );
 };

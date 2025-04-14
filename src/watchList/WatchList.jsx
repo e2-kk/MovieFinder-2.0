@@ -6,6 +6,7 @@ import "./WatchList.css";
 import MovieCard from "../movies/movieCard/MovieCard";
 import FilteringOptions from "../resusableComponents/filtering-options/WatchListFilteringOptions";
 import DeleteIcon from "../resusableComponents/delete-icon/DeleteIcon";
+import MovieCardSkeleton from "../movies/movieCardSkeleton/MovieCardSkeleton";
 
 const WatchList = ({
   watchList,
@@ -14,6 +15,7 @@ const WatchList = ({
   setSortingOption,
   setSortedWatchList,
   sortedWatchList,
+  isLoading,
 }) => {
   useEffect(() => {
     if (sortingOption.year === "asc") {
@@ -58,6 +60,7 @@ const WatchList = ({
         watchList={watchList}
       />
       <div className="movie-list-grid">
+        {isLoading && watchList.map((n) => <MovieCardSkeleton />)}
         {sortedWatchList.map((movie) => (
           <div className="movie-list-item-container" key={movie.movie.id}>
             <DeleteIcon

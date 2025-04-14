@@ -6,14 +6,16 @@ import { getMovieDetails } from "../../utils/api";
 import { getMovieTrailers } from "../../utils/api";
 import { getMovieWatchProviders } from "../../utils/api";
 import SaveIcon from "../../resusableComponents/save-icon/SaveIcon";
+import MoviesPageSkeleton from "../moviesPageSkeleton/MoviesPageSkeleton";
 
-const MoviePage = ({ watchList, handleWatchList }) => {
+const MoviePage = ({ watchList, handleWatchList, isLoading, setIsLoading }) => {
   const { id } = useParams();
   const [selectedMovie, setSelectedMovie] = useState(0);
   const [trailers, setTrailers] = useState([]);
   const [watchProviders, setWatchProviders] = useState([]);
 
   useEffect(() => {
+    setIsLoading(true);
     const getMovie = async () => {
       const movie = await getMovieDetails(id);
       setSelectedMovie(movie);
@@ -35,16 +37,15 @@ const MoviePage = ({ watchList, handleWatchList }) => {
           : movieWatchProviders?.GB?.flatrate
       );
       //console.log(movieWatchProviders);
+      setIsLoading(false);
     };
 
     getWatchProviders();
-  }, [id]);
-
-  //console.log(selectedMovie);
-  //console.log(watchProviders);
+  }, []);
 
   return (
     <div className="movie-details-page container">
+      {isLoading && <MoviesPageSkeleton watchProviders={watchProviders} />}
       <div className="movie-details-backdrop-img-container">
         <img
           className="movie-details-backdrop-img"

@@ -32,13 +32,17 @@ function App() {
   });
   const [watchList, setWatchList] = useState(JSON.parse(savedMovies));
   const [sortedWatchList, setSortedWatchList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     localStorage.setItem("watchList", JSON.stringify(watchList));
     setSortedWatchList(watchList);
+    setIsLoading(false);
   }, [watchList]);
 
   useEffect(() => {
+    setIsLoading(true);
     if (
       selectedCategory !== 0 &&
       sortingOption.services === "watch_providers" &&
@@ -54,6 +58,7 @@ function App() {
           setMovies(data.results);
         }
         setTotalPages(data.total_pages);
+        setIsLoading(false);
       };
       fetchMoviesWithinCategory();
     } else if (
@@ -72,6 +77,7 @@ function App() {
           setMovies(data.results);
         }
         setTotalPages(data.total_pages);
+        setIsLoading(false);
       };
 
       fetchSortedMoviesByYearWithinCategory();
@@ -84,6 +90,7 @@ function App() {
           setMovies(data.results);
         }
         setTotalPages(data.total_pages);
+        setIsLoading(false);
       };
       fetchSortedMoviesByYear();
     } else if (
@@ -102,6 +109,7 @@ function App() {
           setMovies(data.results);
         }
         setTotalPages(data.total_pages);
+        setIsLoading(false);
       };
       fetchSortedMoviesByServicesWithinCategory();
     } else if (sortingOption.services !== "watch_providers") {
@@ -113,6 +121,7 @@ function App() {
           setMovies(data.results);
         }
         setTotalPages(data.total_pages);
+        setIsLoading(false);
       };
       fetchSortedMoviesByServices();
     } else if (sortingOption.rate !== "rating" && selectedCategory !== 0) {
@@ -128,6 +137,7 @@ function App() {
           setMovies(data.results);
         }
         setTotalPages(data.total_pages);
+        setIsLoading(false);
       };
       fetchSortedMoviesByRatingWithinCategory();
     } else if (sortingOption.rate !== "rating") {
@@ -139,6 +149,7 @@ function App() {
           setMovies(data.results);
         }
         setTotalPages(data.total_pages);
+        setIsLoading(false);
       };
       fetchSortedMoviesByRating();
     } else {
@@ -150,6 +161,7 @@ function App() {
           setMovies(data.results);
         }
         setTotalPages(data.total_pages);
+        setIsLoading(false);
       };
 
       fetchMovies();
@@ -175,7 +187,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div>
       <NavBar
         moviesCategories={moviesCategories}
         setSelectedCategory={setSelectedCategory}
@@ -199,6 +211,7 @@ function App() {
               setWatchList={setWatchList}
               watchList={watchList}
               handleWatchList={handleWatchList}
+              isLoading={isLoading}
             />
           }
         />
@@ -208,6 +221,8 @@ function App() {
             <MoviePage
               watchList={watchList}
               handleWatchList={handleWatchList}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
             />
           }
         ></Route>
@@ -221,6 +236,7 @@ function App() {
               sortingOption={sortingOption}
               setSortedWatchList={setSortedWatchList}
               sortedWatchList={sortedWatchList}
+              isLoading={isLoading}
             />
           }
         />
