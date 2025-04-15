@@ -5,6 +5,7 @@ import MovieCard from "../movieCard/MovieCard";
 import SortingOptions from "../../resusableComponents/MovieListSortingOptions";
 import SaveIcon from "../../resusableComponents/save-icon/SaveIcon";
 import MovieCardSkeleton from "../movieCardSkeleton/MovieCardSkeleton";
+import Footer from "../../resusableComponents/footer/Footer";
 
 const MoviesList = ({
   movies,
@@ -64,6 +65,7 @@ const MoviesList = ({
           Load More
         </button>
       )}
+      <Footer />
     </div>
   );
 };

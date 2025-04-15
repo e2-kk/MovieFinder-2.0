@@ -7,6 +7,7 @@ import MovieCard from "../movies/movieCard/MovieCard";
 import FilteringOptions from "../resusableComponents/filtering-options/WatchListFilteringOptions";
 import DeleteIcon from "../resusableComponents/delete-icon/DeleteIcon";
 import MovieCardSkeleton from "../movies/movieCardSkeleton/MovieCardSkeleton";
+import Footer from "../resusableComponents/footer/Footer";
 
 const WatchList = ({
   watchList,
@@ -71,6 +72,7 @@ const WatchList = ({
           </div>
         ))}
       </div>
+      <Footer />
     </div>
   );
 };

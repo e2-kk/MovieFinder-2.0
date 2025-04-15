@@ -2,12 +2,20 @@
   height: 100vh;
 }
 
-.margin-top {
-  margin-top: 4%;
+.flex {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 }
 
 .movie-list-item-container {
   position: relative;
+}
+
+.flex-grow {
+  min-height: 100vh;
+  place-items: start;
+  row-gap: 0;
 }
 
 .movie-list-iem-delete-btn {

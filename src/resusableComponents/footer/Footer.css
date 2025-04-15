@@ -1,0 +1,53 @@
+.footer {
+  padding: 3rem 0;
+  margin-top: 7rem;
+  border-top: 1px solid #dedbdb64;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-links-section {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-links-logo {
+  color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: 1.8rem;
+}
+
+.footer-links-list-item {
+  display: block;
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+
+.footer-links-list-item a {
+  padding: 0;
+  text-align: left;
+}
+
+.footer-credits-section {
+  display: flex;
+  flex-direction: column;
+  column-gap: 2rem;
+  align-items: flex-start;
+}
+
+.footer-credits-section-heading {
+  margin-bottom: 1.8rem;
+}
+
+.footer-credits-section-item {
+  color: #dedbdbcd;
+  font-weight: 300;
+  margin-bottom: 0.5rem;
+}
+
+.footer-credits-section-tmdb-logo {
+  margin-bottom: 0.5rem;
+  width: 40%;
+  height: 20%;
+}

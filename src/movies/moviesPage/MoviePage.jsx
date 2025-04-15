@@ -7,6 +7,7 @@ import { getMovieTrailers } from "../../utils/api";
 import { getMovieWatchProviders } from "../../utils/api";
 import SaveIcon from "../../resusableComponents/save-icon/SaveIcon";
 import MoviesPageSkeleton from "../moviesPageSkeleton/MoviesPageSkeleton";
+import Footer from "../../resusableComponents/footer/Footer";
 
 const MoviePage = ({ watchList, handleWatchList, isLoading, setIsLoading }) => {
   const { id } = useParams();
@@ -165,6 +166,7 @@ const MoviePage = ({ watchList, handleWatchList, isLoading, setIsLoading }) => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
