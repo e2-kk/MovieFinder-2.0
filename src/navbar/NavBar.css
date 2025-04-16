@@ -91,3 +91,25 @@ ul li:hover ul.genres-dropdown {
   display: block;
   z-index: 88;
 }
+
+@media (max-width: 1000px) {
+  .nav {
+    padding: 0 60px;
+  }
+  ul li a:last-child {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 680px) {
+  .nav {
+    padding: 0 45px;
+  }
+
+  ul li a {
+    padding-right: 5px;
+  }
+  ul li a:last-child {
+    padding-right: 5px;
+  }
+}

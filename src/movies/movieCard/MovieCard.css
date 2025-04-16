@@ -83,3 +83,21 @@
   color: #ffffffcd;
   font-size: 1.1rem;
 }
+
+@media (max-width: 1050px) {
+  .movie-card-title {
+    white-space: nowrap;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .movie-card-details-description {
+    font-size: 0.8rem;
+  }
+
+  .movie-card-details-date-rate {
+    font-size: 0.8rem;
+    margin: 10px 0;
+  }
+}
