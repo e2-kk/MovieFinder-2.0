@@ -14,6 +14,7 @@
   row-gap: 40px;
   column-gap: 120px;
   margin-bottom: 2.5rem;
+  overflow: auto;
 }
 
 .movie-list-item-container {
@@ -62,5 +63,18 @@
 @media (max-width: 720px) {
   .movie-list-grid {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .movie-list-grid {
+    column-gap: 50px;
+  }
+}
+
+@media (max-width: 350px) {
+  .movie-list-grid {
+    column-gap: 3.5%;
+    row-gap: 1.3%;
   }
 }
