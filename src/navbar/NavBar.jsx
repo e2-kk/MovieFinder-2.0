@@ -109,6 +109,7 @@ const NavBar = ({
                         services: "watch_providers",
                       });
                       navigate("/", { state: { category } });
+                      setIsOpen(false);
                     }}
                   >
                     {category.name}
@@ -117,7 +118,13 @@ const NavBar = ({
               </ul>
             </li>
             <li className="nav-list-link">
-              <Link to="/watch-list" onClick={handleSelectedCategoryReset}>
+              <Link
+                to="/watch-list"
+                onClick={() => {
+                  handleSelectedCategoryReset();
+                  setIsOpen(false);
+                }}
+              >
                 Watch List
               </Link>
             </li>

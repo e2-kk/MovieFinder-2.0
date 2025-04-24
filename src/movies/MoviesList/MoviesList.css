@@ -6,6 +6,10 @@
   align-items: center;
 }
 
+.height {
+  height: 100vh;
+}
+
 .movie-list-grid {
   display: inline-grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -68,13 +72,13 @@
 
 @media (max-width: 500px) {
   .movie-list-grid {
-    column-gap: 50px;
+    column-gap: 40px;
   }
 }
 
 @media (max-width: 350px) {
   .movie-list-grid {
-    column-gap: 3.5%;
-    row-gap: 1.3%;
+    column-gap: 3%;
+    row-gap: 2%;
   }
 }

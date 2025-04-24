@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import _ from "lodash";
 
 import "../movies/MoviesList/MoviesList.css";
@@ -43,26 +43,23 @@ const WatchList = ({
   }, [sortingOption]);
 
   const handleMovieDeletion = (movie) => {
-    console.log(movie);
     const savedMovies = [...watchList];
     const updatedWatchList = savedMovies.filter((item) => item !== movie);
-
-    console.log(updatedWatchList);
 
     setWatchList(updatedWatchList);
   };
 
   return (
-    <div className="movie-list container height">
+    <div className="movie-list container">
       <FilteringOptions
         sortingOption={sortingOption}
         setSortingOption={setSortingOption}
         setSortedWatchList={setSortedWatchList}
         watchList={watchList}
       />
-      <div className="movie-list-grid">
+      <div className="movie-list-grid margin-bottom items-aligntment">
         {isLoading && watchList.map((n) => <MovieCardSkeleton />)}
-        {sortedWatchList.map((movie) => (
+        {sortedWatchList?.map((movie) => (
           <div className="movie-list-item-container" key={movie.movie.id}>
             <DeleteIcon
               handleMovieDeletion={handleMovieDeletion}
