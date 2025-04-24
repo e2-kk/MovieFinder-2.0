@@ -64,9 +64,10 @@
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 710px) {
   .movie-list-grid {
     grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
   }
 }
 
