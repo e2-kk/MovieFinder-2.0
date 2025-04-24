@@ -2,7 +2,8 @@
   position: relative;
 }
 
-.items-aligntment {
+.height {
+  height: 100vh;
 }
 
 .movie-list-iem-delete-btn {
