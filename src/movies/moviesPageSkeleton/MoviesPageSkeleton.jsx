@@ -3,12 +3,11 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 const MoviesPageSkeleton = ({ watchProviders }) => {
-  console.log(watchProviders.length);
   return (
     <div className="container">
       <Skeleton
         height="450px"
-        margin-bottom="30px"
+        marginBottom="30px"
         baseColor="#242323"
         highlightColor="#5d5959"
       />
@@ -17,7 +16,7 @@ const MoviesPageSkeleton = ({ watchProviders }) => {
           <Skeleton
             width="300px"
             height="350px"
-            style={{ "margin-bottom": "60px" }}
+            style={{ marginBottom: "60px" }}
             baseColor="#282727"
             highlightColor="#5d5959"
           />
@@ -32,77 +31,77 @@ const MoviesPageSkeleton = ({ watchProviders }) => {
           <Skeleton
             width="400px"
             height="30px"
-            style={{ "margin-bottom": "60px" }}
+            style={{ marginBottom: "60px" }}
             baseColor="#282727"
             highlightColor="#5d5959"
           />
           <Skeleton
             width="400px"
             height="15px"
-            style={{ "margin-bottom": "60px" }}
+            style={{ marginBottom: "60px" }}
             baseColor="#282727"
             highlightColor="#5d5959"
           />
           <Skeleton
             width="400px"
             height="10px"
-            style={{ "margin-bottom": "30px" }}
+            style={{ marginBottom: "30px" }}
             baseColor="#282727"
             highlightColor="#5d5959"
           />
           <Skeleton
             width="400px"
             height="10px"
-            style={{ "margin-bottom": "30px" }}
+            style={{ marginBottom: "30px" }}
             baseColor="#282727"
             highlightColor="#5d5959"
           />
           <Skeleton
             width="400px"
             height="10px"
-            style={{ "margin-bottom": "30px" }}
+            style={{ marginBottom: "30px" }}
             baseColor="#282727"
             highlightColor="#5d5959"
           />
           <Skeleton
             width="400px"
             height="10px"
-            style={{ "margin-bottom": "30px" }}
+            style={{ marginBottom: "30px" }}
             baseColor="#282727"
             highlightColor="#5d5959"
           />
           <Skeleton
             width="400px"
             height="10px"
-            style={{ "margin-bottom": "30px" }}
+            style={{ marginBottom: "30px" }}
             baseColor="#282727"
             highlightColor="#5d5959"
           />
           <Skeleton
             width="400px"
             height="10px"
-            style={{ "margin-bottom": "30px" }}
+            style={{ marginBottom: "30px" }}
             baseColor="#282727"
             highlightColor="#5d5959"
           />
           <Skeleton
             width="400px"
             height="30px"
-            style={{ "margin-top": "60px", "margin-bottom": "30px" }}
+            style={{ marginTop: "60px", marginBottom: "30px" }}
             baseColor="#282727"
             highlightColor="#5d5959"
           />
           <Skeleton
             width="400px"
             height="10px"
-            style={{ "margin-bottom": "60px" }}
+            style={{ marginBottom: "60px" }}
             baseColor="#282727"
             highlightColor="#5d5959"
           />
           <Skeleton
             width="400px"
             height="30px"
-            style={{ "margin-bottom": "30px" }}
+            style={{ marginBottom: "30px" }}
             baseColor="#282727"
             highlightColor="#5d5959"
           />
@@ -113,7 +112,7 @@ const MoviesPageSkeleton = ({ watchProviders }) => {
             borderRadius="50px"
             count={watchProviders?.length}
             inline={true}
-            style={{ "margin-right": "40px" }}
+            style={{ marginRight: "40px" }}
             baseColor="#282727"
             highlightColor="#5d5959"
           />

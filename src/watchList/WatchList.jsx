@@ -17,6 +17,7 @@ const WatchList = ({
   setSortedWatchList,
   sortedWatchList,
   isLoading,
+  width,
 }) => {
   useEffect(() => {
     if (sortingOption.year === "asc") {
@@ -58,14 +59,18 @@ const WatchList = ({
         watchList={watchList}
       />
       <div className="movie-list-grid margin-bottom height items-alingtment">
-        {isLoading && watchList.map((n) => <MovieCardSkeleton />)}
+        {isLoading && watchList.map((n) => <MovieCardSkeleton key={n} />)}
         {sortedWatchList?.map((movie) => (
           <div className="movie-list-item-container" key={movie.movie.id}>
             <DeleteIcon
               handleMovieDeletion={handleMovieDeletion}
               movie={movie}
             />
-            <MovieCard movie={movie.movie} watchList={watchList} />
+            <MovieCard
+              movie={movie.movie}
+              watchList={watchList}
+              width={width}
+            />
           </div>
         ))}
       </div>

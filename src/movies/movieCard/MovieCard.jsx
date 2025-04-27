@@ -3,10 +3,15 @@ import { Link } from "react-router-dom";
 
 import "./MovieCard.css";
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie, width }) => {
+  console.log(width);
   return (
     <div className="movie-card-container">
-      <Link className="movie-card" to={`/movie/${movie.id}`} target="_blank">
+      <Link
+        className="movie-card"
+        to={`/movie/${movie.id}`}
+        target={width < 1200 ? "" : "_blank"}
+      >
         <img
           className="movie-card-poster"
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}

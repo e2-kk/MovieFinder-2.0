@@ -68,7 +68,7 @@ const MoviePage = ({ watchList, handleWatchList, isLoading, setIsLoading }) => {
               alt="poster"
             ></img>
           </div>
-          <div className="movie-details-media-trailer-container">
+          <div className="movie-details-media-trailer-container mobile-hidden">
             <iframe
               className="movie-details-media-trailer"
               allow="encrypted-media"
@@ -102,7 +102,7 @@ const MoviePage = ({ watchList, handleWatchList, isLoading, setIsLoading }) => {
             </li>
             <li>
               <span className="movie-details-info-list-item-title">
-                Rating TMBD:&nbsp;
+                Rating TMDB:&nbsp;
               </span>{" "}
               {Math.floor(selectedMovie?.vote_average * 10) / 10}
             </li>
@@ -116,32 +116,44 @@ const MoviePage = ({ watchList, handleWatchList, isLoading, setIsLoading }) => {
               </span>
             </li>
             <li>
-              <span className="movie-details-info-list-item-title">
-                Production Companies:&nbsp;
+              <span className="movie-details-info-list-item-title mobile-hidden">
+                {selectedMovie?.production_companies?.length === 1
+                  ? "Production Company:"
+                  : "Production Companies:"}
+                &nbsp;
               </span>{" "}
               {selectedMovie?.production_companies?.map((company) => (
-                <span key={company.id} className="movie-details-info-genres">
+                <span
+                  key={company.id}
+                  className="movie-details-info-genres mobile-hidden"
+                >
                   {company.name}
                 </span>
               ))}
             </li>
             <li>
-              <span className="movie-details-info-list-item-title">
-                Production Countries:&nbsp;
+              <span className="movie-details-info-list-item-title mobile-hidden">
+                {selectedMovie?.production_countries?.length === 1
+                  ? "Production Country:"
+                  : "Production Countries:"}
+                &nbsp;
               </span>{" "}
               {selectedMovie?.production_countries?.map((country) => (
-                <span key={country.id} className="movie-details-info-genres">
+                <span
+                  key={country.id}
+                  className="movie-details-info-genres mobile-hidden"
+                >
                   {country.name}
                 </span>
               ))}
             </li>
           </ul>
-          <h4 className="movie-details-info-subh">Overview</h4>
-          <p className="movie-details-info-subh-desc">
+          <h4 className="movie-details-info-subh display">Overview</h4>
+          <p className="movie-details-info-subh-desc display">
             {selectedMovie?.overview}
           </p>
-          <h4 className="movie-details-info-subh">Watch Providers</h4>
-          <div className="movie-details-info-provider-container">
+          <h4 className="movie-details-info-subh display">Watch Providers</h4>
+          <div className="movie-details-info-provider-container display">
             {watchProviders ? (
               watchProviders?.map((provider) => (
                 <div
@@ -164,6 +176,44 @@ const MoviePage = ({ watchList, handleWatchList, isLoading, setIsLoading }) => {
               </p>
             )}
           </div>
+        </div>
+      </div>
+      <div className="movie-details-overview-providers">
+        <div className="movie-details-media-trailer-container">
+          <iframe
+            className="movie-details-media-trailer"
+            allow="encrypted-media"
+            allowFullScreen
+            src={`https://www.youtube.com/embed/${trailers[0]?.key}`}
+          ></iframe>
+        </div>
+        <h4 className="movie-details-info-subh">Overview</h4>
+        <p className="movie-details-info-subh-desc">
+          {selectedMovie?.overview}
+        </p>
+        <h4 className="movie-details-info-subh">Watch Providers</h4>
+        <div className="movie-details-info-provider-container">
+          {watchProviders ? (
+            watchProviders?.map((provider) => (
+              <div
+                key={provider.provider_id}
+                className="movie-details-info-provider"
+              >
+                <img
+                  src={`https://image.tmdb.org/t/p/original/${provider?.logo_path}`}
+                  className="movie-details-info-provider-img"
+                ></img>
+
+                <h5 className="movie-details-info-provider-title">
+                  {provider.provider_name}
+                </h5>
+              </div>
+            ))
+          ) : (
+            <p className="missing-content-text">
+              Sorry, Information Unavailable
+            </p>
+          )}
         </div>
       </div>
       <Footer />
