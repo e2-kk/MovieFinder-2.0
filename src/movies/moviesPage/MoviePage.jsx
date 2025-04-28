@@ -37,7 +37,7 @@ const MoviePage = ({ watchList, handleWatchList, isLoading, setIsLoading }) => {
           ? movieWatchProviders?.GB?.rent
           : movieWatchProviders?.GB?.flatrate
       );
-      //console.log(movieWatchProviders);
+
       setIsLoading(false);
     };
 

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import "./MovieCard.css";
 
 const MovieCard = ({ movie, width }) => {
-  console.log(width);
   return (
     <div className="movie-card-container">
       <Link
@@ -26,7 +25,7 @@ const MovieCard = ({ movie, width }) => {
               <img
                 className="movie-card-details-emoji"
                 src="./assets/star.png"
-                alt="rating image"
+                alt="rating"
               />
             </p>
           </div>
