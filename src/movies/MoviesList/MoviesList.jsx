@@ -45,7 +45,7 @@ const MoviesList = ({
       <div className="movie-list-grid">
         {isLoading && skeletons.map((n) => <MovieCardSkeleton key={n} />)}
 
-        {movies.map((movie) => (
+        {movies?.map((movie) => (
           <div className="movie-list-item-container" key={movie.id}>
             <SaveIcon
               watchList={watchList}

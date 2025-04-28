@@ -1,9 +1,9 @@
 import axios from "axios";
-import { config } from "../config";
 
-var api_key = config.API_KEY;
+var api_key = process.env.REACT_APP_API_KEY;
 
 export const getMoviesCategories = async () => {
+  console.log(api_key);
   try {
     const response = await axios.get(
       `https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`
