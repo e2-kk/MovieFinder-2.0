@@ -200,3 +200,12 @@ ul li:hover ul.genres-dropdown {
     padding: 15px 25px;
   }
 }
+
+@media (max-width: 380px) {
+  ul li ul.genres-dropdown {
+    overflow: auto;
+  }
+  ul li ul.genres-dropdown li {
+    font-size: 0.8rem;
+  }
+}
