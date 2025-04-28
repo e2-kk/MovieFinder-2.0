@@ -19,6 +19,7 @@ const MoviesList = ({
   watchList,
   handleWatchList,
   isLoading,
+  width,
 }) => {
   const handleNextMoviesPage = () => {
     if (totalPages > page) {
@@ -52,10 +53,10 @@ const MoviesList = ({
               handleWatchList={handleWatchList}
             />
             <MovieCard
-              key={movie.id}
               movie={movie}
               setWatchList={setWatchList}
               watchList={watchList}
+              width={width}
             />
           </div>
         ))}

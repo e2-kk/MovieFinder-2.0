@@ -1,21 +1,14 @@
-.height {
-  height: 100vh;
-}
-
-.flex {
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-}
-
 .movie-list-item-container {
   position: relative;
 }
 
-.flex-grow {
-  min-height: 100vh;
-  place-items: start;
-  row-gap: 0;
+.items-alingtment {
+  align-items: start;
+  justify-items: center;
+}
+
+.height {
+  height: 100vh;
 }
 
 .movie-list-iem-delete-btn {
@@ -27,4 +20,10 @@
   filter: contrast(200%);
   cursor: pointer;
   z-index: 76;
+}
+
+@media (max-width: 350px) {
+  .margin-bottom {
+    row-gap: 6%;
+  }
 }

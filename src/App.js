@@ -34,6 +34,8 @@ function App() {
   const [sortedWatchList, setSortedWatchList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  let width = window.innerWidth;
+
   useEffect(() => {
     setIsLoading(true);
     localStorage.setItem("watchList", JSON.stringify(watchList));
@@ -212,6 +214,7 @@ function App() {
               watchList={watchList}
               handleWatchList={handleWatchList}
               isLoading={isLoading}
+              width={width}
             />
           }
         />
@@ -237,6 +240,7 @@ function App() {
               setSortedWatchList={setSortedWatchList}
               sortedWatchList={sortedWatchList}
               isLoading={isLoading}
+              width={width}
             />
           }
         />

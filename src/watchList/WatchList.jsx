@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import _ from "lodash";
 
 import "../movies/MoviesList/MoviesList.css";
@@ -17,6 +17,7 @@ const WatchList = ({
   setSortedWatchList,
   sortedWatchList,
   isLoading,
+  width,
 }) => {
   useEffect(() => {
     if (sortingOption.year === "asc") {
@@ -43,32 +44,33 @@ const WatchList = ({
   }, [sortingOption]);
 
   const handleMovieDeletion = (movie) => {
-    console.log(movie);
     const savedMovies = [...watchList];
     const updatedWatchList = savedMovies.filter((item) => item !== movie);
-
-    console.log(updatedWatchList);
 
     setWatchList(updatedWatchList);
   };
 
   return (
-    <div className="movie-list container height">
+    <div className="movie-list container">
       <FilteringOptions
         sortingOption={sortingOption}
         setSortingOption={setSortingOption}
         setSortedWatchList={setSortedWatchList}
         watchList={watchList}
       />
-      <div className="movie-list-grid">
-        {isLoading && watchList.map((n) => <MovieCardSkeleton />)}
-        {sortedWatchList.map((movie) => (
+      <div className="movie-list-grid margin-bottom height items-alingtment">
+        {isLoading && watchList.map((n) => <MovieCardSkeleton key={n} />)}
+        {sortedWatchList?.map((movie) => (
           <div className="movie-list-item-container" key={movie.movie.id}>
             <DeleteIcon
               handleMovieDeletion={handleMovieDeletion}
               movie={movie}
             />
-            <MovieCard movie={movie.movie} watchList={watchList} />
+            <MovieCard
+              movie={movie.movie}
+              watchList={watchList}
+              width={width}
+            />
           </div>
         ))}
       </div>
