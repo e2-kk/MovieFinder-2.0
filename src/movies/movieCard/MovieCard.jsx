@@ -10,7 +10,7 @@ const MovieCard = ({ movie, width }) => {
       <Link
         className="movie-card"
         to={`/movie/${movie.id}`}
-        target={width < 1200 ? "" : "_blank"}
+        target={width < 1500 ? "" : "_blank"}
       >
         <img
           className="movie-card-poster"
