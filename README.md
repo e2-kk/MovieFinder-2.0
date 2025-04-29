@@ -1,4 +1,4 @@
-# MovieFinder
+# MovieFinder 2.0
 
 ## Current Features:
 
