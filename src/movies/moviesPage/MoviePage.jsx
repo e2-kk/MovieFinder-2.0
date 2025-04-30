@@ -16,6 +16,7 @@ const MoviePage = ({ watchList, handleWatchList, isLoading, setIsLoading }) => {
   const [watchProviders, setWatchProviders] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     setIsLoading(true);
     const getMovie = async () => {
       const movie = await getMovieDetails(id);
