@@ -60,7 +60,7 @@ function App() {
           setMovies(data.results);
         }
         setTotalPages(data.total_pages);
-        setIsLoading(false);
+        setTimeout(() => setIsLoading(false), 600);
       };
       fetchMoviesWithinCategory();
     } else if (
@@ -79,7 +79,7 @@ function App() {
           setMovies(data.results);
         }
         setTotalPages(data.total_pages);
-        setIsLoading(false);
+        setTimeout(() => setIsLoading(false), 600);
       };
 
       fetchSortedMoviesByYearWithinCategory();
@@ -92,7 +92,7 @@ function App() {
           setMovies(data.results);
         }
         setTotalPages(data.total_pages);
-        setIsLoading(false);
+        setTimeout(() => setIsLoading(false), 600);
       };
       fetchSortedMoviesByYear();
     } else if (
@@ -111,7 +111,7 @@ function App() {
           setMovies(data.results);
         }
         setTotalPages(data.total_pages);
-        setIsLoading(false);
+        setTimeout(() => setIsLoading(false), 600);
       };
       fetchSortedMoviesByServicesWithinCategory();
     } else if (sortingOption.services !== "watch_providers") {
@@ -123,7 +123,7 @@ function App() {
           setMovies(data.results);
         }
         setTotalPages(data.total_pages);
-        setIsLoading(false);
+        setTimeout(() => setIsLoading(false), 600);
       };
       fetchSortedMoviesByServices();
     } else if (sortingOption.rate !== "rating" && selectedCategory !== 0) {
@@ -139,7 +139,7 @@ function App() {
           setMovies(data.results);
         }
         setTotalPages(data.total_pages);
-        setIsLoading(false);
+        setTimeout(() => setIsLoading(false), 600);
       };
       fetchSortedMoviesByRatingWithinCategory();
     } else if (sortingOption.rate !== "rating") {
@@ -151,7 +151,7 @@ function App() {
           setMovies(data.results);
         }
         setTotalPages(data.total_pages);
-        setIsLoading(false);
+        setTimeout(() => setIsLoading(false), 600);
       };
       fetchSortedMoviesByRating();
     } else {
@@ -163,7 +163,7 @@ function App() {
           setMovies(data.results);
         }
         setTotalPages(data.total_pages);
-        setIsLoading(false);
+        setTimeout(() => setIsLoading(false), 600);
       };
 
       fetchMovies();

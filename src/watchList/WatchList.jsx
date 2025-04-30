@@ -43,6 +43,10 @@ const WatchList = ({
     }
   }, [sortingOption]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleMovieDeletion = (movie) => {
     const savedMovies = [...watchList];
     const updatedWatchList = savedMovies.filter((item) => item !== movie);

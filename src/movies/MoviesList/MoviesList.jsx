@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./MoviesList.css";
 import MovieCard from "../movieCard/MovieCard";
@@ -44,7 +44,6 @@ const MoviesList = ({
       />
       <div className="movie-list-grid">
         {isLoading && skeletons.map((n) => <MovieCardSkeleton key={n} />)}
-
         {movies?.map((movie) => (
           <div className="movie-list-item-container" key={movie.id}>
             <SaveIcon
