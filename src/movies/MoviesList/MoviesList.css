@@ -19,7 +19,6 @@
   column-gap: 120px;
   margin-bottom: 2.5rem;
   overflow: auto;
-  transition: all 0.3s ease-in-out;
 }
 
 .movie-list-item-container {

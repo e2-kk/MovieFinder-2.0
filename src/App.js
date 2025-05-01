@@ -36,6 +36,8 @@ function App() {
 
   let width = window.innerWidth;
 
+  const prevScrollY = window.scrollY;
+
   useEffect(() => {
     setIsLoading(true);
     localStorage.setItem("watchList", JSON.stringify(watchList));
@@ -60,7 +62,7 @@ function App() {
           setMovies(data.results);
         }
         setTotalPages(data.total_pages);
-        setTimeout(() => setIsLoading(false), 600);
+        setTimeout(setIsLoading(false), 700);
       };
       fetchMoviesWithinCategory();
     } else if (
@@ -79,7 +81,7 @@ function App() {
           setMovies(data.results);
         }
         setTotalPages(data.total_pages);
-        setTimeout(() => setIsLoading(false), 600);
+        //setTimeout(() => setIsLoading(false), 600);
       };
 
       fetchSortedMoviesByYearWithinCategory();
@@ -92,7 +94,7 @@ function App() {
           setMovies(data.results);
         }
         setTotalPages(data.total_pages);
-        setTimeout(() => setIsLoading(false), 600);
+        //setTimeout(() => setIsLoading(false), 600);
       };
       fetchSortedMoviesByYear();
     } else if (
@@ -111,7 +113,7 @@ function App() {
           setMovies(data.results);
         }
         setTotalPages(data.total_pages);
-        setTimeout(() => setIsLoading(false), 600);
+        //setTimeout(() => setIsLoading(false), 600);
       };
       fetchSortedMoviesByServicesWithinCategory();
     } else if (sortingOption.services !== "watch_providers") {
@@ -123,7 +125,7 @@ function App() {
           setMovies(data.results);
         }
         setTotalPages(data.total_pages);
-        setTimeout(() => setIsLoading(false), 600);
+        //setTimeout(() => setIsLoading(false), 600);
       };
       fetchSortedMoviesByServices();
     } else if (sortingOption.rate !== "rating" && selectedCategory !== 0) {
@@ -139,7 +141,7 @@ function App() {
           setMovies(data.results);
         }
         setTotalPages(data.total_pages);
-        setTimeout(() => setIsLoading(false), 600);
+        //setTimeout(() => setIsLoading(false), 600);
       };
       fetchSortedMoviesByRatingWithinCategory();
     } else if (sortingOption.rate !== "rating") {
@@ -151,7 +153,7 @@ function App() {
           setMovies(data.results);
         }
         setTotalPages(data.total_pages);
-        setTimeout(() => setIsLoading(false), 600);
+        //setTimeout(() => setIsLoading(false), 600);
       };
       fetchSortedMoviesByRating();
     } else {
@@ -161,9 +163,11 @@ function App() {
           setMovies((prevMovies) => [...prevMovies, ...data.results]);
         } else {
           setMovies(data.results);
+
+          //window.scrollTo({ top: scrollY });
         }
         setTotalPages(data.total_pages);
-        setTimeout(() => setIsLoading(false), 600);
+        setTimeout(setIsLoading(false), 700);
       };
 
       fetchMovies();
