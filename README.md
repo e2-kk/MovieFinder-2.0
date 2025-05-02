@@ -47,7 +47,7 @@ React Skeleton - used for creating loading effect for content requested from API
 
 Loadash - used for sorting movies 
 
-Data Source: 
+#### Data Source: 
 TMDB database
 
 #### Link to Live Project
