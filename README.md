@@ -49,3 +49,7 @@ Loadash - used for sorting movies
 
 #### Data Source: 
 TMDB database
+
+#### Link to Live Project
+
+https://moviefinderer.netlify.app
