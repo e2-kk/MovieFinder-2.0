@@ -6,10 +6,6 @@
   align-items: center;
 }
 
-.height {
-  height: 100vh;
-}
-
 .movie-list-grid {
   display: inline-grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -19,7 +15,7 @@
   column-gap: 120px;
   margin-bottom: 2.5rem;
   overflow: auto;
-  transition: all 0.3s ease-in-out;
+  overflow-y: auto;
 }
 
 .movie-list-item-container {
