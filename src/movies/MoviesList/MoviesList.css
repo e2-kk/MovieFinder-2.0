@@ -15,7 +15,7 @@
   column-gap: 120px;
   margin-bottom: 2.5rem;
   overflow: auto;
-  overflow-y: auto;
+  /*overflow-y: auto;*/
 }
 
 .movie-list-item-container {
@@ -77,6 +77,6 @@
 @media (max-width: 350px) {
   .movie-list-grid {
     column-gap: 3%;
-    row-gap: 2%;
+    row-gap: 1%;
   }
 }
