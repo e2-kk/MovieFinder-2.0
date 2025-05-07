@@ -43,7 +43,6 @@ const MoviesList = ({
         setPageNum={setPageNum}
       />
       <div className="movie-list-grid">
-        {isLoading && skeletons.map((n) => <MovieCardSkeleton key={n} />)}
         {movies?.map((movie, index) => (
           <div
             className="movie-list-item-container"
@@ -62,6 +61,7 @@ const MoviesList = ({
             />
           </div>
         ))}
+        {isLoading && skeletons.map((n) => <MovieCardSkeleton key={n} />)}
       </div>
       {!isLoading && movies.length !== 0 && (
         <button className="movie-list-btn" onClick={handleNextMoviesPage}>
