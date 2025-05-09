@@ -130,7 +130,7 @@ export const getMovieDetails = async (id) => {
     );
     return response.data; // Returns a Promise that resolves to movie details
   } catch (error) {
-    console.error("Error fetching movies:", error);
+    console.error("Error fetching movie details:", error);
     return []; // Return an empty array in case of error
   }
 };
@@ -142,7 +142,7 @@ export const getMovieTrailers = async (id) => {
     );
     return response.data.results; // Returns a Promise that resolves to movie trailers
   } catch (error) {
-    console.error("Error fetching movies:", error);
+    console.error("Error fetching trailers:", error);
     return []; // Return an empty array in case of error
   }
 };
@@ -154,7 +154,7 @@ export const getMovieWatchProviders = async (id) => {
     );
     return response.data.results; // Returns a Promise that resolves to movie trailers
   } catch (error) {
-    console.error("Error fetching movies:", error);
+    console.error("Error fetching watch providers:", error);
     return []; // Return an empty array in case of error
   }
 };

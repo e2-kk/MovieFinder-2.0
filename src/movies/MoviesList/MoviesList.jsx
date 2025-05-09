@@ -6,6 +6,7 @@ import SortingOptions from "../../resusableComponents/MovieListSortingOptions";
 import SaveIcon from "../../resusableComponents/save-icon/SaveIcon";
 import MovieCardSkeleton from "../movieCardSkeleton/MovieCardSkeleton";
 import Footer from "../../resusableComponents/footer/Footer";
+import MissingContentMessage from "../../resusableComponents/error-message/MissingContentMessage";
 
 const MoviesList = ({
   movies,
@@ -26,7 +27,9 @@ const MoviesList = ({
       const pageNum = page + 1;
       setPageNum(pageNum);
     } else {
-      console.log("Sorry, reached the end of movies list");
+      <MissingContentMessage
+        message={"Sorry, reached the end of movies list"}
+      />;
     }
   };
 

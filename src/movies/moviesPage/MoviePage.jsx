@@ -8,6 +8,8 @@ import { getMovieWatchProviders } from "../../utils/api";
 import SaveIcon from "../../resusableComponents/save-icon/SaveIcon";
 import MoviesPageSkeleton from "../moviesPageSkeleton/MoviesPageSkeleton";
 import Footer from "../../resusableComponents/footer/Footer";
+import MissingContent from "../../resusableComponents/error-message/MissingContentMessage";
+import MissingContentMessage from "../../resusableComponents/error-message/MissingContentMessage";
 
 const MoviePage = ({ watchList, handleWatchList, isLoading, setIsLoading }) => {
   const { id } = useParams();
@@ -172,9 +174,9 @@ const MoviePage = ({ watchList, handleWatchList, isLoading, setIsLoading }) => {
                 </div>
               ))
             ) : (
-              <p className="missing-content-text">
-                Sorry, Information Unavailable
-              </p>
+              <MissingContentMessage
+                message={"Sorry, Information Unavailable"}
+              />
             )}
           </div>
         </div>
@@ -211,9 +213,7 @@ const MoviePage = ({ watchList, handleWatchList, isLoading, setIsLoading }) => {
               </div>
             ))
           ) : (
-            <p className="missing-content-text">
-              Sorry, Information Unavailable
-            </p>
+            <MissingContent message={"Sorry, Information Unavailable"} />
           )}
         </div>
       </div>

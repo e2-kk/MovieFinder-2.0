@@ -180,8 +180,6 @@ function App() {
 
       if (movieIndex === -1) {
         updatedWatchList.push({ movie });
-      } else {
-        console.log("Movie is already saved");
       }
 
       return updatedWatchList;
