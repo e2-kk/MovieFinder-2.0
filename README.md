@@ -30,6 +30,8 @@ Watchlist is obtained from users account data in TMDB database
 
 Movie recommndations based on the movies saved to the watch list
 
+Smoother openining and closing of mobile menu
+
 ## Technical Overview
 
 #### Languages: 
