@@ -67,7 +67,11 @@ const MoviePage = ({ watchList, handleWatchList, isLoading, setIsLoading }) => {
             />
             <img
               className="movie-details-media-poster"
-              src={`https://image.tmdb.org/t/p/w500${selectedMovie?.poster_path}`}
+              src={
+                selectedMovie?.poster_path !== null
+                  ? `https://image.tmdb.org/t/p/w500${selectedMovie?.poster_path}`
+                  : "/assets/missing_poster.png"
+              }
               alt="poster"
             ></img>
           </div>

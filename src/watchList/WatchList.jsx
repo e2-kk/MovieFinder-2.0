@@ -62,7 +62,7 @@ const WatchList = ({
         setSortedWatchList={setSortedWatchList}
         watchList={watchList}
       />
-      <div className="movie-list-grid margin-bottom height items-alingtment">
+      <div className="movie-list-grid margin-bottom height">
         {isLoading && watchList.map((n) => <MovieCardSkeleton key={n} />)}
         {sortedWatchList?.map((movie) => (
           <div className="movie-list-item-container" key={movie.movie.id}>

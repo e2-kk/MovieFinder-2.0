@@ -6,20 +6,25 @@ import "./MovieCard.css";
 const MovieCard = ({ movie, width }) => {
   return (
     <div className="movie-card-container">
-      <Link
-        className="movie-card"
-        to={`/movie/${movie.id}`}
-        target={width < 1500 ? "" : "_blank"}
-      >
-        <img
-          className="movie-card-poster"
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          alt="movie poster"
-        />
-
+      <div className="movie-card-visual">
+        <Link
+          className="movie-card"
+          to={`/movie/${movie.id}`}
+          target={width < 1500 ? "" : "_blank"}
+        >
+          <img
+            className="movie-card-poster"
+            src={
+              movie.poster_path !== null
+                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                : "/assets/missing_poster.png"
+            }
+            alt="movie poster"
+          />
+        </Link>
         <div className="movie-card-details">
           <div className="movie-card-details-date-rate">
-            <p>{movie.release_date.slice(0, 4)}</p>
+            <p>{movie.release_date?.slice(0, 4)}</p>
             <p>
               {Math.floor(movie.vote_average * 10) / 10}
               <img
@@ -35,7 +40,8 @@ const MovieCard = ({ movie, width }) => {
               : movie.overview}
           </p>
         </div>
-      </Link>
+      </div>
+
       <h3 className="movie-card-title">
         {movie.title.length > 14
           ? movie.title.slice(0, 14) + "..."

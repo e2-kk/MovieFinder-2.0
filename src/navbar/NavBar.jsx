@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import "./NavBar.css";
-import { getMoviesCategories } from "../utils/api";
+import { getMovieByTitle, getMoviesCategories } from "../utils/api";
 
 const NavBar = ({
   moviesCategories,
@@ -10,9 +10,19 @@ const NavBar = ({
   setMoviesCategories,
   setMovies,
   setSotringOption,
+  movieTerm,
+  setMovieTerm,
+  setMoviesSearchList,
+  moviesSearchList,
+  setIsLoading,
+  setTotalSearchResults,
 }) => {
   const [activeLink, setActiveLink] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [movieInput, setMovieInput] = useState("");
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchCategories = async () => {
       const data = await getMoviesCategories();
@@ -21,7 +31,27 @@ const NavBar = ({
     fetchCategories();
   }, []);
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    const fetchMovieByTitle = async () => {
+      const data = await getMovieByTitle(movieTerm);
+
+      const filteredMoviesSearchList = data.results.filter(
+        (movie) => movie.vote_count > 150 && movie.original_language === "en"
+      );
+
+      if (moviesSearchList?.length !== 0) {
+        setMoviesSearchList((prevMovies) => [
+          ...prevMovies,
+          ...filteredMoviesSearchList,
+        ]);
+      } else {
+        setMoviesSearchList(filteredMoviesSearchList);
+      }
+      setTotalSearchResults(data.total_results);
+      setTimeout(setIsLoading(false), 900);
+    };
+    fetchMovieByTitle();
+  }, [movieTerm]);
 
   const handleSelectedCategoryReset = () => {
     setActiveLink("");
@@ -34,11 +64,32 @@ const NavBar = ({
   const closeMobileMenu = () => {
     setIsOpen(false);
   };
+
+  const handleSearchInput = (event) => {
+    setMovieInput(event.target.value);
+  };
+
+  const handleMovieSearchTermSubmit = (event) => {
+    setMoviesSearchList([]);
+    setMovieTerm(movieInput);
+    event.preventDefault();
+    navigate("/movies-search");
+  };
+
   return (
     <section className="section-nav">
       <div className="section-nav-container">
         <nav className="nav">
           <h1 className="nav-logo">MovieFinder</h1>
+          <form onSubmit={handleMovieSearchTermSubmit}>
+            <input
+              className="nav-searchbar desktop"
+              type="text"
+              placeholder="Search by movie title..."
+              value={movieInput}
+              onChange={handleSearchInput}
+            ></input>
+          </form>
           <ul className="nav-list-desktop">
             <li className="nav-list-link">
               <a href="/">Films</a>
@@ -53,6 +104,7 @@ const NavBar = ({
                     onClick={() => {
                       setSelectedCategory(category.id);
                       setMovies([]);
+                      setMovieInput("");
                       setActiveLink(category.name);
                       setSotringOption({
                         year: "release_date",
@@ -68,7 +120,13 @@ const NavBar = ({
               </ul>
             </li>
             <li className="nav-list-link">
-              <Link to="/watch-list" onClick={handleSelectedCategoryReset}>
+              <Link
+                to="/watch-list"
+                onClick={() => {
+                  handleSelectedCategoryReset();
+                  setMovieInput("");
+                }}
+              >
                 Watch List
               </Link>
             </li>
@@ -102,6 +160,7 @@ const NavBar = ({
                     onClick={() => {
                       setSelectedCategory(category.id);
                       setMovies([]);
+                      setMovieInput("");
                       setActiveLink(category.name);
                       setSotringOption({
                         year: "release_date",
@@ -123,10 +182,25 @@ const NavBar = ({
                 onClick={() => {
                   handleSelectedCategoryReset();
                   setIsOpen(false);
+                  setMovieInput("");
                 }}
               >
                 Watch List
               </Link>
+            </li>
+            <li>
+              <form
+                onSubmit={handleMovieSearchTermSubmit}
+                className="padding-left"
+              >
+                <input
+                  className="nav-searchbar mobile"
+                  type="text"
+                  placeholder="Search by movie title..."
+                  value={movieInput}
+                  onChange={handleSearchInput}
+                ></input>
+              </form>
             </li>
           </ul>
         </nav>

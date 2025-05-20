@@ -2,8 +2,8 @@
   position: absolute;
   max-width: 23px;
   max-height: 23px;
-  top: 13px;
-  right: 5px;
+  top: 15px;
+  right: 10px;
   filter: contrast(200%);
   cursor: pointer;
   z-index: 76;

@@ -2,15 +2,6 @@
   position: relative;
 }
 
-.items-alingtment {
-  align-items: start;
-  justify-items: center;
-}
-
-.height {
-  height: 100vh;
-}
-
 .movie-list-iem-delete-btn {
   position: absolute;
   max-width: 23px;
@@ -20,6 +11,11 @@
   filter: contrast(200%);
   cursor: pointer;
   z-index: 76;
+}
+
+.height {
+  height: 100vh;
+  place-items: initial;
 }
 
 @media (max-width: 350px) {
