@@ -18,11 +18,11 @@ Saved and unsaved movies to watch list are visible during movies search
 
 Each movie has a page with its details such as title, overview, watch providers and trailer
 
+Movie can be searched by its title
+
 ## Future Features:
 
 Displays popular movies in general, of the week and streaming in cinemas at the moment
-
-Movie can be searched by its title
 
 Users are able to login through account on TMDB
 
