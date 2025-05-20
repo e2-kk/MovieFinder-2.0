@@ -158,3 +158,15 @@ export const getMovieWatchProviders = async (id) => {
     return []; // Return an empty array in case of error
   }
 };
+
+export const getMovieByTitle = async (movieTerm) => {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${movieTerm}&include_adult=false&with_original_language=en`
+    );
+    return response.data; // Returns a Promise that resolves to movie trailers
+  } catch (error) {
+    console.error("Error fetching movie by title:", error);
+    return []; // Return an empty array in case of error
+  }
+};

@@ -16,6 +16,7 @@ import {
 } from "./utils/api";
 import WatchList from "./watchList/WatchList";
 import MoviePage from "./movies/moviesPage/MoviePage";
+import MoviesSearchList from "./movies/moviesSearchList/MoviesSearchList";
 
 const savedMovies = localStorage.getItem("watchList");
 
@@ -33,6 +34,9 @@ function App() {
   const [watchList, setWatchList] = useState(JSON.parse(savedMovies));
   const [sortedWatchList, setSortedWatchList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [movieTerm, setMovieTerm] = useState("");
+  const [moviesSearchList, setMoviesSearchList] = useState([]);
+  const [totalSearchResults, setTotalSearchResults] = useState(1);
 
   let width = window.innerWidth;
 
@@ -195,6 +199,12 @@ function App() {
         setMovies={setMovies}
         setSotringOption={setSortingOption}
         selectedCategory={selectedCategory}
+        movieTerm={movieTerm}
+        setMovieTerm={setMovieTerm}
+        setMoviesSearchList={setMoviesSearchList}
+        moviesSearchList={moviesSearchList}
+        setIsLoading={setIsLoading}
+        setTotalSearchResults={setTotalSearchResults}
       />
       <Routes>
         <Route
@@ -213,6 +223,22 @@ function App() {
               handleWatchList={handleWatchList}
               isLoading={isLoading}
               width={width}
+              pageNum={pageNum}
+            />
+          }
+        />
+        <Route
+          path="/movies-search"
+          element={
+            <MoviesSearchList
+              moviesSearchList={moviesSearchList}
+              watchList={watchList}
+              handleWatchList={handleWatchList}
+              width={width}
+              isLoading={isLoading}
+              setWatchList={setWatchList}
+              movieTerm={movieTerm}
+              totalSearchResults={totalSearchResults}
             />
           }
         />

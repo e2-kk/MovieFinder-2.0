@@ -1,3 +1,10 @@
 .message-text {
   font-size: 1.1rem;
+  text-wrap: nowrap;
+}
+
+@media (max-width: 420px) {
+  .message-text {
+    font-size: 0.9rem;
+  }
 }

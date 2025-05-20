@@ -21,6 +21,7 @@ const MoviesList = ({
   handleWatchList,
   isLoading,
   width,
+  pageNum,
 }) => {
   const handleNextMoviesPage = () => {
     if (totalPages > page) {
@@ -66,7 +67,7 @@ const MoviesList = ({
         ))}
         {isLoading && skeletons.map((n) => <MovieCardSkeleton key={n} />)}
       </div>
-      {!isLoading && movies.length !== 0 && (
+      {!isLoading && movies?.length !== 0 && (
         <button className="movie-list-btn" onClick={handleNextMoviesPage}>
           Load More
         </button>

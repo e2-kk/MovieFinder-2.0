@@ -17,7 +17,7 @@
   position: fixed;
   width: 100%;
   margin: 0 auto;
-  padding: 0 80px;
+  padding: 8px 80px;
   top: 0;
   left: 0;
   z-index: 90;
@@ -26,13 +26,39 @@
 
 .nav-logo {
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   cursor: pointer;
+}
+
+.nav-searchbar {
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  padding: 0.35rem 4rem;
+  background-color: #242323;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-searchbar:hover {
+  opacity: 0.75;
+}
+
+input,
+select,
+textarea {
+  color: #ffffff;
+}
+
+textarea:focus,
+input:focus {
+  color: #ffffff;
 }
 
 .nav .nav-list-desktop {
   /*margin: 0 auto;*/
   text-align: center;
+  align-items: center;
 }
 
 ul {
@@ -139,12 +165,44 @@ ul li:hover ul.genres-dropdown {
   margin-top: 15px;
 }
 
+.desktop {
+  display: inline;
+}
+
+.mobile {
+  display: none;
+}
+
 @media (max-width: 1000px) {
   .nav {
     padding: 0 60px;
   }
   ul li a:last-child {
     padding-right: 0;
+  }
+
+  .nav-searchbar {
+    padding: 0.45rem 4rem;
+  }
+}
+
+@media (max-width: 890px) {
+  .nav-searchbar {
+    padding: 0.35rem 2.7rem;
+  }
+
+  ul li a {
+    padding: 1.3rem 1rem;
+  }
+}
+
+@media (max-width: 785px) {
+  .nav-searchbar {
+    padding: 0.25rem 2rem;
+  }
+
+  ul li a {
+    padding: 1.3rem 0.4rem;
   }
 }
 
@@ -154,6 +212,19 @@ ul li:hover ul.genres-dropdown {
   }
   .nav-list-desktop {
     display: none;
+  }
+
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    display: inline-block;
+    margin: 0 auto;
+  }
+
+  .padding-left {
+    padding-left: 30px;
   }
 
   .nav-list-mobile-menu-btn {
@@ -179,6 +250,11 @@ ul li:hover ul.genres-dropdown {
 
   .margin-top {
     margin-top: 4.5rem;
+  }
+
+  .nav-searchbar {
+    padding: 0.4rem 0.25rem;
+    font-size: 1.1rem;
   }
 }
 

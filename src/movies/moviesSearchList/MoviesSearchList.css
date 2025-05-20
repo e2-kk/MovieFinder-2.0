@@ -1,0 +1,21 @@
+.margin-top {
+  margin-top: 8rem;
+}
+
+.movie-list-message-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.height {
+  height: 100vh;
+  place-items: initial;
+}
+
+@media (max-width: 500px) {
+  .margin-top {
+    margin-top: 5rem;
+  }
+}

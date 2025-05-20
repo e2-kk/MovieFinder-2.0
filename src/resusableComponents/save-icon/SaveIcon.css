@@ -2,8 +2,8 @@
   max-width: 23px;
   max-height: 23px;
   position: absolute;
-  top: 13px;
-  left: 5px;
+  top: 15px;
+  left: 10px;
   z-index: 10;
   cursor: pointer;
 }
