@@ -24,21 +24,23 @@ const MoviesSearchList = ({
 
   return (
     <div className="movie-list container margin-top ">
-      {moviesSearchList?.length === 0 && totalSearchResults === 0 ? (
+      {isLoading && moviesSearchList.length === 0 ? (
+        <div className="movie-list-grid height">
+          {skeletons.map((n) => (
+            <MovieCardSkeleton key={n} />
+          ))}
+        </div>
+      ) : moviesSearchList.length === 0 &&
+        totalSearchResults === 0 &&
+        movieTerm ? (
         <div className="movie-list-message-container height margin-top">
           <MissingContentMessage
-            message={
-              "Sorry, no movies containing" +
-              " " +
-              movieTerm +
-              " " +
-              "were found"
-            }
+            message={`Sorry, no movies containing "${movieTerm}" were found.`}
           />
         </div>
       ) : (
-        <div className="movie-list-grid  height">
-          {moviesSearchList?.map((movie, index) => (
+        <div className="movie-list-grid height">
+          {moviesSearchList.map((movie, index) => (
             <div
               className="movie-list-item-container"
               key={`${movie.id}-${index}`}
@@ -56,7 +58,6 @@ const MoviesSearchList = ({
               />
             </div>
           ))}
-
           {isLoading && skeletons.map((n) => <MovieCardSkeleton key={n} />)}
         </div>
       )}

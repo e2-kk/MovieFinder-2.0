@@ -32,6 +32,7 @@ const NavBar = ({
   }, []);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchMovieByTitle = async () => {
       const data = await getMovieByTitle(movieTerm);
 
@@ -49,6 +50,7 @@ const NavBar = ({
       }
       setTotalSearchResults(data.total_results);
       setTimeout(setIsLoading(false), 900);
+      setIsLoading(false);
     };
     fetchMovieByTitle();
   }, [movieTerm]);
