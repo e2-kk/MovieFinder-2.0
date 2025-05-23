@@ -76,6 +76,10 @@ const NavBar = ({
     navigate("/movies-search");
   };
 
+  const handleLoginDirect = () => {
+    navigate("/login");
+  };
+
   return (
     <section className="section-nav">
       <div className="section-nav-container">
@@ -131,6 +135,11 @@ const NavBar = ({
               </Link>
             </li>
           </ul>
+          <img
+            src="/assets/icons8-user-64.png"
+            className="nav-list-link-user"
+            onClick={handleLoginDirect}
+          ></img>
           <li className="nav-list-mobile-menu-btn">
             <img
               src="/assets/menu.svg"

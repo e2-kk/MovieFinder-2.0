@@ -118,6 +118,11 @@ ul li:hover ul.genres-dropdown {
   z-index: 88;
 }
 
+.nav-list-link-user {
+  width: 32px;
+  height: 32px;
+}
+
 .nav-list-menu-btn {
   display: none;
 }

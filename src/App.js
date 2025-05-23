@@ -17,6 +17,7 @@ import {
 import WatchList from "./watchList/WatchList";
 import MoviePage from "./movies/moviesPage/MoviePage";
 import MoviesSearchList from "./movies/moviesSearchList/MoviesSearchList";
+import UserLogin from "./user-login/UserLogin";
 
 const savedMovies = localStorage.getItem("watchList");
 
@@ -268,6 +269,7 @@ function App() {
             />
           }
         />
+        <Route path="/login" element={<UserLogin />} />
       </Routes>
     </div>
   );
