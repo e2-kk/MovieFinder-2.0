@@ -181,7 +181,7 @@ export const getUserToken = async (userToken) => {
     );
     return response.data; // Returns a Promise that resolves to user access token
   } catch (error) {
-    console.error("Error fetching movie by title:", error);
+    console.error("Error creating user token:", error);
     return {}; // Return an empty object in case of error
   }
 };
@@ -194,7 +194,7 @@ export const createUserSession = async (userToken) => {
     );
     return response.data; // Returns a Promise that resolves to user session id
   } catch (error) {
-    console.error("Error fetching movie by title:", error);
+    console.error("Error creating user session id:", error);
     return ""; // Return an empty string in case of error
   }
 };
@@ -207,7 +207,7 @@ export const deleteUserSession = async (sessionId) => {
     );
     return response.data; // Returns a Promise that resolves to sucess: true for deleted session
   } catch (error) {
-    console.error("Error fetching movie by title:", error);
+    console.error("Error deleting session id:", error);
     return false; // Return false in case of error
   }
 };
