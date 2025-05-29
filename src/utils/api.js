@@ -170,3 +170,31 @@ export const getMovieByTitle = async (movieTerm) => {
     return []; // Return an empty array in case of error
   }
 };
+
+export const getUserToken = async (userToken) => {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/authentication/token/new?api_key=${api_key}`,
+      {
+        userToken,
+      }
+    );
+    return response.data; // Returns a Promise that resolves to movie trailers
+  } catch (error) {
+    console.error("Error fetching movie by title:", error);
+    return {}; // Return an empty object in case of error
+  }
+};
+
+export const createUserSession = async (userToken) => {
+  try {
+    const response = await axios.post(
+      `https://api.themoviedb.org/3/authentication/session/new?api_key=${api_key}`,
+      { request_token: userToken }
+    );
+    return response.data; // Returns a Promise that resolves to movie trailers
+  } catch (error) {
+    console.error("Error fetching movie by title:", error);
+    return "Coudn't create session id"; // Return an empty array in case of error
+  }
+};

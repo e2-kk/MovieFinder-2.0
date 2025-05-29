@@ -56,7 +56,6 @@ input:focus {
 }
 
 .nav .nav-list-desktop {
-  /*margin: 0 auto;*/
   text-align: center;
   align-items: center;
 }
@@ -76,7 +75,7 @@ ul li a {
   text-decoration: none;
   text-align: center;
   color: #ffffffcd;
-  transition: 0.9ms ease-in-out;
+  transition: 0.4s ease-in-out;
   font-size: 1.2rem;
 }
 
@@ -118,9 +117,38 @@ ul li:hover ul.genres-dropdown {
   z-index: 88;
 }
 
+.nav-list-link-login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #242323;
+  padding: 2px 10px;
+  border-radius: 10px;
+  transition: 0.2s ease-in-out;
+}
+
 .nav-list-link-user {
-  width: 32px;
-  height: 32px;
+  width: 26px;
+  height: 26px;
+  margin-right: 0.3rem;
+  cursor: pointer;
+  transition: 0.4s ease-in-out;
+}
+
+.nav-list-link-login-container:hover {
+  opacity: 0.7;
+}
+
+.nav-list-link-login-container button {
+  border: none;
+  cursor: pointer;
+  outline: none;
+  color: #e1e1df;
+  appearance: none;
+  font-weight: 600;
+  font-size: 0.96rem;
+  background-color: transparent;
+  white-space: nowrap;
 }
 
 .nav-list-menu-btn {
@@ -145,7 +173,6 @@ ul li:hover ul.genres-dropdown {
 
 .nav-list-mobile li {
   width: 100%;
-  /*margin-bottom: 2rem;*/
 }
 
 .nav-list-mobile .nav-list-link {

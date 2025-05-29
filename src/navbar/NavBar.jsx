@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import "./NavBar.css";
-import { getMovieByTitle, getMoviesCategories } from "../utils/api";
+import {
+  getMovieByTitle,
+  getMoviesCategories,
+  getUserToken,
+  createUserSession,
+} from "../utils/api";
 
 const NavBar = ({
   moviesCategories,
@@ -16,6 +21,8 @@ const NavBar = ({
   moviesSearchList,
   setIsLoading,
   setTotalSearchResults,
+  sessionId,
+  setSessionId,
 }) => {
   const [activeLink, setActiveLink] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -76,8 +83,20 @@ const NavBar = ({
     navigate("/movies-search");
   };
 
-  const handleLoginDirect = () => {
-    navigate("/login");
+  const handleLogin = async () => {
+    const userToken = await getUserToken();
+    if (userToken) {
+      const redirectUrl = `https://www.themoviedb.org/authenticate/${userToken.request_token}`;
+      const popup = window.open(redirectUrl, "_blank");
+
+      const pollInterval = setInterval(async () => {
+        if (popup?.closed) {
+          clearInterval(pollInterval);
+          const session = await createUserSession(userToken.request_token);
+          setSessionId(session.session_id);
+        }
+      }, 1000);
+    }
   };
 
   return (
@@ -135,11 +154,13 @@ const NavBar = ({
               </Link>
             </li>
           </ul>
-          <img
-            src="/assets/icons8-user-64.png"
-            className="nav-list-link-user"
-            onClick={handleLoginDirect}
-          ></img>
+          <div className="nav-list-link-login-container" onClick={handleLogin}>
+            <img
+              src="/assets/icons8-user-64.png"
+              className="nav-list-link-user"
+            ></img>
+            <button>{sessionId ? "Log out" : "Log in"}</button>
+          </div>
           <li className="nav-list-mobile-menu-btn">
             <img
               src="/assets/menu.svg"

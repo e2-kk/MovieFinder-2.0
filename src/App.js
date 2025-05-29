@@ -17,7 +17,6 @@ import {
 import WatchList from "./watchList/WatchList";
 import MoviePage from "./movies/moviesPage/MoviePage";
 import MoviesSearchList from "./movies/moviesSearchList/MoviesSearchList";
-import UserLogin from "./user-login/UserLogin";
 
 const savedMovies = localStorage.getItem("watchList");
 
@@ -38,6 +37,7 @@ function App() {
   const [movieTerm, setMovieTerm] = useState("");
   const [moviesSearchList, setMoviesSearchList] = useState([]);
   const [totalSearchResults, setTotalSearchResults] = useState(1);
+  const [sessionId, setSessionId] = useState("");
 
   let width = window.innerWidth;
 
@@ -206,6 +206,8 @@ function App() {
         moviesSearchList={moviesSearchList}
         setIsLoading={setIsLoading}
         setTotalSearchResults={setTotalSearchResults}
+        sessionId={sessionId}
+        setSessionId={setSessionId}
       />
       <Routes>
         <Route
@@ -269,7 +271,6 @@ function App() {
             />
           }
         />
-        <Route path="/login" element={<UserLogin />} />
       </Routes>
     </div>
   );
