@@ -179,7 +179,7 @@ export const getUserToken = async (userToken) => {
         userToken,
       }
     );
-    return response.data; // Returns a Promise that resolves to movie trailers
+    return response.data; // Returns a Promise that resolves to user access token
   } catch (error) {
     console.error("Error fetching movie by title:", error);
     return {}; // Return an empty object in case of error
@@ -192,9 +192,22 @@ export const createUserSession = async (userToken) => {
       `https://api.themoviedb.org/3/authentication/session/new?api_key=${api_key}`,
       { request_token: userToken }
     );
-    return response.data; // Returns a Promise that resolves to movie trailers
+    return response.data; // Returns a Promise that resolves to user session id
   } catch (error) {
     console.error("Error fetching movie by title:", error);
-    return "Coudn't create session id"; // Return an empty array in case of error
+    return ""; // Return an empty string in case of error
+  }
+};
+
+export const deleteUserSession = async (sessionId) => {
+  try {
+    const response = await axios.delete(
+      `https://api.themoviedb.org/3/authentication/session?api_key=${api_key}`,
+      { data: { session_id: sessionId } }
+    );
+    return response.data; // Returns a Promise that resolves to sucess: true for deleted session
+  } catch (error) {
+    console.error("Error fetching movie by title:", error);
+    return false; // Return false in case of error
   }
 };

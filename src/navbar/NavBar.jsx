@@ -7,6 +7,7 @@ import {
   getMoviesCategories,
   getUserToken,
   createUserSession,
+  deleteUserSession,
 } from "../utils/api";
 
 const NavBar = ({
@@ -99,6 +100,15 @@ const NavBar = ({
     }
   };
 
+  const handleLogOut = async () => {
+    const deletedSession = await deleteUserSession(sessionId);
+    if (deletedSession?.success === true) {
+      setSessionId("");
+    } else {
+      window.alert("Error logging out");
+    }
+  };
+
   return (
     <section className="section-nav">
       <div className="section-nav-container">
@@ -154,12 +164,16 @@ const NavBar = ({
               </Link>
             </li>
           </ul>
-          <div className="nav-list-link-login-container" onClick={handleLogin}>
+          <div className="nav-list-link-login-container">
             <img
               src="/assets/icons8-user-64.png"
               className="nav-list-link-user"
             ></img>
-            <button>{sessionId ? "Log out" : "Log in"}</button>
+            {sessionId ? (
+              <button onClick={handleLogOut}>Log out</button>
+            ) : (
+              <button onClick={handleLogin}>Log in</button>
+            )}
           </div>
           <li className="nav-list-mobile-menu-btn">
             <img
