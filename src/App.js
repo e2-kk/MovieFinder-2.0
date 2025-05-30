@@ -38,6 +38,7 @@ function App() {
   const [moviesSearchList, setMoviesSearchList] = useState([]);
   const [totalSearchResults, setTotalSearchResults] = useState(1);
   const [sessionId, setSessionId] = useState("");
+  const [userId, setUserId] = useState(0);
 
   let width = window.innerWidth;
 
@@ -208,6 +209,8 @@ function App() {
         setTotalSearchResults={setTotalSearchResults}
         sessionId={sessionId}
         setSessionId={setSessionId}
+        userId={userId}
+        setUserId={setUserId}
       />
       <Routes>
         <Route
@@ -268,6 +271,8 @@ function App() {
               sortedWatchList={sortedWatchList}
               isLoading={isLoading}
               width={width}
+              userId={userId}
+              sessionId={sessionId}
             />
           }
         />

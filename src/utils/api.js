@@ -211,3 +211,27 @@ export const deleteUserSession = async (sessionId) => {
     return false; // Return false in case of error
   }
 };
+
+export const getUserId = async (sessionId) => {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/account?api_key=${api_key}&session_id=${sessionId}`
+    );
+    return response.data; // Returns a Promise that resolves to user account data
+  } catch (error) {
+    console.error("Error getting user id:", error);
+    return {}; // Return empty object in case of error
+  }
+};
+
+export const getWatchList = async (accountId, sessionId) => {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/account/${accountId}/watchlist/movies?api_key=${api_key}&session_id=${sessionId}`
+    );
+    return response.data; // Returns a Promise that resolves to watchlist
+  } catch (error) {
+    console.error("Error getting watchlist:", error);
+    return {}; // Return empty object in case of error
+  }
+};

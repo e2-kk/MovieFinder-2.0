@@ -8,6 +8,7 @@ import {
   getUserToken,
   createUserSession,
   deleteUserSession,
+  getUserId,
 } from "../utils/api";
 
 const NavBar = ({
@@ -24,6 +25,8 @@ const NavBar = ({
   setTotalSearchResults,
   sessionId,
   setSessionId,
+  userId,
+  setUserId,
 }) => {
   const [activeLink, setActiveLink] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -95,10 +98,17 @@ const NavBar = ({
           clearInterval(pollInterval);
           const session = await createUserSession(userToken.request_token);
           setSessionId(session.session_id);
+
+          if (session?.hasOwnProperty("session_id")) {
+            const id = await getUserId(session?.session_id);
+            setUserId(id?.id);
+          }
         }
       }, 1000);
     }
   };
+
+  console.log("This is user id", userId);
 
   const handleLogOut = async () => {
     const deletedSession = await deleteUserSession(sessionId);

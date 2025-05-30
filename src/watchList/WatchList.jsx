@@ -8,6 +8,7 @@ import FilteringOptions from "../resusableComponents/filtering-options/WatchList
 import DeleteIcon from "../resusableComponents/delete-icon/DeleteIcon";
 import MovieCardSkeleton from "../movies/movieCardSkeleton/MovieCardSkeleton";
 import Footer from "../resusableComponents/footer/Footer";
+import { getWatchList } from "../utils/api";
 
 const WatchList = ({
   watchList,
@@ -18,6 +19,8 @@ const WatchList = ({
   sortedWatchList,
   isLoading,
   width,
+  userId,
+  sessionId,
 }) => {
   useEffect(() => {
     if (sortingOption.year === "asc") {
@@ -43,8 +46,18 @@ const WatchList = ({
     }
   }, [sortingOption]);
 
+  const user = userId;
+  const session = sessionId;
+
+  const getUserWatchList = async () => {
+    const savedMovies = await getWatchList(user, session);
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
+    if (user) {
+      getUserWatchList();
+    }
   }, []);
 
   const handleMovieDeletion = (movie) => {
