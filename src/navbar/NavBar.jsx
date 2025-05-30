@@ -108,8 +108,6 @@ const NavBar = ({
     }
   };
 
-  console.log("This is user id", userId);
-
   const handleLogOut = async () => {
     const deletedSession = await deleteUserSession(sessionId);
     if (deletedSession?.success === true) {
