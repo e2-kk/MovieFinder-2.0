@@ -117,7 +117,15 @@ ul li:hover ul.genres-dropdown {
   z-index: 88;
 }
 
+.nav-list-link-login {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 1.3rem;
+}
+
 .nav-list-link-login-container {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -139,7 +147,11 @@ ul li:hover ul.genres-dropdown {
   opacity: 0.7;
 }
 
-.nav-list-link-login-container button {
+.nav-list-link-login-container span {
+  text-wrap: nowrap;
+}
+
+.nav-list-link-login-button {
   border: none;
   cursor: pointer;
   outline: none;
@@ -149,6 +161,112 @@ ul li:hover ul.genres-dropdown {
   font-size: 0.96rem;
   background-color: transparent;
   white-space: nowrap;
+  transition: 0.4s ease-in-out;
+}
+
+.nav-list-link-login-button.display {
+  display: inline-block;
+}
+
+.nav-list-link-login-button.hide {
+  display: none;
+}
+
+.nav-list-link-login-button:hover {
+  opacity: 0.7;
+}
+
+.loader {
+  width: 15px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 3px solid #b1b0b6;
+  animation: l20-1 0.8s infinite linear alternate, l20-2 1.6s infinite linear;
+}
+@keyframes l20-1 {
+  0% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%);
+  }
+  12.5% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 0%,
+      100% 0%,
+      100% 0%
+    );
+  }
+  25% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 100%,
+      100% 100%,
+      100% 100%
+    );
+  }
+  50% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+  62.5% {
+    clip-path: polygon(
+      50% 50%,
+      100% 0,
+      100% 0%,
+      100% 0%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+  75% {
+    clip-path: polygon(
+      50% 50%,
+      100% 100%,
+      100% 100%,
+      100% 100%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+  100% {
+    clip-path: polygon(
+      50% 50%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+}
+@keyframes l20-2 {
+  0% {
+    transform: scaleY(1) rotate(0deg);
+  }
+  49.99% {
+    transform: scaleY(1) rotate(135deg);
+  }
+  50% {
+    transform: scaleY(-1) rotate(0deg);
+  }
+  100% {
+    transform: scaleY(-1) rotate(-135deg);
+  }
 }
 
 .nav-list-menu-btn {

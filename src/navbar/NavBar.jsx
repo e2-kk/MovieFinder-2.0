@@ -31,6 +31,8 @@ const NavBar = ({
   const [activeLink, setActiveLink] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [movieInput, setMovieInput] = useState("");
+  const [userName, setUserName] = useState("");
+  const [isLoggedin, setIsLoggedin] = useState(false);
 
   const navigate = useNavigate();
 
@@ -88,6 +90,7 @@ const NavBar = ({
   };
 
   const handleLogin = async () => {
+    setIsLoggedin(true);
     const userToken = await getUserToken();
     if (userToken) {
       const redirectUrl = `https://www.themoviedb.org/authenticate/${userToken.request_token}`;
@@ -102,9 +105,14 @@ const NavBar = ({
           if (session?.hasOwnProperty("session_id")) {
             const id = await getUserId(session?.session_id);
             setUserId(id?.id);
+            setUserName(id?.username);
           }
+          setTimeout(setIsLoggedin(false), 4000);
         }
       }, 1000);
+    } else {
+      setIsLoggedin(false);
+      window.alert("Error loggin in");
     }
   };
 
@@ -112,6 +120,7 @@ const NavBar = ({
     const deletedSession = await deleteUserSession(sessionId);
     if (deletedSession?.success === true) {
       setSessionId("");
+      setUserName("");
     } else {
       window.alert("Error logging out");
     }
@@ -172,16 +181,33 @@ const NavBar = ({
               </Link>
             </li>
           </ul>
-          <div className="nav-list-link-login-container">
-            <img
-              src="/assets/icons8-user-64.png"
-              className="nav-list-link-user"
-            ></img>
-            {sessionId ? (
-              <button onClick={handleLogOut}>Log out</button>
-            ) : (
-              <button onClick={handleLogin}>Log in</button>
-            )}
+          <div className="nav-list-link-login">
+            <div className="nav-list-link-login-container">
+              <img
+                src="/assets/icons8-user-64.png"
+                className="nav-list-link-user"
+              ></img>
+              {sessionId ? (
+                <span>{userName}</span>
+              ) : isLoggedin ? (
+                <div class="loader"></div>
+              ) : (
+                <button
+                  onClick={handleLogin}
+                  className="nav-list-link-login-button"
+                >
+                  Log in
+                </button>
+              )}
+            </div>
+            <button
+              className={`nav-list-link-login-button ${
+                sessionId ? "display" : "hide"
+              } `}
+              onClick={handleLogOut}
+            >
+              Log out
+            </button>
           </div>
           <li className="nav-list-mobile-menu-btn">
             <img
