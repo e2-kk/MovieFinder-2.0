@@ -26,7 +26,6 @@ const WatchList = ({
 }) => {
   const user = userId;
   const session = sessionId;
-  const [error, setError] = useState("");
 
   useEffect(() => {
     if (sortingOption.year === "asc") {
@@ -73,10 +72,6 @@ const WatchList = ({
       {!user ? (
         <div className="movie-list-message-container height margin-top">
           <MissingContentMessage message={"Please, login to view watch list"} />
-        </div>
-      ) : error ? (
-        <div className="movie-list-message-container height margin-top">
-          <MissingContentMessage message={error} />
         </div>
       ) : (
         <div className="movie-list-grid margin-bottom height">
