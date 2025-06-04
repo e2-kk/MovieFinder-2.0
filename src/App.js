@@ -13,12 +13,12 @@ import {
   getSortedMoviesByServicesWithinCategory,
   getSortedMoviesByRatingWithinCategory,
   getSortedMoviesByYearWithinCategory,
+  addMovieToWatchList,
+  getWatchList,
 } from "./utils/api";
 import WatchList from "./watchList/WatchList";
 import MoviePage from "./movies/moviesPage/MoviePage";
 import MoviesSearchList from "./movies/moviesSearchList/MoviesSearchList";
-
-const savedMovies = localStorage.getItem("watchList");
 
 function App() {
   const [moviesCategories, setMoviesCategories] = useState([]);
@@ -31,7 +31,8 @@ function App() {
     rate: "rating",
     services: "watch_providers",
   });
-  const [watchList, setWatchList] = useState(JSON.parse(savedMovies));
+
+  const [watchList, setWatchList] = useState([]);
   const [sortedWatchList, setSortedWatchList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [movieTerm, setMovieTerm] = useState("");
@@ -42,15 +43,28 @@ function App() {
 
   let width = window.innerWidth;
 
-  useEffect(() => {
-    setIsLoading(true);
-    localStorage.setItem("watchList", JSON.stringify(watchList));
-    setSortedWatchList(watchList);
-    setIsLoading(false);
-  }, [watchList]);
+  const fetchFullWatchList = async (userId, sessionId) => {
+    let allResults = [];
+    let currentPage = 1;
+    let totalPages = 1;
+
+    while (currentPage <= totalPages) {
+      const response = await getWatchList(userId, sessionId, currentPage);
+      if (response?.results) {
+        allResults = [...allResults, ...response.results];
+        totalPages = response.total_pages;
+        currentPage = currentPage + 1;
+      } else {
+        break;
+      }
+    }
+
+    return allResults;
+  };
 
   useEffect(() => {
     setIsLoading(true);
+
     if (
       selectedCategory !== 0 &&
       sortingOption.services === "watch_providers" &&
@@ -176,20 +190,39 @@ function App() {
     }
   }, [selectedCategory, pageNum, sortingOption]);
 
-  const handleWatchList = (movie) => {
-    setWatchList((prevWatchList) => {
-      const updatedWatchList = [...(prevWatchList || [])];
+  useEffect(() => {
+    if (userId && sessionId) {
+      const refetchWatchList = async () => {
+        const savedMovies = await fetchFullWatchList(userId, sessionId);
+        setWatchList(savedMovies);
+      };
+      refetchWatchList();
+    }
+  }, [userId, sessionId]);
 
-      const movieIndex = updatedWatchList.findIndex(
-        (item) => item.movie.id === movie.id
-      );
+  const handleWatchList = async (movie) => {
+    const saveMovieToWatchList = await addMovieToWatchList(
+      userId,
+      sessionId,
+      movie?.id
+    );
+    if (saveMovieToWatchList?.data?.success === true) {
+      setWatchList((prevWatchList) => {
+        const updatedWatchList = [...(prevWatchList || [])];
 
-      if (movieIndex === -1) {
-        updatedWatchList.push({ movie });
-      }
+        const movieIndex = updatedWatchList.findIndex(
+          (item) => item.id === movie?.id
+        );
 
-      return updatedWatchList;
-    });
+        if (movieIndex === -1) {
+          updatedWatchList.push(movie);
+        }
+
+        return updatedWatchList;
+      });
+    } else {
+      window.alert("Error adding movie to watch list. Please, try again later");
+    }
   };
 
   return (
@@ -211,6 +244,8 @@ function App() {
         setSessionId={setSessionId}
         userId={userId}
         setUserId={setUserId}
+        setWatchList={setWatchList}
+        setSortedWatchList={setSortedWatchList}
       />
       <Routes>
         <Route

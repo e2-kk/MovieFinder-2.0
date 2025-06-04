@@ -224,14 +224,27 @@ export const getUserId = async (sessionId) => {
   }
 };
 
-export const getWatchList = async (accountId, sessionId) => {
+export const getWatchList = async (accountId, sessionId, currentPage) => {
   try {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/account/${accountId}/watchlist/movies?api_key=${api_key}&session_id=${sessionId}`
+      `https://api.themoviedb.org/3/account/${accountId}/watchlist/movies?api_key=${api_key}&session_id=${sessionId}&page=${currentPage}`
     );
     return response.data; // Returns a Promise that resolves to watchlist
   } catch (error) {
     console.error("Error getting watchlist:", error);
-    return {}; // Return empty object in case of error
+    return null; // Return null in case of error
+  }
+};
+
+export const addMovieToWatchList = async (accountId, sessionId, movieId) => {
+  try {
+    const response = await axios.post(
+      `https://api.themoviedb.org/3/account/${accountId}/watchlist?api_key=${api_key}&session_id=${sessionId}`,
+      { media_type: "movie", media_id: movieId, watchlist: true }
+    );
+    return response; // Returns a Promise that resolves to added movie to watch list
+  } catch (error) {
+    console.error("Error adding movie to watch list:", error);
+    return ""; // Return an empty string in case of error
   }
 };

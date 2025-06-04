@@ -1,14 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import _ from "lodash";
 
 import "../movies/MoviesList/MoviesList.css";
 import "./WatchList.css";
+import "../movies/moviesSearchList/MoviesSearchList.css";
 import MovieCard from "../movies/movieCard/MovieCard";
 import FilteringOptions from "../resusableComponents/filtering-options/WatchListFilteringOptions";
 import DeleteIcon from "../resusableComponents/delete-icon/DeleteIcon";
 import MovieCardSkeleton from "../movies/movieCardSkeleton/MovieCardSkeleton";
 import Footer from "../resusableComponents/footer/Footer";
 import { getWatchList } from "../utils/api";
+import MissingContentMessage from "../resusableComponents/error-message/MissingContentMessage";
 
 const WatchList = ({
   watchList,
@@ -22,47 +24,39 @@ const WatchList = ({
   userId,
   sessionId,
 }) => {
+  const user = userId;
+  const session = sessionId;
+  const [error, setError] = useState("");
+
   useEffect(() => {
     if (sortingOption.year === "asc") {
-      const sortedWatchList = _.sortBy(watchList, ["movie.release_date"]);
+      const sortedWatchList = _.sortBy(watchList, ["release_date"]);
       setSortedWatchList(sortedWatchList);
     } else if (sortingOption.year === "desc") {
-      const sortedWatchList = _.orderBy(
-        watchList,
-        ["movie.release_date"],
-        ["desc"]
-      );
+      const sortedWatchList = _.orderBy(watchList, ["release_date"], ["desc"]);
       setSortedWatchList(sortedWatchList);
     } else if (sortingOption.rate === "asc") {
-      const sortedWatchList = _.sortBy(watchList, ["movie.vote_average"]);
+      const sortedWatchList = _.sortBy(watchList, ["vote_average"]);
       setSortedWatchList(sortedWatchList);
     } else if (sortingOption.rate === "desc") {
-      const sortedWatchList = _.orderBy(
-        watchList,
-        ["movie.vote_average"],
-        ["desc"]
-      );
+      const sortedWatchList = _.orderBy(watchList, ["vote_average"], ["desc"]);
       setSortedWatchList(sortedWatchList);
     }
   }, [sortingOption]);
 
-  const user = userId;
-  const session = sessionId;
-
-  const getUserWatchList = async () => {
-    const savedMovies = await getWatchList(user, session);
-  };
-
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (user) {
-      getUserWatchList();
-    }
   }, []);
+
+  useEffect(() => {
+    if (user && session && watchList.length !== 0) {
+      setSortedWatchList(watchList);
+    }
+  }, [user, session, watchList]);
 
   const handleMovieDeletion = (movie) => {
     const savedMovies = [...watchList];
-    const updatedWatchList = savedMovies.filter((item) => item !== movie);
+    const updatedWatchList = savedMovies?.filter((item) => item !== movie);
 
     setWatchList(updatedWatchList);
   };
@@ -75,22 +69,28 @@ const WatchList = ({
         setSortedWatchList={setSortedWatchList}
         watchList={watchList}
       />
-      <div className="movie-list-grid margin-bottom height">
-        {isLoading && watchList.map((n) => <MovieCardSkeleton key={n} />)}
-        {sortedWatchList?.map((movie) => (
-          <div className="movie-list-item-container" key={movie.movie.id}>
-            <DeleteIcon
-              handleMovieDeletion={handleMovieDeletion}
-              movie={movie}
-            />
-            <MovieCard
-              movie={movie.movie}
-              watchList={watchList}
-              width={width}
-            />
-          </div>
-        ))}
-      </div>
+      {isLoading && watchList.map((n) => <MovieCardSkeleton key={n} />)}
+      {!user ? (
+        <div className="movie-list-message-container height margin-top">
+          <MissingContentMessage message={"Please, login to view watch list"} />
+        </div>
+      ) : error ? (
+        <div className="movie-list-message-container height margin-top">
+          <MissingContentMessage message={error} />
+        </div>
+      ) : (
+        <div className="movie-list-grid margin-bottom height">
+          {sortedWatchList?.map((movie) => (
+            <div className="movie-list-item-container" key={movie?.id}>
+              <DeleteIcon
+                handleMovieDeletion={handleMovieDeletion}
+                movie={movie}
+              />
+              <MovieCard movie={movie} watchList={watchList} width={width} />
+            </div>
+          ))}
+        </div>
+      )}
       <Footer />
     </div>
   );

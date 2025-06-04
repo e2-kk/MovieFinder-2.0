@@ -27,6 +27,8 @@ const NavBar = ({
   setSessionId,
   userId,
   setUserId,
+  setWatchList,
+  setSortedWatchList,
 }) => {
   const [activeLink, setActiveLink] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -121,6 +123,8 @@ const NavBar = ({
     if (deletedSession?.success === true) {
       setSessionId("");
       setUserName("");
+      setWatchList([]);
+      setSortedWatchList([]);
     } else {
       window.alert("Error logging out");
     }
@@ -190,7 +194,7 @@ const NavBar = ({
               {sessionId ? (
                 <span>{userName}</span>
               ) : isLoggedin ? (
-                <div class="loader"></div>
+                <div className="loader"></div>
               ) : (
                 <button
                   onClick={handleLogin}
