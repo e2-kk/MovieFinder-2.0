@@ -48,13 +48,14 @@ const WatchList = ({
   }, []);
 
   useEffect(() => {
-    if (user && session && watchList.length !== 0) {
+    if (user && session && watchList.length >= 0) {
       setSortedWatchList(watchList);
     }
   }, [user, session, watchList]);
 
   const handleMovieDeletion = async (movie) => {
     const removedMovie = await removeMovieToWatchList(user, session, movie?.id);
+
     if (removedMovie?.data?.success === true) {
       const savedMovies = [...watchList];
       const updatedWatchList = savedMovies?.filter((item) => item !== movie);
