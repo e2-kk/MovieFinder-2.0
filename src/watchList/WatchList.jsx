@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import _ from "lodash";
 
 import "../movies/MoviesList/MoviesList.css";
@@ -9,7 +9,7 @@ import FilteringOptions from "../resusableComponents/filtering-options/WatchList
 import DeleteIcon from "../resusableComponents/delete-icon/DeleteIcon";
 import MovieCardSkeleton from "../movies/movieCardSkeleton/MovieCardSkeleton";
 import Footer from "../resusableComponents/footer/Footer";
-import { getWatchList } from "../utils/api";
+import { removeMovieToWatchList } from "../utils/api";
 import MissingContentMessage from "../resusableComponents/error-message/MissingContentMessage";
 
 const WatchList = ({
@@ -53,11 +53,17 @@ const WatchList = ({
     }
   }, [user, session, watchList]);
 
-  const handleMovieDeletion = (movie) => {
-    const savedMovies = [...watchList];
-    const updatedWatchList = savedMovies?.filter((item) => item !== movie);
-
-    setWatchList(updatedWatchList);
+  const handleMovieDeletion = async (movie) => {
+    const removedMovie = await removeMovieToWatchList(user, session, movie?.id);
+    if (removedMovie?.data?.success === true) {
+      const savedMovies = [...watchList];
+      const updatedWatchList = savedMovies?.filter((item) => item !== movie);
+      setWatchList(updatedWatchList);
+    } else {
+      window.alert(
+        "Error removing movie from watchlist. Please, try again later"
+      );
+    }
   };
 
   return (

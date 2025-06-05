@@ -125,6 +125,7 @@ const NavBar = ({
       setUserName("");
       setWatchList([]);
       setSortedWatchList([]);
+      setUserId("");
     } else {
       window.alert("Error logging out");
     }

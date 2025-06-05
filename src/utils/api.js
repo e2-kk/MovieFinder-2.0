@@ -248,3 +248,16 @@ export const addMovieToWatchList = async (accountId, sessionId, movieId) => {
     return ""; // Return an empty string in case of error
   }
 };
+
+export const removeMovieToWatchList = async (accountId, sessionId, movieId) => {
+  try {
+    const response = await axios.post(
+      `https://api.themoviedb.org/3/account/${accountId}/watchlist?api_key=${api_key}&session_id=${sessionId}`,
+      { media_type: "movie", media_id: movieId, watchlist: false }
+    );
+    return response; // Returns a Promise that resolves to removied movie from  watch list
+  } catch (error) {
+    console.error("Error removing movie from watch list:", error);
+    return ""; // Return an empty string in case of error
+  }
+};
