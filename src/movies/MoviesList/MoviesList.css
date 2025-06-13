@@ -15,7 +15,6 @@
   column-gap: 120px;
   margin-bottom: 2.5rem;
   overflow: auto;
-  /*overflow-y: auto;*/
 }
 
 .movie-list-item-container {
@@ -58,19 +57,32 @@
   }
   .movie-list-grid {
     grid-template-columns: 1fr 1fr 1fr;
+    width: auto;
   }
 }
 
 @media (max-width: 710px) {
   .movie-list-grid {
     grid-template-columns: 1fr 1fr;
-    column-gap: 20px;
+    column-gap: 190px;
+  }
+}
+
+@media (max-width: 600px) {
+  .movie-list-grid {
+    column-gap: 120px;
   }
 }
 
 @media (max-width: 500px) {
   .movie-list-grid {
-    column-gap: 40px;
+    column-gap: 80px;
+  }
+}
+
+@media (max-width: 400px) {
+  .movie-list-grid {
+    column-gap: 50px;
   }
 }
 

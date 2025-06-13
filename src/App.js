@@ -20,6 +20,10 @@ import WatchList from "./watchList/WatchList";
 import MoviePage from "./movies/moviesPage/MoviePage";
 import MoviesSearchList from "./movies/moviesSearchList/MoviesSearchList";
 
+const sessionid = localStorage.getItem("sessionId");
+const userid = localStorage.getItem("userId");
+const username = localStorage.getItem("userName");
+
 function App() {
   const [moviesCategories, setMoviesCategories] = useState([]);
   const [movies, setMovies] = useState([]);
@@ -38,8 +42,11 @@ function App() {
   const [movieTerm, setMovieTerm] = useState("");
   const [moviesSearchList, setMoviesSearchList] = useState([]);
   const [totalSearchResults, setTotalSearchResults] = useState(1);
-  const [sessionId, setSessionId] = useState("");
-  const [userId, setUserId] = useState(0);
+  const [sessionId, setSessionId] = useState(JSON.parse(sessionid));
+  const [userId, setUserId] = useState(JSON.parse(userid));
+  const [userName, setUserName] = useState(JSON.parse(username));
+  const [watchListError, setWatchListError] = useState();
+  const [channel, setChannel] = useState(null);
 
   let width = window.innerWidth;
 
@@ -55,7 +62,7 @@ function App() {
         totalPages = response.total_pages;
         currentPage = currentPage + 1;
       } else {
-        break;
+        return null;
       }
     }
 
@@ -192,13 +199,31 @@ function App() {
 
   useEffect(() => {
     if (userId && sessionId) {
+      setWatchListError("");
       const refetchWatchList = async () => {
         const savedMovies = await fetchFullWatchList(userId, sessionId);
-        setWatchList(savedMovies);
+        if (savedMovies !== null) {
+          setWatchList(savedMovies);
+        } else {
+          setWatchListError("Error getting watchlist. Please, try again later");
+        }
       };
       refetchWatchList();
     }
   }, [userId, sessionId]);
+
+  useEffect(() => {
+    const bc = new BroadcastChannel("watchlist_channel");
+    setChannel(bc);
+
+    bc.onmessage = (event) => {
+      setWatchList(event.data);
+    };
+
+    return () => {
+      bc.close();
+    };
+  }, []);
 
   const handleWatchList = async (movie) => {
     const saveMovieToWatchList = await addMovieToWatchList(
@@ -217,13 +242,19 @@ function App() {
         if (movieIndex === -1) {
           updatedWatchList.push(movie);
         }
-
+        channel?.postMessage(updatedWatchList);
         return updatedWatchList;
       });
     } else {
       window.alert("Error adding movie to watch list. Please, try again later");
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem("userId", JSON.stringify(userId));
+    localStorage.setItem("sessionId", JSON.stringify(sessionId));
+    localStorage.setItem("userName", JSON.stringify(userName));
+  }, [userId, sessionId, userName]);
 
   return (
     <div>
@@ -246,6 +277,8 @@ function App() {
         setUserId={setUserId}
         setWatchList={setWatchList}
         setSortedWatchList={setSortedWatchList}
+        userName={userName}
+        setUserName={setUserName}
       />
       <Routes>
         <Route
@@ -308,6 +341,8 @@ function App() {
               width={width}
               userId={userId}
               sessionId={sessionId}
+              watchListError={watchListError}
+              channel={channel}
             />
           }
         />

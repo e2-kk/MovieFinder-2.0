@@ -117,6 +117,11 @@ ul li:hover ul.genres-dropdown {
   z-index: 88;
 }
 
+.genres-dropdown-show {
+  display: block;
+  z-index: 88;
+}
+
 .nav-list-link-login {
   display: flex;
   align-items: center;
@@ -323,44 +328,79 @@ ul li:hover ul.genres-dropdown {
   display: none;
 }
 
+@media (max-width: 1200px) {
+  .nav {
+    padding: 8px 50px;
+  }
+  .nav-logo {
+    font-size: 1.9rem;
+  }
+  .nav-searchbar {
+    padding: 0.27rem 1.6rem;
+  }
+}
+
+@media (max-width: 1100px) {
+  .nav-logo {
+    font-size: 1.9rem;
+  }
+  .nav-searchbar {
+    padding: 0.27rem 1.4rem;
+    margin-left: 1.2rem;
+  }
+
+  ul.nav-list-desktop {
+    display: flex;
+    align-items: center;
+  }
+
+  ul.nav-list-desktop li {
+    text-wrap: nowrap;
+  }
+
+  ul li a {
+    padding: 20px 18px;
+  }
+}
 @media (max-width: 1000px) {
   .nav {
-    padding: 0 60px;
+    padding: 0 40px;
+  }
+
+  .nav-searchbar {
+    padding: 0.27rem 1rem;
+    margin-left: 0.7rem;
+    font-size: 0.9rem;
   }
   ul li a:last-child {
     padding-right: 0;
-  }
-
-  .nav-searchbar {
-    padding: 0.45rem 4rem;
-  }
-}
-
-@media (max-width: 890px) {
-  .nav-searchbar {
-    padding: 0.35rem 2.7rem;
+    padding-left: 0;
   }
 
   ul li a {
-    padding: 1.3rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .nav-list-link-user {
+    width: 20px;
+    height: 20px;
+  }
+
+  .nav-list-link-login-container span {
+    text-wrap: nowrap;
+    font-size: 0.9rem;
+  }
+
+  .nav-list-link-login-button {
+    font-size: 0.8rem;
   }
 }
 
-@media (max-width: 785px) {
-  .nav-searchbar {
-    padding: 0.25rem 2rem;
-  }
-
-  ul li a {
-    padding: 1.3rem 0.4rem;
-  }
-}
-
-@media (max-width: 720px) {
+@media (max-width: 850px) {
   .nav {
     padding: 15px 60px;
   }
-  .nav-list-desktop {
+  .nav .nav-list-desktop {
     display: none;
   }
 
@@ -379,7 +419,7 @@ ul li:hover ul.genres-dropdown {
 
   .nav-list-mobile-menu-btn {
     display: inline-block;
-    padding-top: 0.7rem;
+    padding-top: 0.4rem;
   }
 
   .nav-list-mobile.is-open {
@@ -410,7 +450,7 @@ ul li:hover ul.genres-dropdown {
 
 @media (max-width: 680px) {
   .nav {
-    padding: 15px 45px;
+    padding: 15px 25px;
   }
 
   ul li a {
@@ -421,9 +461,45 @@ ul li:hover ul.genres-dropdown {
   }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 550px) {
+  .nav-logo {
+    font-size: 1.1rem;
+  }
+
+  .nav-list-link-user {
+    width: 18px;
+    height: 18px;
+  }
+
+  .nav-list-link-login-container span {
+    font-size: 0.7rem;
+  }
+
+  .nav-list-link-login-button {
+    font-size: 0.7rem;
+  }
+
+  .nav-searchbar {
+    font-size: 0.92rem;
+  }
+}
+
+@media (max-width: 400px) {
   .nav {
-    padding: 15px 25px;
+    padding: 15px 20px;
+  }
+
+  .nav-list-link-user {
+    width: 16px;
+    height: 16px;
+  }
+
+  .nav-list-link-login-container span {
+    font-size: 0.6rem;
+  }
+
+  .nav-list-link-login-button {
+    font-size: 0.6rem;
   }
 }
 

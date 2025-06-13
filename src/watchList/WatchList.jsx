@@ -23,6 +23,8 @@ const WatchList = ({
   width,
   userId,
   sessionId,
+  watchListError,
+  channel,
 }) => {
   const user = userId;
   const session = sessionId;
@@ -48,7 +50,7 @@ const WatchList = ({
   }, []);
 
   useEffect(() => {
-    if (user && session && watchList.length >= 0) {
+    if (user && session && watchList?.length >= 0) {
       setSortedWatchList(watchList);
     }
   }, [user, session, watchList]);
@@ -60,6 +62,7 @@ const WatchList = ({
       const savedMovies = [...watchList];
       const updatedWatchList = savedMovies?.filter((item) => item !== movie);
       setWatchList(updatedWatchList);
+      channel?.postMessage(updatedWatchList);
     } else {
       window.alert(
         "Error removing movie from watchlist. Please, try again later"
@@ -75,14 +78,21 @@ const WatchList = ({
         setSortedWatchList={setSortedWatchList}
         watchList={watchList}
       />
-      {isLoading && watchList.map((n) => <MovieCardSkeleton key={n} />)}
-      {!user ? (
+      {isLoading && watchList?.map((n) => <MovieCardSkeleton key={n} />)}
+      {!session ? (
         <div className="movie-list-message-container height margin-top">
           <MissingContentMessage message={"Please, login to view watch list"} />
         </div>
+      ) : !user ||
+        (user &&
+          watchListError?.length !== undefined &&
+          watchList?.length === 0) ? (
+        <div className="movie-list-message-container height margin-top">
+          <MissingContentMessage message={watchListError} />
+        </div>
       ) : (
         <div className="movie-list-grid margin-bottom height">
-          {sortedWatchList?.map((movie) => (
+          {sortedWatchList?.map((movie, index) => (
             <div className="movie-list-item-container" key={movie?.id}>
               <DeleteIcon
                 handleMovieDeletion={handleMovieDeletion}

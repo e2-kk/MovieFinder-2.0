@@ -220,7 +220,7 @@ export const getUserId = async (sessionId) => {
     return response.data; // Returns a Promise that resolves to user account data
   } catch (error) {
     console.error("Error getting user id:", error);
-    return {}; // Return empty object in case of error
+    return null; // Return null in case of error
   }
 };
 
