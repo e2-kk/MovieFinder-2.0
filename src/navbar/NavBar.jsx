@@ -98,6 +98,14 @@ const NavBar = ({
 
   const handleLogin = async () => {
     setIsLoggedin(true);
+    const popup = window.open("", "_blank");
+
+    if (!popup) {
+      setIsLoggedin(false);
+      window.alert("Please allow popups in your browser settings to log in.");
+      return;
+    }
+
     const userToken = await getUserToken();
     if (userToken) {
       const redirectUrl = `https://www.themoviedb.org/authenticate/${userToken.request_token}`;
