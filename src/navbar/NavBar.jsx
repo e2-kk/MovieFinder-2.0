@@ -96,15 +96,20 @@ const NavBar = ({
     navigate("/movies-search");
   };
 
-  const handleLogin = async () => {
-    setIsLoggedin(true);
+  const handlePopupLogin = () => {
     const popup = window.open("", "_blank");
 
     if (!popup) {
-      setIsLoggedin(false);
-      window.alert("Please allow popups in your browser settings to log in.");
+      window.alert("Please enable popups in your browser settings.");
       return;
     }
+
+    // Continue login logic asynchronously
+    handleLogin(popup);
+  };
+
+  const handleLogin = async () => {
+    setIsLoggedin(true);
 
     const userToken = await getUserToken();
     if (userToken) {
@@ -230,7 +235,7 @@ const NavBar = ({
                 <div className="loader"></div>
               ) : (
                 <button
-                  onClick={handleLogin}
+                  onClick={handlePopupLogin}
                   className="nav-list-link-login-button"
                 >
                   Log in
