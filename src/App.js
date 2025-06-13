@@ -13,12 +13,16 @@ import {
   getSortedMoviesByServicesWithinCategory,
   getSortedMoviesByRatingWithinCategory,
   getSortedMoviesByYearWithinCategory,
+  addMovieToWatchList,
+  getWatchList,
 } from "./utils/api";
 import WatchList from "./watchList/WatchList";
 import MoviePage from "./movies/moviesPage/MoviePage";
 import MoviesSearchList from "./movies/moviesSearchList/MoviesSearchList";
 
-const savedMovies = localStorage.getItem("watchList");
+const sessionid = localStorage.getItem("sessionId");
+const userid = localStorage.getItem("userId");
+const username = localStorage.getItem("userName");
 
 function App() {
   const [moviesCategories, setMoviesCategories] = useState([]);
@@ -31,24 +35,43 @@ function App() {
     rate: "rating",
     services: "watch_providers",
   });
-  const [watchList, setWatchList] = useState(JSON.parse(savedMovies));
+
+  const [watchList, setWatchList] = useState([]);
   const [sortedWatchList, setSortedWatchList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [movieTerm, setMovieTerm] = useState("");
   const [moviesSearchList, setMoviesSearchList] = useState([]);
   const [totalSearchResults, setTotalSearchResults] = useState(1);
+  const [sessionId, setSessionId] = useState(JSON.parse(sessionid));
+  const [userId, setUserId] = useState(JSON.parse(userid));
+  const [userName, setUserName] = useState(JSON.parse(username));
+  const [watchListError, setWatchListError] = useState();
+  const [channel, setChannel] = useState(null);
 
   let width = window.innerWidth;
 
-  useEffect(() => {
-    setIsLoading(true);
-    localStorage.setItem("watchList", JSON.stringify(watchList));
-    setSortedWatchList(watchList);
-    setIsLoading(false);
-  }, [watchList]);
+  const fetchFullWatchList = async (userId, sessionId) => {
+    let allResults = [];
+    let currentPage = 1;
+    let totalPages = 1;
+
+    while (currentPage <= totalPages) {
+      const response = await getWatchList(userId, sessionId, currentPage);
+      if (response?.results) {
+        allResults = [...allResults, ...response.results];
+        totalPages = response.total_pages;
+        currentPage = currentPage + 1;
+      } else {
+        return null;
+      }
+    }
+
+    return allResults;
+  };
 
   useEffect(() => {
     setIsLoading(true);
+
     if (
       selectedCategory !== 0 &&
       sortingOption.services === "watch_providers" &&
@@ -174,21 +197,64 @@ function App() {
     }
   }, [selectedCategory, pageNum, sortingOption]);
 
-  const handleWatchList = (movie) => {
-    setWatchList((prevWatchList) => {
-      const updatedWatchList = [...(prevWatchList || [])];
+  useEffect(() => {
+    if (userId && sessionId) {
+      setWatchListError("");
+      const refetchWatchList = async () => {
+        const savedMovies = await fetchFullWatchList(userId, sessionId);
+        if (savedMovies !== null) {
+          setWatchList(savedMovies);
+        } else {
+          setWatchListError("Error getting watchlist. Please, try again later");
+        }
+      };
+      refetchWatchList();
+    }
+  }, [userId, sessionId]);
 
-      const movieIndex = updatedWatchList.findIndex(
-        (item) => item.movie.id === movie.id
-      );
+  useEffect(() => {
+    const bc = new BroadcastChannel("watchlist_channel");
+    setChannel(bc);
 
-      if (movieIndex === -1) {
-        updatedWatchList.push({ movie });
-      }
+    bc.onmessage = (event) => {
+      setWatchList(event.data);
+    };
 
-      return updatedWatchList;
-    });
+    return () => {
+      bc.close();
+    };
+  }, []);
+
+  const handleWatchList = async (movie) => {
+    const saveMovieToWatchList = await addMovieToWatchList(
+      userId,
+      sessionId,
+      movie?.id
+    );
+    if (saveMovieToWatchList?.data?.success === true) {
+      setWatchList((prevWatchList) => {
+        const updatedWatchList = [...(prevWatchList || [])];
+
+        const movieIndex = updatedWatchList.findIndex(
+          (item) => item.id === movie?.id
+        );
+
+        if (movieIndex === -1) {
+          updatedWatchList.push(movie);
+        }
+        channel?.postMessage(updatedWatchList);
+        return updatedWatchList;
+      });
+    } else {
+      window.alert("Error adding movie to watch list. Please, try again later");
+    }
   };
+
+  useEffect(() => {
+    localStorage.setItem("userId", JSON.stringify(userId));
+    localStorage.setItem("sessionId", JSON.stringify(sessionId));
+    localStorage.setItem("userName", JSON.stringify(userName));
+  }, [userId, sessionId, userName]);
 
   return (
     <div>
@@ -205,6 +271,14 @@ function App() {
         moviesSearchList={moviesSearchList}
         setIsLoading={setIsLoading}
         setTotalSearchResults={setTotalSearchResults}
+        sessionId={sessionId}
+        setSessionId={setSessionId}
+        userId={userId}
+        setUserId={setUserId}
+        setWatchList={setWatchList}
+        setSortedWatchList={setSortedWatchList}
+        userName={userName}
+        setUserName={setUserName}
       />
       <Routes>
         <Route
@@ -265,6 +339,10 @@ function App() {
               sortedWatchList={sortedWatchList}
               isLoading={isLoading}
               width={width}
+              userId={userId}
+              sessionId={sessionId}
+              watchListError={watchListError}
+              channel={channel}
             />
           }
         />

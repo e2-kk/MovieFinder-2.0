@@ -2,7 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import "./NavBar.css";
-import { getMovieByTitle, getMoviesCategories } from "../utils/api";
+import {
+  getMovieByTitle,
+  getMoviesCategories,
+  getUserToken,
+  createUserSession,
+  deleteUserSession,
+  getUserId,
+} from "../utils/api";
 
 const NavBar = ({
   moviesCategories,
@@ -16,10 +23,21 @@ const NavBar = ({
   moviesSearchList,
   setIsLoading,
   setTotalSearchResults,
+  sessionId,
+  setSessionId,
+  userId,
+  setUserId,
+  setWatchList,
+  setSortedWatchList,
+  userName,
+  setUserName,
 }) => {
   const [activeLink, setActiveLink] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [movieInput, setMovieInput] = useState("");
+
+  const [isLoggedin, setIsLoggedin] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
 
   const navigate = useNavigate();
 
@@ -78,6 +96,55 @@ const NavBar = ({
     navigate("/movies-search");
   };
 
+  const handleLogin = async () => {
+    setIsLoggedin(true);
+    const userToken = await getUserToken();
+    if (userToken) {
+      const redirectUrl = `https://www.themoviedb.org/authenticate/${userToken.request_token}`;
+      const popup = window.open(redirectUrl, "_blank");
+      const pollInterval = setInterval(async () => {
+        if (popup?.closed) {
+          clearInterval(pollInterval);
+          const session = await createUserSession(userToken.request_token);
+          setSessionId(session.session_id);
+          if (session?.hasOwnProperty("session_id")) {
+            const id = await getUserId(session?.session_id);
+            setUserId(id?.id);
+            setUserName(id?.username);
+            if (id === null) {
+              window.alert(
+                "Error getting user details. Please, try again later"
+              );
+            }
+          }
+          setTimeout(setIsLoggedin(false), 4000);
+        }
+      }, 1000);
+    } else {
+      setIsLoggedin(false);
+      window.alert("Error loggin in");
+    }
+  };
+
+  const handleLogOut = async () => {
+    const deletedSession = await deleteUserSession(sessionId);
+    if (deletedSession?.success === true) {
+      setSessionId("");
+      setUserName("");
+      setWatchList([]);
+      setSortedWatchList([]);
+      setUserId("");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("sessionId");
+      localStorage.removeItem("userName");
+    } else {
+      window.alert("Error logging out. Please, refresh the page and try again");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("sessionId");
+      localStorage.removeItem("userName");
+    }
+  };
+
   return (
     <section className="section-nav">
       <div className="section-nav-container">
@@ -96,9 +163,19 @@ const NavBar = ({
             <li className="nav-list-link">
               <a href="/">Films</a>
             </li>
-            <li className="nav-list-link">
+            <li
+              className="nav-list-link nav-list-link-genres"
+              onClick={(event) => {
+                event.preventDefault();
+                setIsClicked(true);
+              }}
+            >
               <a href="#">Genres</a>
-              <ul className="genres-dropdown">
+              <ul
+                className={`genres-dropdown${
+                  isClicked ? "genres-dropdown-show" : ""
+                } `}
+              >
                 {moviesCategories.map((category) => (
                   <li
                     className={activeLink === category.name ? "active" : ""}
@@ -133,13 +210,42 @@ const NavBar = ({
               </Link>
             </li>
           </ul>
-          <li className="nav-list-mobile-menu-btn">
-            <img
-              src="/assets/menu.svg"
-              alt="menu"
-              onClick={openMobileMenu}
-            ></img>
-          </li>
+          <div className="nav-list-link-login">
+            <div className="nav-list-link-login-container">
+              <img
+                src="/assets/icons8-user-64.png"
+                className="nav-list-link-user"
+              ></img>
+              {sessionId ? (
+                <span>{userName}</span>
+              ) : isLoggedin ? (
+                <div className="loader"></div>
+              ) : (
+                <button
+                  onClick={handleLogin}
+                  className="nav-list-link-login-button"
+                >
+                  Log in
+                </button>
+              )}
+            </div>
+            <button
+              className={`nav-list-link-login-button ${
+                sessionId ? "display" : "hide"
+              } `}
+              onClick={handleLogOut}
+            >
+              Log out
+            </button>
+          </div>
+
+          <img
+            className="nav-list-mobile-menu-btn"
+            src="/assets/menu.svg"
+            alt="menu"
+            onClick={openMobileMenu}
+          ></img>
+
           <ul className={`nav-list-mobile ${isOpen ? "is-open" : ""}`}>
             <li>
               <img

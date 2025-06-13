@@ -170,3 +170,94 @@ export const getMovieByTitle = async (movieTerm) => {
     return []; // Return an empty array in case of error
   }
 };
+
+export const getUserToken = async (userToken) => {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/authentication/token/new?api_key=${api_key}`,
+      {
+        userToken,
+      }
+    );
+    return response.data; // Returns a Promise that resolves to user access token
+  } catch (error) {
+    console.error("Error creating user token:", error);
+    return {}; // Return an empty object in case of error
+  }
+};
+
+export const createUserSession = async (userToken) => {
+  try {
+    const response = await axios.post(
+      `https://api.themoviedb.org/3/authentication/session/new?api_key=${api_key}`,
+      { request_token: userToken }
+    );
+    return response.data; // Returns a Promise that resolves to user session id
+  } catch (error) {
+    console.error("Error creating user session id:", error);
+    return ""; // Return an empty string in case of error
+  }
+};
+
+export const deleteUserSession = async (sessionId) => {
+  try {
+    const response = await axios.delete(
+      `https://api.themoviedb.org/3/authentication/session?api_key=${api_key}`,
+      { data: { session_id: sessionId } }
+    );
+    return response.data; // Returns a Promise that resolves to sucess: true for deleted session
+  } catch (error) {
+    console.error("Error deleting session id:", error);
+    return false; // Return false in case of error
+  }
+};
+
+export const getUserId = async (sessionId) => {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/account?api_key=${api_key}&session_id=${sessionId}`
+    );
+    return response.data; // Returns a Promise that resolves to user account data
+  } catch (error) {
+    console.error("Error getting user id:", error);
+    return null; // Return null in case of error
+  }
+};
+
+export const getWatchList = async (accountId, sessionId, currentPage) => {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/account/${accountId}/watchlist/movies?api_key=${api_key}&session_id=${sessionId}&page=${currentPage}`
+    );
+    return response.data; // Returns a Promise that resolves to watchlist
+  } catch (error) {
+    console.error("Error getting watchlist:", error);
+    return null; // Return null in case of error
+  }
+};
+
+export const addMovieToWatchList = async (accountId, sessionId, movieId) => {
+  try {
+    const response = await axios.post(
+      `https://api.themoviedb.org/3/account/${accountId}/watchlist?api_key=${api_key}&session_id=${sessionId}`,
+      { media_type: "movie", media_id: movieId, watchlist: true }
+    );
+    return response; // Returns a Promise that resolves to added movie to watch list
+  } catch (error) {
+    console.error("Error adding movie to watch list:", error);
+    return ""; // Return an empty string in case of error
+  }
+};
+
+export const removeMovieToWatchList = async (accountId, sessionId, movieId) => {
+  try {
+    const response = await axios.post(
+      `https://api.themoviedb.org/3/account/${accountId}/watchlist?api_key=${api_key}&session_id=${sessionId}`,
+      { media_type: "movie", media_id: movieId, watchlist: false }
+    );
+    return response; // Returns a Promise that resolves to removied movie from  watch list
+  } catch (error) {
+    console.error("Error removing movie from watch list:", error);
+    return ""; // Return an empty string in case of error
+  }
+};
