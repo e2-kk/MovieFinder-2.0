@@ -18,6 +18,12 @@
   place-items: initial;
 }
 
+@media (max-width: 500px) {
+  .padding {
+    padding: 40px 0;
+  }
+}
+
 @media (max-width: 350px) {
   .margin-bottom {
     row-gap: 6%;

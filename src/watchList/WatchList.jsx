@@ -71,7 +71,7 @@ const WatchList = ({
   };
 
   return (
-    <div className="movie-list container">
+    <div className="movie-list container padding">
       <FilteringOptions
         sortingOption={sortingOption}
         setSortingOption={setSortingOption}

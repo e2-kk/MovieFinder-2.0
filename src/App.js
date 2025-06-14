@@ -42,7 +42,14 @@ function App() {
   const [movieTerm, setMovieTerm] = useState("");
   const [moviesSearchList, setMoviesSearchList] = useState([]);
   const [totalSearchResults, setTotalSearchResults] = useState(1);
-  const [sessionId, setSessionId] = useState(JSON.parse(sessionid));
+  const [sessionId, setSessionId] = useState(() => {
+    try {
+      const stored = localStorage.getItem("sessionId");
+      return stored && stored !== "undefined" ? JSON.parse(stored) : null;
+    } catch {
+      return null;
+    }
+  });
   const [userId, setUserId] = useState(JSON.parse(userid));
   const [userName, setUserName] = useState(JSON.parse(username));
   const [watchListError, setWatchListError] = useState();
@@ -252,7 +259,10 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("userId", JSON.stringify(userId));
-    localStorage.setItem("sessionId", JSON.stringify(sessionId));
+    if (sessionId !== undefined && sessionId !== null) {
+      console.log("I am executed");
+      localStorage.setItem("sessionId", JSON.stringify(sessionId));
+    }
     localStorage.setItem("userName", JSON.stringify(userName));
   }, [userId, sessionId, userName]);
 

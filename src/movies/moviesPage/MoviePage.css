@@ -363,15 +363,23 @@
   }
 
   .movie-details-info-title {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .movie-details-info-tagline {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    opacity: 0.8;
   }
 
   .movie-details-info-list {
-    margin-top: 3rem;
+    margin-top: 1rem;
+    font-size: 1rem;
   }
 
   .movie-details-info-list li {
-    margin-bottom: 2.7rem;
+    margin-bottom: 1.5rem;
   }
 
   .movie-details-overview-providers .movie-details-info-provider-container {
@@ -397,11 +405,11 @@
   }
 
   .movie-details-info-title {
-    margin-bottom: 1.7rem;
+    margin-bottom: 3rem;
   }
 
   .movie-details-info-tagline {
-    margin-bottom: 1.7rem;
+    margin-bottom: 3rem;
   }
 
   .movie-details-info-list {
@@ -409,7 +417,7 @@
   }
 
   .movie-details-info-list li {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.6rem;
   }
 
   .movie-details-overview-providers .movie-details-media-trailer-container {
@@ -419,16 +427,22 @@
 }
 
 @media (max-width: 490px) {
+  .movie-details {
+    padding-top: 3rem;
+  }
   .movie-details-info-title {
-    font-size: 1rem;
+    font-size: 1.4rem;
+    margin-bottom: 2.2rem;
   }
 
   .movie-details-info-tagline {
     font-size: 0.9rem;
+    margin-bottom: 2.2rem;
   }
 
   .movie-details-info-list li {
-    font-size: 1rem;
+    font-size: 0.9rem;
+    margin-bottom: 1.3rem;
   }
 
   .movie-details-info-subh {
@@ -457,11 +471,18 @@
   }
 
   .movie-details-info-title {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .movie-details-info-tagline {
+    margin-bottom: 1.5rem;
     font-size: 0.8rem;
   }
 
   .movie-details-info-list li {
     font-size: 0.9rem;
+    margin-bottom: 1rem;
   }
 
   .movie-details-info-subh {
