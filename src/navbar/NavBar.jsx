@@ -104,7 +104,6 @@ const NavBar = ({
       return;
     }
 
-    // Continue login logic asynchronously
     handleLogin(popup);
   };
 
@@ -114,7 +113,7 @@ const NavBar = ({
     const userToken = await getUserToken();
     if (userToken) {
       const redirectUrl = `https://www.themoviedb.org/authenticate/${userToken.request_token}`;
-      //const popup = window.open(redirectUrl, "_blank");
+
       popup.location.href = redirectUrl;
       const pollInterval = setInterval(async () => {
         if (popup?.closed) {
@@ -186,7 +185,7 @@ const NavBar = ({
             >
               <a href="#">Genres</a>
               <ul
-                className={`genres-dropdown${
+                className={`genres-dropdown ${
                   isClicked ? "genres-dropdown-show" : ""
                 } `}
               >
