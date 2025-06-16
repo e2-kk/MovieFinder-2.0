@@ -150,6 +150,10 @@
   display: none;
 }
 
+.hidden {
+  display: none;
+}
+
 @media (max-width: 1600px) {
   .movie-details-page {
     margin-top: 5%;

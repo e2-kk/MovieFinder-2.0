@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { DarkModeSwitch } from "react-toggle-dark-mode";
 
 import "./NavBar.css";
 import {
@@ -38,6 +39,7 @@ const NavBar = ({
 
   const [isLoggedin, setIsLoggedin] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
+  const [isDarkMode, setDarkMode] = useState(false);
 
   const navigate = useNavigate();
 
@@ -92,6 +94,8 @@ const NavBar = ({
   const handleMovieSearchTermSubmit = (event) => {
     setMoviesSearchList([]);
     setMovieTerm(movieInput);
+    setActiveLink("");
+    setTimeout(setIsOpen(false), 9000);
     event.preventDefault();
     navigate("/movies-search");
   };
@@ -156,6 +160,19 @@ const NavBar = ({
       localStorage.removeItem("sessionId");
       localStorage.removeItem("userName");
     }
+  };
+
+  const setDarkTheme = () => {
+    document.querySelector("body").setAttribute("data-theme", "dark");
+  };
+
+  const setLightTheme = () => {
+    document.querySelector("body").setAttribute("data-theme", "light");
+  };
+
+  const toggleDarkMode = (checked) => {
+    setDarkMode(checked);
+    checked ? setDarkTheme() : setLightTheme();
   };
 
   return (
@@ -251,7 +268,12 @@ const NavBar = ({
               Log out
             </button>
           </div>
-
+          <DarkModeSwitch
+            style={{ display: "inline-block", color: "#ffff" }}
+            checked={isDarkMode}
+            onChange={toggleDarkMode}
+            size={20}
+          />
           <img
             className="nav-list-mobile-menu-btn"
             src="/assets/menu.svg"

@@ -49,6 +49,10 @@ const WatchList = ({
     window.scrollTo(0, 0);
   }, []);
 
+  if (!user && !session) {
+    setTimeout(window.scrollTo(0, 0), 10000);
+  }
+
   useEffect(() => {
     if (user && session && watchList?.length >= 0) {
       setSortedWatchList(watchList);
