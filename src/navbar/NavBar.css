@@ -1,5 +1,5 @@
 .section-nav {
-  background: #151516;
+  background: var(--body_background);
 }
 
 .section-nav-container {
@@ -21,11 +21,11 @@
   top: 0;
   left: 0;
   z-index: 90;
-  background-color: #151516;
+  background-color: var(--body_background);
 }
 
 .nav-logo {
-  color: #fff;
+  color: var(--body_color);
   font-size: 1.7rem;
   cursor: pointer;
 }
@@ -35,9 +35,10 @@
   border: none;
   border-radius: 10px;
   padding: 0.35rem 4rem;
-  background-color: #242323;
+  background-color: var(--buttons-background-color);
   font-size: 1rem;
-  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 30px rgba(97, 95, 95, 0.227);
+  transition: all 0.9s ease-in-out;
 }
 
 .nav-searchbar:hover {
@@ -47,12 +48,15 @@
 input,
 select,
 textarea {
-  color: #ffffff;
+  color: var(--search-bar-text-color);
+}
+input {
+  caret-color: var(--search-bar-text-color);
 }
 
 textarea:focus,
 input:focus {
-  color: #ffffff;
+  color: var(--search-bar-text-color);
 }
 
 .nav .nav-list-desktop {
@@ -67,6 +71,7 @@ ul {
 ul li {
   display: inline-block;
   position: relative;
+  cursor: pointer;
 }
 
 ul li a {
@@ -74,9 +79,10 @@ ul li a {
   padding: 20px 30px;
   text-decoration: none;
   text-align: center;
-  color: #ffffffcd;
-  transition: 0.4s ease-in-out;
+  color: var(--body_color);
+  transition: 0.9s ease-in-out;
   font-size: 1.2rem;
+  cursor: pointer;
 }
 
 ul li ul.genres-dropdown li {
@@ -84,24 +90,24 @@ ul li ul.genres-dropdown li {
   font-size: 1.08rem;
   padding: 1.5px 0;
   cursor: pointer;
-  transition: 0.9ms ease-in-out;
+  transition: 0.9s ease-in-out;
 }
 
 ul li ul.genres-dropdown li:hover {
-  color: #c9c3c37a;
+  color: var(--nav-links-hover-color);
 }
 
 ul li ul.genres-dropdown li.active {
-  color: #c9c3c37a;
+  color: var(--nav-links-hover-color);
 }
 
 ul li ul.genres-dropdown {
   width: 100%;
-  background-color: #1a1a1b;
+  background-color: var(--genres-dropdown-background-color);
   position: absolute;
   z-index: 999;
   display: none;
-  color: #ffffffcd;
+  color: var(--body_color);
   opacity: 1;
   padding: 15px 9px;
   border-bottom-left-radius: 10px;
@@ -109,7 +115,7 @@ ul li ul.genres-dropdown {
 }
 
 ul li a:hover {
-  color: #c9c3c37a;
+  color: var(--nav-links-hover-color);
 }
 
 ul li:hover ul.genres-dropdown {
@@ -134,10 +140,11 @@ ul li:hover ul.genres-dropdown {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #242323;
+  background-color: var(--buttons-background-color);
   padding: 2px 10px;
   border-radius: 10px;
-  transition: 0.2s ease-in-out;
+  box-shadow: 0 4px 30px rgba(97, 95, 95, 0.227);
+  transition: 0.9s ease-in-out;
 }
 
 .nav-list-link-user {
@@ -145,7 +152,7 @@ ul li:hover ul.genres-dropdown {
   height: 26px;
   margin-right: 0.3rem;
   cursor: pointer;
-  transition: 0.4s ease-in-out;
+  transition: 0.9s ease-in-out;
 }
 
 .nav-list-link-login-container:hover {
@@ -160,13 +167,13 @@ ul li:hover ul.genres-dropdown {
   border: none;
   cursor: pointer;
   outline: none;
-  color: #e1e1df;
+  color: var(--body_color);
   appearance: none;
   font-weight: 600;
   font-size: 0.96rem;
   background-color: transparent;
   white-space: nowrap;
-  transition: 0.4s ease-in-out;
+  transition: 0.9s ease-in-out;
 }
 
 .nav-list-link-login-button.display {
@@ -286,12 +293,20 @@ ul li:hover ul.genres-dropdown {
   height: 100vh;
   width: 250px;
   z-index: 999;
-  background-color: #242323;
+  background-color: var(--mobile-menu-bg-color);
   box-shadow: -10px 0 10px rgba(17, 16, 16, 0.04);
   display: none;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+}
+
+.nav-dark-mode-switch {
+  transition: 0.9s ease-in-out;
+}
+
+.nav-dark-mode-switch:hover {
+  color: var(--dark_mode_switch_hover_color);
 }
 
 .nav-list-mobile li {
@@ -361,6 +376,10 @@ ul li:hover ul.genres-dropdown {
   ul li a {
     padding: 20px 18px;
   }
+  .nav-dark-mode-switch {
+    width: 15px;
+    height: 15px;
+  }
 }
 @media (max-width: 1000px) {
   .nav {
@@ -419,7 +438,6 @@ ul li:hover ul.genres-dropdown {
 
   .nav-list-mobile-menu-btn {
     display: inline-block;
-    padding-top: 0.4rem;
   }
 
   .nav-list-mobile.is-open {
@@ -482,6 +500,12 @@ ul li:hover ul.genres-dropdown {
   .nav-searchbar {
     font-size: 0.92rem;
   }
+
+  .nav-list-mobile-menu-btn {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+  }
 }
 
 @media (max-width: 400px) {
@@ -509,5 +533,10 @@ ul li:hover ul.genres-dropdown {
   }
   ul li ul.genres-dropdown li {
     font-size: 0.8rem;
+  }
+
+  .nav-dark-mode-switch {
+    width: 13px;
+    height: 13px;
   }
 }

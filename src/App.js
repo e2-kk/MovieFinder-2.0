@@ -46,7 +46,9 @@ function App() {
   const [userId, setUserId] = useState(JSON.parse(userid));
   const [userName, setUserName] = useState(JSON.parse(username));
   const [watchListError, setWatchListError] = useState();
+  const [isDarkMode, setDarkMode] = useState(false);
   const [channel, setChannel] = useState(null);
+  const [darkChannel, setDarkChannel] = useState(null);
 
   let width = window.innerWidth;
 
@@ -213,17 +215,33 @@ function App() {
   }, [userId, sessionId]);
 
   useEffect(() => {
-    const bc = new BroadcastChannel("watchlist_channel");
-    setChannel(bc);
+    const watchListChannel = new BroadcastChannel("watchlist_channel");
+    const darkModeChannel = new BroadcastChannel("dark_mode_channel");
 
-    bc.onmessage = (event) => {
+    setChannel(watchListChannel);
+    setDarkChannel(darkModeChannel);
+
+    watchListChannel.onmessage = (event) => {
       setWatchList(event.data);
     };
 
+    darkModeChannel.onmessage = (event) => {
+      setDarkMode(event.data);
+    };
+
     return () => {
-      bc.close();
+      watchListChannel.close();
+      darkModeChannel.close();
     };
   }, []);
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.querySelector("body").setAttribute("data-theme", "dark");
+    } else {
+      document.querySelector("body").setAttribute("data-theme", "light");
+    }
+  }, [isDarkMode]);
 
   const handleWatchList = async (movie) => {
     const saveMovieToWatchList = await addMovieToWatchList(
@@ -245,6 +263,10 @@ function App() {
         channel?.postMessage(updatedWatchList);
         return updatedWatchList;
       });
+    } else if (!sessionId && !userId) {
+      window.alert(
+        "Error adding movie to watch list. Please, log in to your account"
+      );
     } else {
       window.alert("Error adding movie to watch list. Please, try again later");
     }
@@ -279,6 +301,10 @@ function App() {
         setSortedWatchList={setSortedWatchList}
         userName={userName}
         setUserName={setUserName}
+        setDarkMode={setDarkMode}
+        isDarkMode={isDarkMode}
+        darkChannel={darkChannel}
+        setDarkChannel={setDarkChannel}
       />
       <Routes>
         <Route

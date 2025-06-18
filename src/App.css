@@ -9,9 +9,50 @@ html {
   box-sizing: border-box;
 }
 
+[data-theme="dark"] {
+  --body_background: #151516;
+  --body_color: #ffffffcd;
+  --heading_color: #ffffffcd;
+  --buttons-background-color: #242323;
+  --nav-links-hover-color: #c9c3c37a;
+  --genres-dropdown-background-color: #1a1a1b;
+  --search-bar-text-color: #ffffff;
+  --dark_mode_switch_hover_color: #ffffffcd;
+  --sorting-options-hover-color: #454545;
+  --movie_card_background_color: #303031;
+  --movie-list-button-hover-color: #c9c3c37a;
+  --movie-details-page-movie-title: #ffffffcd;
+  --movie-details-page-info-subh-desc: #d6cfcfcd;
+  --movie-details-page-info-provider-title: #d6cfcfcd;
+  --movie-details-subh-desc-mobile: #d6cfcfcd;
+  --footer-credits-color: #dedbdbcd;
+  --mobile-menu-bg-color: #242323;
+}
+
+:root {
+  --body_background: #faf9f6;
+  --body_color: #272525;
+  --heading_color: #272525;
+  --movie-details-text: #ffffffcd;
+  --buttons-background-color: #e2e2df;
+  --nav-links-hover-color: #2525269a;
+  --genres-dropdown-background-color: #f6f4f1f2;
+  --search-bar-text-color: #272525;
+  --dark_mode_switch_hover_color: #838385d6;
+  --sorting-options-hover-color: #7976767e;
+  --movie_card_background_color: #e9e8e874;
+  --movie-list-button-hover-color: #9f9999f6;
+  --movie-details-page-info-subh-desc: #625f5fc2;
+  --movie-details-page-info-provider-title: #625f5fc2;
+  --movie-details-page-movie-title: #ffffffcd;
+  --movie-details-subh-desc-mobile: #625f5f91;
+  --footer-credits-color: #959191ca;
+  --mobile-menu-bg-color: #f3efed;
+}
+
 body {
-  background-color: #151516;
-  color: #ffffffcd;
+  background-color: var(--body_background);
+  color: var(--body_color);
 }
 .container {
   width: 90%;
