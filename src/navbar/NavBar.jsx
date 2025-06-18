@@ -32,6 +32,10 @@ const NavBar = ({
   setSortedWatchList,
   userName,
   setUserName,
+  setDarkMode,
+  isDarkMode,
+  darkChannel,
+  setDarkChannel,
 }) => {
   const [activeLink, setActiveLink] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -39,7 +43,6 @@ const NavBar = ({
 
   const [isLoggedin, setIsLoggedin] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
-  const [isDarkMode, setDarkMode] = useState(false);
 
   const navigate = useNavigate();
 
@@ -162,6 +165,15 @@ const NavBar = ({
     }
   };
 
+  useEffect(() => {
+    const darkChannel = new BroadcastChannel("dark_mode_channel");
+    setDarkChannel(darkChannel);
+
+    return () => {
+      darkChannel?.close();
+    };
+  }, []);
+
   const setDarkTheme = () => {
     document.querySelector("body").setAttribute("data-theme", "dark");
   };
@@ -172,7 +184,13 @@ const NavBar = ({
 
   const toggleDarkMode = (checked) => {
     setDarkMode(checked);
-    checked ? setDarkTheme() : setLightTheme();
+    if (checked) {
+      setDarkTheme();
+      darkChannel?.postMessage(checked);
+    } else {
+      setLightTheme();
+      darkChannel?.postMessage(checked);
+    }
   };
 
   return (
@@ -243,7 +261,11 @@ const NavBar = ({
           <div className="nav-list-link-login">
             <div className="nav-list-link-login-container">
               <img
-                src="/assets/icons8-user-64.png"
+                src={
+                  isDarkMode
+                    ? "/assets/icons8-user-64.png"
+                    : "/assets/icons8-user-dark.png"
+                }
                 className="nav-list-link-user"
               ></img>
               {sessionId ? (
@@ -269,14 +291,18 @@ const NavBar = ({
             </button>
           </div>
           <DarkModeSwitch
-            style={{ display: "inline-block", color: "#ffff" }}
+            className="nav-dark-mode-switch"
+            style={{
+              display: "inline-block",
+              color: isDarkMode ? "#ffffffcd" : "#272525",
+            }}
             checked={isDarkMode}
             onChange={toggleDarkMode}
             size={20}
           />
           <img
             className="nav-list-mobile-menu-btn"
-            src="/assets/menu.svg"
+            src={isDarkMode ? "/assets/menu.svg" : "/assets/menu-light.svg"}
             alt="menu"
             onClick={openMobileMenu}
           ></img>
@@ -284,7 +310,9 @@ const NavBar = ({
           <ul className={`nav-list-mobile ${isOpen ? "is-open" : ""}`}>
             <li>
               <img
-                src="/assets/close.svg"
+                src={
+                  isDarkMode ? "/assets/close.svg" : "/assets/close-light.svg"
+                }
                 alt="close button"
                 className="nav-list-mobile-close-btn"
                 onClick={closeMobileMenu}

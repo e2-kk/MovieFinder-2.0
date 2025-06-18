@@ -27,16 +27,18 @@
   border: 1.5px solid #bdbabacd;
   outline: none;
   background-color: transparent;
-  color: #ffffffcd;
+  color: var(--body_color);
   padding: 0.5rem 1.25rem;
   width: 15rem;
   font-size: 1.1rem;
   border-radius: 10px;
-  transition: 0.3s ease;
+  transition: 0.9s ease-in-out;
+  box-shadow: 0 4px 30px rgba(97, 95, 95, 0.06);
+  cursor: pointer;
 }
 
 .movie-list-btn:hover {
-  color: #c9c3c37a;
+  color: var(--movie-list-button-hover-color);
   border-color: #c9c3c37a;
 }
 

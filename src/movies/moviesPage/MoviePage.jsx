@@ -85,7 +85,13 @@ const MoviePage = ({ watchList, handleWatchList, isLoading, setIsLoading }) => {
           </div>
         </div>
         <div className="movie-details-info">
-          <h2 className="movie-details-info-title">{selectedMovie?.title}</h2>
+          <h2
+            className={`movie-details-info-title ${
+              selectedMovie?.tagline === "" ? "margin-bottom" : ""
+            }`}
+          >
+            {selectedMovie?.title}
+          </h2>
           <h3
             className={`movie-details-info-tagline ${
               selectedMovie?.tagline === "" ? "hidden" : ""

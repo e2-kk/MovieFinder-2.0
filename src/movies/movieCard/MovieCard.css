@@ -13,7 +13,7 @@
   max-height: 260px;
   border-radius: 10px;
   overflow: hidden;
-  background-color: #303031;
+  background-color: var(--movie_card_background_color);
   padding: 4px 4px;
 }
 
@@ -24,6 +24,7 @@
 .movie-card img {
   border-radius: 10px;
   display: block;
+  box-shadow: 0 4px 30px rgba(29, 26, 26, 0.7);
 }
 
 .movie-card:hover {
@@ -52,9 +53,10 @@
   flex-direction: column;
   justify-content: center;
   opacity: 0;
-  transition: 0.2s ease-in-out;
+  transition: 0.9s ease-in-out;
   overflow: hidden;
   pointer-events: none;
+  color: var(--movie-details-text);
 }
 
 .movie-card-visual:hover .movie-card-details {
@@ -83,7 +85,7 @@
 }
 
 .movie-card-title {
-  color: #ffffffcd;
+  color: var(--heading_color);
   font-size: 1.1rem;
   margin-top: 1rem;
 }

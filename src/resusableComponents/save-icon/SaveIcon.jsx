@@ -3,8 +3,6 @@ import React from "react";
 import "./SaveIcon.css";
 
 const SaveIcon = ({ watchList, movie, handleWatchList }) => {
-  let isAdded = watchList?.some((savedMovie) => savedMovie?.id === movie?.id);
-
   return (
     <img
       className="movie-card-save-icon"

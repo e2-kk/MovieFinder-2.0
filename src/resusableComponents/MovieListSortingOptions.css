@@ -11,8 +11,8 @@
   padding: 0.65rem 4rem;
   cursor: pointer;
   outline: none;
-  background-color: #242323;
-  color: #e1e1df;
+  background-color: var(--buttons-background-color);
+  color: var(--body_color);
   appearance: none;
   opacity: 0.9;
   font-weight: 600;
@@ -22,6 +22,7 @@
   text-align-last: center;
   transition: 0.9s ease-in-out;
   white-space: nowrap;
+  box-shadow: 0 4px 30px rgba(97, 95, 95, 0.2);
 }
 
 .option:last-child {
@@ -29,7 +30,7 @@
 }
 
 .option:hover {
-  background-color: #454545;
+  background-color: var(--sorting-options-hover-color);
 }
 
 @media (max-width: 900px) {
