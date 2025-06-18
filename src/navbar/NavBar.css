@@ -446,7 +446,7 @@ ul li:hover ul.genres-dropdown {
     transition: 0.25ms ease-in-out;
   }
   ul li ul.genres-dropdown {
-    background-color: #242323;
+    background-color: var(--mobile-genres-dropdown-bg-color);
     padding-left: 30px;
   }
   .genres-dropdown li {
