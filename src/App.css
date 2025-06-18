@@ -27,6 +27,7 @@ html {
   --movie-details-subh-desc-mobile: #d6cfcfcd;
   --footer-credits-color: #dedbdbcd;
   --mobile-menu-bg-color: #242323;
+  --mobile-genres-dropdown-bg-color: #242323;
 }
 
 :root {
@@ -48,6 +49,7 @@ html {
   --movie-details-subh-desc-mobile: #625f5f91;
   --footer-credits-color: #959191ca;
   --mobile-menu-bg-color: #f3efed;
+  --mobile-genres-dropdown-bg-color: #f3efed;
 }
 
 body {
