@@ -193,6 +193,10 @@ const NavBar = ({
     }
   };
 
+  useEffect(() => {
+    localStorage.setItem("darkmode", JSON.stringify(isDarkMode));
+  }, [isDarkMode]);
+
   return (
     <section className="section-nav">
       <div className="section-nav-container">
