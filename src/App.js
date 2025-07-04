@@ -23,6 +23,7 @@ import MoviesSearchList from "./movies/moviesSearchList/MoviesSearchList";
 const sessionid = localStorage.getItem("sessionId");
 const userid = localStorage.getItem("userId");
 const username = localStorage.getItem("userName");
+const darkmode = localStorage.getItem("darkmode");
 
 function App() {
   const [moviesCategories, setMoviesCategories] = useState([]);
@@ -46,7 +47,7 @@ function App() {
   const [userId, setUserId] = useState(JSON.parse(userid));
   const [userName, setUserName] = useState(JSON.parse(username));
   const [watchListError, setWatchListError] = useState();
-  const [isDarkMode, setDarkMode] = useState(false);
+  const [isDarkMode, setDarkMode] = useState(JSON.parse(darkmode));
   const [channel, setChannel] = useState(null);
   const [darkChannel, setDarkChannel] = useState(null);
 
