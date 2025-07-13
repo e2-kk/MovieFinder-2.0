@@ -36,6 +36,8 @@ const NavBar = ({
   isDarkMode,
   darkChannel,
   setDarkChannel,
+  loginChannel,
+  accNameChannel
 }) => {
   const [activeLink, setActiveLink] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -123,14 +125,17 @@ const NavBar = ({
 
       popup.location.href = redirectUrl;
       const pollInterval = setInterval(async () => {
+
         if (popup?.closed) {
           clearInterval(pollInterval);
           const session = await createUserSession(userToken.request_token);
           setSessionId(session.session_id);
+          loginChannel?.postMessage(session.session_id);
           if (session?.hasOwnProperty("session_id")) {
             const id = await getUserId(session?.session_id);
             setUserId(id?.id);
             setUserName(id?.username);
+            accNameChannel?.postMessage(id?.username);
             if (id === null) {
               window.alert(
                 "Error getting user details. Please, try again later"
@@ -138,6 +143,7 @@ const NavBar = ({
             }
           }
           setTimeout(setIsLoggedin(false), 4000);
+
         }
       }, 1000);
     } else {
@@ -150,6 +156,7 @@ const NavBar = ({
     const deletedSession = await deleteUserSession(sessionId);
     if (deletedSession?.success === true) {
       setSessionId("");
+      loginChannel?.postMessage("");
       setUserName("");
       setWatchList([]);
       setSortedWatchList([]);
@@ -224,9 +231,8 @@ const NavBar = ({
             >
               <a href="#">Genres</a>
               <ul
-                className={`genres-dropdown ${
-                  isClicked ? "genres-dropdown-show" : ""
-                } `}
+                className={`genres-dropdown ${isClicked ? "genres-dropdown-show" : ""
+                  } `}
               >
                 {moviesCategories.map((category) => (
                   <li
@@ -286,9 +292,8 @@ const NavBar = ({
               )}
             </div>
             <button
-              className={`nav-list-link-login-button ${
-                sessionId ? "display" : "hide"
-              } `}
+              className={`nav-list-link-login-button ${sessionId ? "display" : "hide"
+                } `}
               onClick={handleLogOut}
             >
               Log out

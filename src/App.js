@@ -50,6 +50,9 @@ function App() {
   const [isDarkMode, setDarkMode] = useState(JSON.parse(darkmode));
   const [channel, setChannel] = useState(null);
   const [darkChannel, setDarkChannel] = useState(null);
+  const [loginChannel, setLoginChannel] = useState("");
+  const [accNameChannel, setAccNameChannel] = useState(null);
+  
 
   let width = window.innerWidth;
 
@@ -218,9 +221,15 @@ function App() {
   useEffect(() => {
     const watchListChannel = new BroadcastChannel("watchlist_channel");
     const darkModeChannel = new BroadcastChannel("dark_mode_channel");
+    const userLoginChannel = new BroadcastChannel("user_login_channel");
+    const userNameChannel = new BroadcastChannel("user_name_channel");
+    
 
     setChannel(watchListChannel);
     setDarkChannel(darkModeChannel);
+    setLoginChannel(userLoginChannel);
+    setAccNameChannel(userNameChannel);
+    
 
     watchListChannel.onmessage = (event) => {
       setWatchList(event.data);
@@ -230,9 +239,23 @@ function App() {
       setDarkMode(event.data);
     };
 
+    userLoginChannel.onmessage = (event) => {
+      const receivedSessionId = event.data;
+      setSessionId(receivedSessionId);
+    }
+
+    userNameChannel.onmessage = (event) => {
+     const receivedUserName = event.data;
+     setUserName(receivedUserName);
+    }
+
+    
+  
     return () => {
       watchListChannel.close();
       darkModeChannel.close();
+      userLoginChannel.close();
+      userNameChannel.close();
     };
   }, []);
 
@@ -306,6 +329,8 @@ function App() {
         isDarkMode={isDarkMode}
         darkChannel={darkChannel}
         setDarkChannel={setDarkChannel}
+        loginChannel = {loginChannel}
+        accNameChannel = {accNameChannel}
       />
       <Routes>
         <Route
