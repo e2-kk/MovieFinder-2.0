@@ -65,12 +65,18 @@ const NavBar = ({
         (movie) => movie.vote_count > 150 && movie.original_language === "en"
       );
 
+      if (data.results.length = 0) {
+        setIsLoading(false);
+        return;
+      }
+
       if (moviesSearchList?.length !== 0) {
         setMoviesSearchList((prevMovies) => [
           ...prevMovies,
           ...filteredMoviesSearchList,
         ]);
-      } else {
+      }
+      else {
         setMoviesSearchList(filteredMoviesSearchList);
       }
       setTotalSearchResults(data.total_results);

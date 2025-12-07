@@ -26,6 +26,7 @@ const MoviesSearchList = ({
     window.scrollTo(0, 0);
   }, []);
 
+  console.log(moviesSearchList.length);
   return (
     <div className="movie-list container margin-top ">
       {isLoading && moviesSearchList.length === 0 ? (
