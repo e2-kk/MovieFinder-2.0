@@ -108,4 +108,8 @@
     max-width: 136px;
     max-height: 230px;
   }
+
+  .movie-card-title {
+    font-size: 0.8rem;
+  }
 }
