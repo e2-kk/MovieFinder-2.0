@@ -90,7 +90,7 @@
 
 @media (max-width: 350px) {
   .movie-list-grid {
-    column-gap: 2.5%;
+    column-gap: 2%;
     row-gap: 1%;
   }
 }
