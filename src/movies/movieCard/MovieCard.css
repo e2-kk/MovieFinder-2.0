@@ -103,7 +103,7 @@
   }
 }
 
-@media (max-width: 350px) {
+@media (max-width: 500px) {
   .movie-card {
     max-width: 136px;
     max-height: 230px;
