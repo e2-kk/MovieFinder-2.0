@@ -78,15 +78,15 @@
 
 @media (max-width: 500px) {
   .movie-list-grid {
-    column-gap: 80px;
+    column-gap: 9%;
   }
 }
 
-@media (max-width: 400px) {
+/*@media (max-width: 400px) {
   .movie-list-grid {
-    column-gap: 35px;
+    column-gap: 9%;
   }
-}
+}*/
 
 @media (max-width: 350px) {
   .movie-list-grid {
