@@ -78,9 +78,15 @@
 }
 
 @media (max-width: 500px) {
+  .movie-list {
+    padding: 10px 0;
+    
+  }
   .movie-list-grid {
     column-gap: 9%;
   }
+
+  
 }
 
 /*@media (max-width: 400px) {

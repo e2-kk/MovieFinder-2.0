@@ -80,9 +80,13 @@
 }
 
 @media (max-width: 500px) {
+  .footer {
+    margin-top: 3rem;
+  }
   .footer-credits-section-heading {
     font-size: 0.9rem;
     margin-bottom: 1.3rem;
+    
   }
 
   .footer-credits-section-item {
