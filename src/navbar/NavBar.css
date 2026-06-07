@@ -481,16 +481,22 @@ ul li:hover ul.genres-dropdown {
 
 @media (max-width: 550px) {
   .nav-logo {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
   }
 
   .nav-list-link-user {
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
   }
+
+
+
 
   .nav-list-link-login-container span {
     font-size: 0.7rem;
+  }
+.nav-list-link-login {
+    column-gap: 0.7rem;
   }
 
   .nav-list-link-login-button {
@@ -502,8 +508,8 @@ ul li:hover ul.genres-dropdown {
   }
 
   .nav-list-mobile-menu-btn {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     padding: 0;
   }
 }
