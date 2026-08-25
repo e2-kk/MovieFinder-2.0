@@ -54,7 +54,7 @@
 }
 
 .movie-details-media-trailer-container {
-  width: 50%;
+  width: 51%;
   aspect-ratio: 16 / 9;
   margin-bottom: 10%;
   box-shadow: 0 4px 30px rgba(97, 95, 95, 0.2);
@@ -233,7 +233,7 @@
 
   .movie-details-media-trailer-container {
     position: relative;
-    width: 87%;
+    width: 90%;
     aspect-ratio: 3/2;
   }
 
