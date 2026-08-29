@@ -19,6 +19,7 @@ import {
 import WatchList from "./watchList/WatchList";
 import MoviePage from "./movies/moviesPage/MoviePage";
 import MoviesSearchList from "./movies/moviesSearchList/MoviesSearchList";
+import MainPage from "./mainPage/MainPage";
 
 const sessionid = localStorage.getItem("sessionId");
 const userid = localStorage.getItem("userId");
@@ -398,6 +399,13 @@ function App() {
             />
           }
         />
+        <Route
+          path="/main-page"
+          element={
+            <MainPage
+            />
+          }
+        ></Route>
       </Routes>
     </div>
   );

@@ -263,3 +263,16 @@ export const removeMovieToWatchList = async (accountId, sessionId, movieId) => {
     return ""; // Return an empty string in case of error
   }
 };
+
+export const moviesCurrentlyInTheaters = async (id) => {
+ try {
+  const response = await axios.get (
+  `https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}`
+  );
+  console.log(response)//returns a promise that resolves to a list of movies in theathers
+ } catch (error){
+   console.error ("Error getting movies currently in theathers")
+   return ""
+ }
+
+};
