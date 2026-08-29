@@ -1,6 +1,8 @@
 import axios from "axios";
 
 var api_key = process.env.REACT_APP_API_KEY;
+const current_date = new Date();
+
 
 export const getMoviesCategories = async () => {
   try {
@@ -17,7 +19,7 @@ export const getMoviesCategories = async () => {
 export const getAllMovies = async (pageNum) => {
   try {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&primary_release_date.gte=2000-01-01&primary_release_date.lte=2025-12-31&with_original_language=en&vote_count.gte=150.0&page=${pageNum}`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&primary_release_date.gte=2000-01-01&primary_release_date.lte=${current_date}&with_original_language=en&vote_count.gte=150.0&page=${pageNum}`
     );
     return response.data; // Returns a Promise that resolves to all movies
   } catch (error) {
@@ -29,7 +31,7 @@ export const getAllMovies = async (pageNum) => {
 export const getMoviesWithinCategory = async (category, pageNum) => {
   try {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&with_genres=${category}&primary_release_date.gte=2000-01-01&primary_release_date.lte=2025-12-31&with_original_language=en&vote_count.gte=150.0&page=${pageNum}`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&with_genres=${category}&primary_release_date.gte=2000-01-01&primary_release_date.lte=${current_date}&with_original_language=en&vote_count.gte=150.0&page=${pageNum}`
     );
 
     return response.data; // Returns a Promise that resolves to movies within genres
@@ -42,7 +44,7 @@ export const getMoviesWithinCategory = async (category, pageNum) => {
 export const getSortedMoviesByYear = async (pageNum, sortingOption) => {
   try {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&primary_release_date.gte=2000-01-01&primary_release_date.lte=2025-12-31&with_original_language=en&vote_count.gte=150.0&page=${pageNum}&sort_by=${sortingOption.year}`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&primary_release_date.gte=2000-01-01&primary_release_date.lte=${current_date}&with_original_language=en&vote_count.gte=150.0&page=${pageNum}&sort_by=${sortingOption.year}`
     );
     return response.data; // Returns a Promise that resolves to sorted movies by release year
   } catch (error) {
@@ -54,7 +56,7 @@ export const getSortedMoviesByYear = async (pageNum, sortingOption) => {
 export const getSortedMoviesByRating = async (pageNum, sortingOption) => {
   try {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&primary_release_date.gte=2000-01-01&primary_release_date.lte=2025-12-31&with_original_language=en&vote_count.gte=150.0&page=${pageNum}&sort_by=${sortingOption.rate}`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&primary_release_date.gte=2000-01-01&primary_release_date.lte=${current_date}&with_original_language=en&vote_count.gte=150.0&page=${pageNum}&sort_by=${sortingOption.rate}`
     );
     return response.data; // Returns a Promise that resolves to sorted movies by rating
   } catch (error) {
@@ -66,7 +68,7 @@ export const getSortedMoviesByRating = async (pageNum, sortingOption) => {
 export const getSortedMoviesByServices = async (pageNum, sortingOption) => {
   try {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&primary_release_date.gte=2000-01-01&primary_release_date.lte=2025-12-31&with_original_language=en&vote_count.gte=150.0&page=${pageNum}&with_watch_providers=${sortingOption.services}`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&primary_release_date.gte=2000-01-01&primary_release_date.lte=${current_date}&with_original_language=en&vote_count.gte=150.0&page=${pageNum}&with_watch_providers=${sortingOption.services}`
     );
     return response.data; // Returns a Promise that resolves to sorted movies by services
   } catch (error) {
@@ -82,7 +84,7 @@ export const getSortedMoviesByServicesWithinCategory = async (
 ) => {
   try {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&primary_release_date.gte=2000-01-01&primary_release_date.lte=2025-12-31&with_original_language=en&vote_count.gte=150.0&page=${pageNum}&with_watch_providers=${sortingOption.services}&with_genres=${category}`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&primary_release_date.gte=2000-01-01&primary_release_date.lte=${current_date}&with_original_language=en&vote_count.gte=150.0&page=${pageNum}&with_watch_providers=${sortingOption.services}&with_genres=${category}`
     );
     return response.data; // Returns a Promise that resolves to sorted movies by services within selected category4
   } catch (error) {
@@ -98,7 +100,7 @@ export const getSortedMoviesByRatingWithinCategory = async (
 ) => {
   try {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&primary_release_date.gte=2000-01-01&primary_release_date.lte=2025-12-31&with_original_language=en&vote_count.gte=150.0&page=${pageNum}&sort_by=${sortingOption.rate}&with_genres=${category}`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&primary_release_date.gte=2000-01-01&primary_release_date.lte=${current_date}&with_original_language=en&vote_count.gte=150.0&page=${pageNum}&sort_by=${sortingOption.rate}&with_genres=${category}`
     );
     return response.data; // Returns a Promise that resolves to sorted movies by rating within selected category
   } catch (error) {
@@ -114,7 +116,7 @@ export const getSortedMoviesByYearWithinCategory = async (
 ) => {
   try {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&primary_release_date.gte=2000-01-01&primary_release_date.lte=2025-12-31&with_original_language=en&vote_count.gte=150.0&page=${pageNum}&sort_by=${sortingOption.year}&with_genres=${category}`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&primary_release_date.gte=2000-01-01&primary_release_date.lte=${current_date}&with_original_language=en&vote_count.gte=150.0&page=${pageNum}&sort_by=${sortingOption.year}&with_genres=${category}`
     );
     return response.data; // Returns a Promise that resolves to sorted movies by release year within selected category
   } catch (error) {
